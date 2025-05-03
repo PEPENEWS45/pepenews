@@ -14,10 +14,12 @@
     }
 
     header {
-      background: linear-gradient(135deg, #1b5e20, #ffd700); /* Gradient from green to gold */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 80px 20px;
+      background: linear-gradient(135deg, #1b5e20 50%, #ffd700 50%);
       color: white;
-      text-align: center;
-      padding: 80px 20px 60px;
     }
 
     header h1 {
@@ -27,11 +29,27 @@
     }
 
     section {
+      display: flex;
       padding: 40px 20px;
       max-width: 1200px;
       margin: auto;
-      background: linear-gradient(135deg, #1b5e20, #ffd700); /* Green to Gold Gradient */
       border-radius: 20px;
+    }
+
+    .green-side {
+      background-color: #1b5e20;
+      color: white;
+      flex: 1;
+      padding: 20px;
+      border-radius: 20px 0 0 20px;
+    }
+
+    .gold-side {
+      background-color: #ffd700;
+      color: #1b5e20;
+      flex: 1;
+      padding: 20px;
+      border-radius: 0 20px 20px 0;
     }
 
     .news-cards {
@@ -135,33 +153,33 @@
     <p>The heartbeat of meme culture, powered by $PNEWS</p>
   </header>
 
-  <!-- News Cards -->
+  <!-- News Cards Section -->
   <section>
-    <h2>🔥 Meme Headlines</h2>
-    <div class="news-cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 1">
-        <h3>Meme War Erupts Between Frog Factions</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 2">
-        <h3>Gold Pepe NFT Sells for 69 ETH</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 3">
-        <h3>Top 10 Viral Memes This Week</h3>
+    <div class="green-side">
+      <h2>🔥 Meme Headlines</h2>
+      <div class="news-cards">
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Meme 1">
+          <h3>Meme War Erupts Between Frog Factions</h3>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Meme 2">
+          <h3>Gold Pepe NFT Sells for 69 ETH</h3>
+        </div>
+        <div class="card">
+          <img src="https://via.placeholder.com/300x200" alt="Meme 3">
+          <h3>Top 10 Viral Memes This Week</h3>
+        </div>
       </div>
     </div>
-  </section>
-
-  <!-- Latest Updates -->
-  <section class="updates">
-    <h2>📢 Latest Updates</h2>
-    <ul>
-      <li>🔥 PepeCoin and Doge merge rumors spark chaos</li>
-      <li>🎉 MemeFest 2025 set for July – get ready!</li>
-      <li>📢 $PNEWS listing on major DEX announced</li>
-    </ul>
+    <div class="gold-side">
+      <h2>📢 Latest Updates</h2>
+      <ul>
+        <li>🔥 PepeCoin and Doge merge rumors spark chaos</li>
+        <li>🎉 MemeFest 2025 set for July – get ready!</li>
+        <li>📢 $PNEWS listing on major DEX announced</li>
+      </ul>
+    </div>
   </section>
 
   <!-- Call-to-Action (Buy $PNEWS) -->
