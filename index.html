@@ -19,219 +19,215 @@
   </div>
 </header>
 
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title><section>
+ <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>PepeNews.io - Meme Culture</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Fredoka', sans-serif;
+    background-color: #1b5e20; /* Green background */
+    color: white;
+  }
+
+  header {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #1b5e20; /* Green background */
+    color: white;
+  }
+
+  header h1 {
+    font-size: 3em;
+    margin: 0;
+    color: #FFD700; /* Gold color for title */
+  }
+
+  header p {
+    font-size: 1.5em;
+    color: #FFD700; /* Gold color for description */
+  }
+
+  section {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: auto;
+    background-color: #1b5e20; /* Green background */
+  }
+
+  h2 {
+    text-align: center;
+    color: #FFD700; /* Gold color for section headers */
+    font-size: 2em;
+  }
+
+  .news-cards {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .card {
+    background: #fff;
+    border: 2px solid #FFD700; /* Gold borders */
+    border-radius: 16px;
+    overflow: hidden;
+    width: 300px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .card h3 {
+    padding: 16px;
+    font-size: 1.2em;
+    margin: 0;
+    color: #1b5e20; /* Green color for card titles */
+  }
+
+  .updates {
+    background-color: #FFD700; /* Gold background for updates */
+    border-left: 6px solid #1b5e20; /* Green left border */
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+  .updates ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .updates li {
+    padding: 10px 0;
+    border-bottom: 1px solid #1b5e20; /* Green border for updates */
+    color: #1b5e20; /* Green text color for updates */
+  }
+
+  .cta {
+    text-align: center;
+    background: #1b5e20; /* Green background for CTA */
+    color: white;
+    padding: 60px 20px;
+    border-radius: 20px;
+    margin-top: 40px;
+  }
+
+  .cta button {
+    background: #FFD700; /* Gold button */
+    border: none;
+    color: #1b5e20; /* Green text color on button */
+    padding: 16px 32px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+  }
+
+  .cta button:hover {
+    background: #ffcc00; /* Lighter gold on hover */
+  }
+
+  footer {
+    text-align: center;
+    padding: 40px 20px;
+    background: #1b5e20; /* Green background for footer */
+    color: white;
+  }
+
+  footer a {
+    color: #FFD700; /* Gold color for links */
+    margin: 0 10px;
+    text-decoration: none;
+  }
+
+  @media (max-width: 768px) {
+    .news-cards {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Hero Section -->
+<header>
+  <h1>Where Memes Go Viral</h1>
+  <p>The heartbeat of meme culture, powered by $PNEWS</p>
+</header>
+
+<!-- Buy $PNEWS Section -->
+<section class="cta">
   <h2>🚀 Buy $PNEWS — Fuel the Meme Revolution</h2>
   <p style="font-size: 1.3em; color: #FFD700; text-align: center; max-width: 800px; margin: 0 auto;">
     Own a piece of the internet’s wildest newsroom. Connect your wallet and ride the meme wave!
   </p>
   <div style="text-align: center; margin-top: 30px;">
-    <button style="background-color: #FFD700; color: #006400; font-weight: bold; font-size: 1.2em; padding: 12px 24px; border: none; border-radius: 8px; cursor: pointer;">
-      Connect Wallet
-    </button>
+    <button onclick="connectWallet()">Connect Wallet</button>
   </div>
 </section>
-      margin: 0;
-      font-family: 'Fredoka', sans-serif;
-      background-color: #1b5e20; /* Green background */
-      color: white;
-    }
 
-    header {
-      padding: 80px 20px;
-      text-align: center;
-      background-color: #1b5e20; /* Green background */
-      color: white;
-    }
-
-    header h1 {
-      font-size: 3em;
-      margin: 0;
-      color: #FFD700; /* Gold color for title */
-    }
-
-    header p {
-      font-size: 1.5em;
-      color: #FFD700; /* Gold color for description */
-    }
-
-    section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-      background-color: #1b5e20; /* Green background */
-    }
-
-    h2 {
-      text-align: center;
-      color: #FFD700; /* Gold color for section headers */
-      font-size: 2em;
-    }
-
-    .news-cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .card {
-      background: #fff;
-      border: 2px solid #FFD700; /* Gold borders */
-      border-radius: 16px;
-      overflow: hidden;
-      width: 300px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card h3 {
-      padding: 16px;
-      font-size: 1.2em;
-      margin: 0;
-      color: #1b5e20; /* Green color for card titles */
-    }
-
-    .updates {
-      background-color: #FFD700; /* Gold background for updates */
-      border-left: 6px solid #1b5e20; /* Green left border */
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .updates ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .updates li {
-      padding: 10px 0;
-      border-bottom: 1px solid #1b5e20; /* Green border for updates */
-      color: #1b5e20; /* Green text color for updates */
-    }
-
-    .cta {
-      text-align: center;
-      background: #1b5e20; /* Green background for CTA */
-      color: white;
-      padding: 60px 20px;
-      border-radius: 20px;
-      margin-top: 40px;
-    }
-
-    .cta button {
-      background: #FFD700; /* Gold button */
-      border: none;
-      color: #1b5e20; /* Green text color on button */
-      padding: 16px 32px;
-      font-size: 1.2em;
-      border-radius: 50px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s ease;
-    }
-
-    .cta button:hover {
-      background: #ffcc00; /* Lighter gold on hover */
-    }
-
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      background: #1b5e20; /* Green background for footer */
-      color: white;
-    }
-
-    footer a {
-      color: #FFD700; /* Gold color for links */
-      margin: 0 10px;
-      text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-      .news-cards {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Hero Section -->
-  <header>
-    <h1>Where Memes Go Viral</h1>
-    <p>The heartbeat of meme culture, powered by $PNEWS</p>
-  </header>
-
-  <!-- News Cards Section -->
-  <section>
-    <h2>🔥 Meme Headlines</h2>
-    <div class="news-cards">
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 1">
-        <h3>Meme War Erupts Between Frog Factions</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 2">
-        <h3>Gold Pepe NFT Sells for 69 ETH</h3>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/300x200" alt="Meme 3">
-        <h3>Top 10 Viral Memes This Week</h3>
-      </div>
+<!-- News Cards Section -->
+<section>
+  <h2>🔥 Meme Headlines</h2>
+  <div class="news-cards">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200" alt="Meme 1">
+      <h3>Meme War Erupts Between Frog Factions</h3>
     </div>
-  </section>
-
-  <!-- Latest Updates Section -->
-  <section>
-    <h2>📢 Latest Updates</h2>
-    <div class="updates">
-      <ul>
-        <li>🔥 PepeCoin and Doge merge rumors spark chaos</li>
-        <li>🎉 MemeFest 2025 set for July – get ready!</li>
-        <li>📢 $PNEWS listing on major DEX announced</li>
-      </ul>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200" alt="Meme 2">
+      <h3>Gold Pepe NFT Sells for 69 ETH</h3>
     </div>
-  </section>
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200" alt="Meme 3">
+      <h3>Top 10 Viral Memes This Week</h3>
+    </div>
+  </div>
+</section>
 
-  <!-- Call-to-Action (Buy $PNEWS) -->
-  <section class="cta">
-    <h2>Buy $PNEWS Now</h2>
-    <p>Connect your wallet and ride the meme wave 🚀</p>
-    <button onclick="connectWallet()">Connect Wallet</button>
-  </section>
+<!-- Latest Updates Section -->
+<section>
+  <h2>📢 Latest Updates</h2>
+  <div class="updates">
+    <ul>
+      <li>🔥 PepeCoin and Doge merge rumors spark chaos</li>
+      <li>🎉 MemeFest 2025 set for July – get ready!</li>
+      <li>📢 $PNEWS listing on major DEX announced</li>
+    </ul>
+  </div>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <p>💚 Built by the Meme Community · Join us on 
-      <a href="#">Twitter</a> · 
-      <a href="#">Telegram</a> · 
-      <a href="#">Discord</a>
-    </p>
-  </footer>
+<!-- Footer -->
+<footer>
+  <p>💚 Built by the Meme Community · Join us on 
+    <a href="#">Twitter</a> · 
+    <a href="#">Telegram</a> · 
+    <a href="#">Discord</a>
+  </p>
+</footer>
 
-  <script>
-    async function connectWallet() {
-      if (window.ethereum) {
-        try {
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          alert("Connected: " + accounts[0]);
-          // Optional: trigger contract interaction to buy $PNEWS
-        } catch (err) {
-          alert("Wallet connection failed: " + err.message);
-        }
-      } else {
-        alert("MetaMask is not detected. Please install it first.");
+<script>
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        alert("Connected: " + accounts[0]);
+        // Optional: trigger contract interaction to buy $PNEWS
+      } catch (err) {
+        alert("Wallet connection failed: " + err.message);
       }
+    } else {
+      alert("MetaMask is not detected. Please install it first.");
     }
-  </script>
+  }
+</script>
 
 </body>
 </html>
