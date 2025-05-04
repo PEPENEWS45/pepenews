@@ -36,25 +36,24 @@
       margin-bottom: 20px;
     }
 
-    /* Language Selection Dropdown */
+    /* Language Selector */
     .language-selector {
       position: absolute;
       top: 20px;
       left: 20px;
-      background-color: #FFD700; /* Gold background */
-      border: none;
-      color: black;
+      background-color: #FFD700;
+      color: #1b5e20;
       padding: 10px;
-      font-size: 1rem;
-      border-radius: 5px;
-      cursor: pointer;
+      border-radius: 8px;
     }
 
-    .language-selector select {
-      background: #FFD700;
-      color: black;
-      border: none;
-      font-size: 1rem;
+    select {
+      background-color: #FFD700;
+      color: #1b5e20;
+      border: 2px solid #1b5e20;
+      padding: 5px;
+      font-size: 1em;
+      border-radius: 5px;
     }
 
     section {
@@ -70,92 +69,9 @@
       font-size: 2em;
     }
 
-    /* Ticker section styles */
-    #ticker-track {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 1.2rem;
-      padding: 10px;
-      background-color: #FFD700; /* Gold background inside the box */
-      color: black; /* Black text for prices */
-      font-weight: bold;
-      position: relative;
-    }
-
-    .ticker-content {
-      display: inline-block;
-      animation: ticker 15s linear infinite; /* Animation for moving ticker */
-    }
-
-    .ticker-item {
-      margin-right: 15px;
-      color: red; /* Red color for the price labels */
-    }
-
-    /* Animation for ticker text */
-    @keyframes ticker {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
-    }
-
-    /* News card styles */
-    .news-cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .card {
-      background: #fff;
-      border: 2px solid #FFD700; /* Gold borders */
-      border-radius: 16px;
-      overflow: hidden;
-      width: 300px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
-
-    .card h3 {
-      padding: 16px;
-      font-size: 1.2em;
-      margin: 0;
-      color: #1b5e20; /* Green color for card titles */
-    }
-
-    /* Updates Section Styles */
-    .updates {
-      background-color: #FFD700; /* Gold background for updates */
-      border-left: 6px solid #1b5e20; /* Green left border */
-      padding: 20px;
-      border-radius: 10px;
-    }
-
-    .updates ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .updates li {
-      padding: 10px 0;
-      border-bottom: 1px solid #1b5e20; /* Green border for updates */
-      color: #1b5e20; /* Green text color for updates */
-    }
-
-    /* Call to action (CTA) Button styles */
     .cta {
       text-align: center;
-      background: #1b5e20; /* Green background for CTA */
+      background: #1b5e20;
       color: white;
       padding: 60px 20px;
       border-radius: 20px;
@@ -163,9 +79,9 @@
     }
 
     .cta button {
-      background: #FFD700; /* Gold button */
+      background: #FFD700;
       border: none;
-      color: #1b5e20; /* Green text color on button */
+      color: #1b5e20;
       padding: 16px 32px;
       font-size: 1.2em;
       border-radius: 50px;
@@ -175,28 +91,20 @@
     }
 
     .cta button:hover {
-      background: #ffcc00; /* Lighter gold on hover */
+      background: #ffcc00;
     }
 
-    /* Footer styles */
     footer {
       text-align: center;
       padding: 40px 20px;
-      background: #1b5e20; /* Green background for footer */
+      background: #1b5e20;
       color: white;
     }
 
     footer a {
-      color: #FFD700; /* Gold color for links */
+      color: #FFD700;
       margin: 0 10px;
       text-decoration: none;
-    }
-
-    @media (max-width: 768px) {
-      .news-cards {
-        flex-direction: column;
-        align-items: center;
-      }
     }
   </style>
 </head>
@@ -204,54 +112,44 @@
 
 <!-- Language Selection Dropdown -->
 <div class="language-selector">
-  <select id="language-select">
+  <select id="language-select" onchange="changeLanguage()">
     <option value="en">English</option>
-    <option value="fr">Français</option>
-    <option value="es">Español</option>
-    <option value="de">Deutsch</option>
-    <!-- Add more languages as needed -->
+    <option value="zh">中文 (Mandarin)</option>
+    <option value="hi">हिन्दी (Hindi)</option>
+    <option value="es">Español (Spanish)</option>
+    <option value="fr">Français (French)</option>
+    <option value="ar">العربية (Arabic)</option>
+    <option value="bn">বাংলা (Bengali)</option>
+    <option value="pt">Português (Portuguese)</option>
+    <option value="ru">Русский (Russian)</option>
+    <option value="ur">اردو (Urdu)</option>
+    <option value="id">Bahasa Indonesia (Indonesian)</option>
+    <option value="de">Deutsch (German)</option>
+    <option value="ja">日本語 (Japanese)</option>
+    <option value="pcm">Nigerian Pidgin</option>
+    <option value="arz">مصرى (Egyptian Arabic)</option>
+    <option value="mr">मराठी (Marathi)</option>
+    <option value="te">తెలుగు (Telugu)</option>
+    <option value="tr">Türkçe (Turkish)</option>
+    <option value="ta">தமிழ் (Tamil)</option>
+    <option value="yue">粤语 (Cantonese)</option>
   </select>
 </div>
 
 <!-- Hero Section -->
 <header>
-  <!-- Logo with max-width set to 300px -->
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="PepeNews Logo">
-  <h1>Fuel the Meme Revolution</h1>
-  <p>The Future of Meme Journalism, powered by $PNEWS</p>
+  <h1 id="header-title">Fuel the Meme Revolution</h1>
+  <p id="header-description">The Future of Meme Journalism, powered by $PNEWS</p>
 </header>
-
-<!-- Ticker Section for Live Meme Prices -->
-<section>
-  <div id="ticker-track">
-    <div class="ticker-content">
-      <!-- The prices will go here dynamically -->
-    </div>
-  </div>
-</section>
-
-<!-- Connect Wallet Section -->
-<section class="cta">
-  <h2>🚀 Buy $PNEWS TOKEN — Ride the Meme Wave</h2>
-  <p style="font-size: 1.3em; color: #FFD700; text-align: center; max-width: 800px; margin: 0 auto;">
-    Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!
-  </p>
-  <div style="text-align: center; margin-top: 30px;">
-    <button onclick="connectWallet()">Connect Wallet</button>
-  </div>
-</section>
 
 <!-- Countdown Timer Section -->
 <section style="background-color: #1b5e20; padding: 40px 20px; text-align: center; color: #FFD700;">
-  <h2 style="font-size: 2rem;">⏳ Countdown to $PNEWS Token Launch</h2>
-  <p style="font-size: 1.2rem; margin-bottom: 20px;">
-    Get ready for liftoff — don't miss it!
-  </p>
+  <h2 style="font-size: 2rem;" id="countdown-title">⏳ Countdown to $PNEWS Token Launch</h2>
+  <p style="font-size: 1.2rem; margin-bottom: 20px;" id="countdown-description">Get ready for liftoff — don't miss it!</p>
 
   <!-- Pepe riding rocket image -->
-  <img src="https://github.com/PEPENEWS45/PepeNews/assets/PEPENEWS45/rocket-pepe.png" 
-       alt="Pepe Riding Rocket" 
-       style="max-width: 300px; margin-bottom: 20px;" />
+  <img src="https://github.com/PEPENEWS45/PepeNews/assets/PEPENEWS45/rocket-pepe.png" alt="Pepe Riding Rocket" style="max-width: 300px; margin-bottom: 20px;" />
 
   <div id="countdown" style="font-size: 2rem; font-weight: bold;"></div>
 </section>
@@ -259,25 +157,11 @@
 <!-- Meme Coin Section -->
 <section>
   <h2>🔥 Meme Wars, Viral Trends, and Rare NFTs</h2>
-  <div class="news-cards">
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Meme 1">
-      <h3>Gold PNEWS NFT Sells for 69 ETH</h3>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Meme 2">
-      <h3>Top 10 Viral Memes This Week</h3>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/300x200" alt="Meme 3">
-      <h3>Meme Wars: Who Will Rule the Internet</h3>
-    </div>
-  </div>
 </section>
 
 <!-- Footer -->
 <footer>
-  <p>💚 Built by the Meme Community · Join us on 
+  <p id="footer-text">💚 Built by the Meme Community · Join us on 
     <a href="#">Twitter</a> · 
     <a href="#">Telegram</a> · 
     <a href="#">Discord</a>
@@ -285,46 +169,56 @@
 </footer>
 
 <script>
-  // Language selection functionality
-  document.getElementById('language-select').addEventListener('change', function() {
-    var language = this.value;
-    alert("Language changed to: " + language); // Placeholder for actual language switching logic
-  });
+  // Change language function
+  function changeLanguage() {
+    const selectedLanguage = document.getElementById("language-select").value;
 
-  // Countdown Timer
-  const launchDate = new Date("May 28, 2025 09:00:00 EDT").getTime();
-  const countdownFunc = setInterval(() => {
-    const now = new Date().getTime();
-    const timeLeft = launchDate - now;
-
-    if (timeLeft <= 0) {
-      clearInterval(countdownFunc);
-      document.getElementById("countdown").innerHTML = "🚀 Launched!";
-      return;
-    }
-
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }, 1000);
-
-  // Connect wallet function
-  async function connectWallet() {
-    if (window.ethereum) {
-      try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        alert("Connected: " + accounts[0]);
-        // Optional: trigger contract interaction to buy $PNEWS
-      } catch (err) {
-        alert("Wallet connection failed: " + err.message);
+    const languageData = {
+      en: {
+        headerTitle: "Fuel the Meme Revolution",
+        headerDescription: "The Future of Meme Journalism, powered by $PNEWS",
+        countdownTitle: "⏳ Countdown to $PNEWS Token Launch",
+        countdownDescription: "Get ready for liftoff — don't miss it!",
+        footerText: "💚 Built by the Meme Community · Join us on Twitter · Telegram · Discord"
+      },
+      zh: {
+        headerTitle: "推动表情包革命",
+        headerDescription: "由 $PNEWS 提供支持的表情包新闻的未来",
+        countdownTitle: "⏳ 距离 $PNEWS 代币发行还剩",
+        countdownDescription: "准备起飞 — 不要错过!",
+        footerText: "💚 由表情包社区打造 · 加入我们： Twitter · Telegram · Discord"
+      },
+      hi: {
+        headerTitle: "मेमे क्रांति को बढ़ावा दें",
+        headerDescription: "$PNEWS द्वारा समर्थित मीम पत्रकारिता का भविष्य",
+        countdownTitle: "⏳ $PNEWS टोकन लॉन्च की उलटी गिनती",
+        countdownDescription: "लॉन्च के लिए तैयार हो जाइए — इसे मिस न करें!",
+        footerText: "💚 मीम समुदाय द्वारा निर्मित · हमसे जुड़ें: Twitter · Telegram · Discord"
+      },
+      es: {
+        headerTitle: "Impulsa la Revolución de Memes",
+        headerDescription: "El Futuro del Periodismo de Memes, impulsado por $PNEWS",
+        countdownTitle: "⏳ Cuenta regresiva para el lanzamiento del token $PNEWS",
+        countdownDescription: "¡Prepárate para el despegue — no te lo pierdas!",
+        footerText: "💚 Hecho por la comunidad de memes · Únete a nosotros: Twitter · Telegram · Discord"
+      },
+      fr: {
+        headerTitle: "Alimentez la Révolution des Mèmes",
+        headerDescription: "L'Avenir du Journalisme de Mèmes, alimenté par $PNEWS",
+        countdownTitle: "⏳ Compte à rebours jusqu'au lancement du token $PNEWS",
+        countdownDescription: "Préparez-vous pour le décollage — ne le manquez pas !",
+        footerText: "💚 Construit par la communauté des mèmes · Rejoignez-nous sur : Twitter · Telegram · Discord"
       }
-    } else {
-      alert("MetaMask is not detected. Please install it first.");
-    }
+      // Add other languages as needed
+    };
+
+    const data = languageData[selectedLanguage];
+
+    document.getElementById("header-title").innerText = data.headerTitle;
+    document.getElementById("header-description").innerText = data.headerDescription;
+    document.getElementById("countdown-title").innerText = data.countdownTitle;
+    document.getElementById("countdown-description").innerText = data.countdownDescription;
+    document.getElementById("footer-text").innerText = data.footerText;
   }
 </script>
 
