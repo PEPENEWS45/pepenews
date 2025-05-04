@@ -125,6 +125,13 @@
       min-width: 280px;
     }
 
+    #countdown img {
+      max-width: 300px;
+      margin-top: 20px;
+      border-radius: 15px;
+      animation: float 3s ease-in-out infinite;
+    }
+
     #updates {
       flex: 1;
       min-width: 280px;
@@ -156,6 +163,12 @@
       color: #FFD700;
       margin: 0 10px;
       text-decoration: none;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
     }
   </style>
 </head>
@@ -209,6 +222,7 @@
   <div id="countdown">
     <h2>⏳ Countdown to $PNEWS Token Launch</h2>
     <div id="timer">Loading...</div>
+    <img src="A_2D_digital_illustration_announces_the_countdown_.png" alt="Pepe the News Reporter Riding a Rocket">
   </div>
   <div id="updates">
     <h2>🚨 Latest Updates</h2>
@@ -240,7 +254,6 @@
         title: "为表情革命加油",
         desc: "$PNEWS驱动的表情新闻未来"
       }
-      // Add others similarly
     };
     const content = translations[lang] || translations['en'];
     document.getElementById('main-title').textContent = content.title;
@@ -294,3 +307,9 @@
       }
     } else {
       alert("MetaMask is not detected. Please install it first.");
+    }
+  }
+</script>
+
+</body>
+</html>
