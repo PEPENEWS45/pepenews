@@ -1,42 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PepeNews.io - Meme Culture</title>
   <style>
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background-color: #1b5e20; /* Green background */
+      background-color: #1b5e20;
       color: white;
     }
 
     header {
-      padding: 80px 20px;
+      padding: 80px 20px 20px;
       text-align: center;
-      background-color: #1b5e20; /* Green background */
-      color: white;
+      background-color: #1b5e20;
     }
 
     header h1 {
       font-size: 3em;
       margin: 0;
-      color: #FFD700; /* Gold color for title */
+      color: #FFD700;
     }
 
     header p {
       font-size: 1.5em;
-      color: #FFD700; /* Gold color for description */
+      color: #FFD700;
     }
 
-    /* Logo with updated size */
     header img {
       max-width: 300px;
       margin-bottom: 20px;
     }
 
-    /* Language selector */
     #language-selector {
       position: absolute;
       top: 20px;
@@ -44,7 +41,6 @@
       padding: 10px;
       background-color: #FFD700;
       border-radius: 5px;
-      cursor: pointer;
       color: #1b5e20;
       font-weight: bold;
     }
@@ -53,109 +49,113 @@
       padding: 40px 20px;
       max-width: 1200px;
       margin: auto;
-      background-color: #1b5e20; /* Green background */
+      background-color: #1b5e20;
     }
 
     h2 {
       text-align: center;
-      color: #FFD700; /* Gold color for section headers */
+      color: #FFD700;
       font-size: 2em;
     }
 
-    /* Ticker section styles */
     #ticker-track {
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
-      font-size: 1.2rem;
-      padding: 10px;
-      background-color: #FFD700; /* Gold background inside the box */
-      color: black; /* Black text for prices */
+      background-color: #FFD700;
+      color: black;
       font-weight: bold;
       position: relative;
+      padding: 10px;
     }
 
     .ticker-content {
       display: inline-block;
-      animation: ticker 15s linear infinite; /* Animation for moving ticker */
+      animation: ticker 15s linear infinite;
     }
 
     .ticker-item {
       margin-right: 15px;
-      color: red; /* Red color for the price labels */
+      color: red;
     }
 
-    /* Animation for ticker text */
     @keyframes ticker {
-      0% {
-        transform: translateX(100%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
     }
 
-    /* Call to action (CTA) Button styles */
     .cta {
       text-align: center;
-      background: #1b5e20; /* Green background for CTA */
+      background: #1b5e20;
       color: white;
       padding: 60px 20px;
       border-radius: 20px;
-      margin-top: 40px;
     }
 
-    .cta button {
-      background: #FFD700; /* Gold button */
-      border: none;
-      color: #1b5e20; /* Green text color on button */
+    .cta a {
+      display: inline-block;
+      background: #FFD700;
+      color: #1b5e20;
       padding: 16px 32px;
       font-size: 1.2em;
       border-radius: 50px;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s ease;
-    }
-
-    .cta button:hover {
-      background: #ffcc00; /* Lighter gold on hover */
-    }
-
-    /* Footer styles */
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      background: #1b5e20; /* Green background for footer */
-      color: white;
-    }
-
-    footer a {
-      color: #FFD700; /* Gold color for links */
-      margin: 0 10px;
       text-decoration: none;
+      font-weight: bold;
+      margin-top: 20px;
     }
 
-    /* Updates section */
+    .cta a:hover {
+      background: #ffcc00;
+    }
+
+    #countdown-updates {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      align-items: flex-start;
+      padding: 40px 20px;
+      background-color: #1b5e20;
+      color: #FFD700;
+    }
+
+    #countdown {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      flex: 1;
+      min-width: 280px;
+    }
+
     #updates {
-      margin-top: 40px;
-      padding: 40px;
-      background-color: #FFD700;
-      color: #1b5e20;
+      flex: 1;
+      min-width: 280px;
+      padding: 20px;
     }
 
     #updates h2 {
-      font-size: 2.5em;
-      margin-bottom: 20px;
+      font-size: 2em;
     }
 
     #updates ul {
-      list-style-type: none;
+      list-style: none;
       padding: 0;
     }
 
     #updates li {
       margin-bottom: 10px;
-      font-size: 1.2em;
+      font-size: 1.1em;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 20px;
+      background: #1b5e20;
+      color: white;
+    }
+
+    footer a {
+      color: #FFD700;
+      margin: 0 10px;
+      text-decoration: none;
     }
   </style>
 </head>
@@ -186,47 +186,40 @@
   </select>
 </div>
 
-<!-- Hero Section -->
 <header>
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="PepeNews Logo">
   <h1 id="main-title">Fuel the Meme Revolution</h1>
   <p id="main-description">The Future of Meme Journalism, powered by $PNEWS</p>
-
-  <!-- Buy $PNEWS Section -->
-  <div class="buy-pnews">
-    <h3>🚀 Buy $PNEWS TOKEN — Ride the Meme Wave</h3>
-    <p>Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!</p>
-    <button onclick="connectWallet()">Connect Wallet</button>
-  </div>
 </header>
 
-<!-- Ticker Section for Live Meme Prices -->
 <section>
   <div id="ticker-track">
-    <div class="ticker-content">
-      <!-- The prices will go here dynamically -->
-    </div>
+    <div class="ticker-content"></div>
   </div>
 </section>
 
-<!-- Countdown Timer Section -->
-<section style="background-color: #1b5e20; padding: 40px 20px; text-align: center; color: #FFD700;">
-  <h2>⏳ Countdown to $PNEWS Token Launch</h2>
-  <p>Get ready for liftoff — don't miss it!</p>
-  <div id="countdown" style="font-size: 2rem; font-weight: bold;"></div>
+<section class="cta">
+  <h3>🚀 Buy $PNEWS TOKEN — Ride the Meme Wave</h3>
+  <p>Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!</p>
+  <a href="#" onclick="connectWallet()">Connect Wallet</a>
+  <a href="#">Buy $PNEWS</a>
 </section>
 
-<!-- Updates Section -->
-<section id="updates">
-  <h2>🚨 Latest Updates</h2>
-  <ul>
-    <li>📈 The $PNEWS Token sale starts in just 3 days! Prepare to buy!</li>
-    <li>🎉 Join us on our <a href="#" target="_blank">Discord</a> for live discussions and updates.</li>
-    <li>💬 Follow us on Twitter for real-time announcements: <a href="#" target="_blank">Twitter</a></li>
-  </ul>
+<section id="countdown-updates">
+  <div id="countdown">
+    <h2>⏳ Countdown to $PNEWS Token Launch</h2>
+    <div id="timer">Loading...</div>
+  </div>
+  <div id="updates">
+    <h2>🚨 Latest Updates</h2>
+    <ul>
+      <li>📈 $PNEWS Token sale starts in just 3 days!</li>
+      <li>🎉 Join our <a href="#">Discord</a> for live updates.</li>
+      <li>💬 Follow us on <a href="#">Twitter</a> for more news.</li>
+    </ul>
+  </div>
 </section>
 
-<!-- Social Media Footer -->
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
     <a href="#">Twitter</a> · 
@@ -236,101 +229,68 @@
 </footer>
 
 <script>
-  // Language Data
-  const languageData = {
-    en: {
-      title: "Fuel the Meme Revolution",
-      description: "The Future of Meme Journalism, powered by $PNEWS",
-      countdownText: "⏳ Countdown to $PNEWS Token Launch",
-      buyText: "🚀 Buy $PNEWS TOKEN — Ride the Meme Wave",
-      buyDesc: "Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!",
-    },
-    zh: {
-      title: "为表情革命加油",
-      description: "$PNEWS驱动的表情新闻的未来",
-      countdownText: "⏳ 距离 $PNEWS 代币发布倒计时",
-      buyText: "🚀 购买 $PNEWS TOKEN — 加入表情波浪",
-      buyDesc: "拥有互联网最狂野新闻室的一部分。连接您的钱包，加入表情革命！",
-    },
-    // Add other languages similarly...
-  };
-
-  // Function to change content based on selected language
   function changeLanguage() {
-    const selectedLang = document.getElementById('language-dropdown').value;
-    document.getElementById('main-title').textContent = languageData[selectedLang]?.title || languageData.en.title;
-    document.getElementById('main-description').textContent = languageData[selectedLang]?.description || languageData.en.description;
-    document.getElementById('countdown').textContent = languageData[selectedLang]?.countdownText || languageData.en.countdownText;
-    document.querySelector('.buy-pnews h3').textContent = languageData[selectedLang]?.buyText || languageData.en.buyText;
-    document.querySelector('.buy-pnews p').textContent = languageData[selectedLang]?.buyDesc || languageData.en.buyDesc;
+    const lang = document.getElementById('language-dropdown').value;
+    const translations = {
+      en: {
+        title: "Fuel the Meme Revolution",
+        desc: "The Future of Meme Journalism, powered by $PNEWS"
+      },
+      zh: {
+        title: "为表情革命加油",
+        desc: "$PNEWS驱动的表情新闻未来"
+      }
+      // Add others similarly
+    };
+    const content = translations[lang] || translations['en'];
+    document.getElementById('main-title').textContent = content.title;
+    document.getElementById('main-description').textContent = content.desc;
   }
 
-  // Countdown Timer
   const launchDate = new Date("May 28, 2025 09:00:00 EDT").getTime();
   const countdownFunc = setInterval(() => {
     const now = new Date().getTime();
     const timeLeft = launchDate - now;
-
     if (timeLeft <= 0) {
       clearInterval(countdownFunc);
-      document.getElementById("countdown").innerHTML = "🚀 Launched!";
+      document.getElementById("timer").innerHTML = "🚀 Launched!";
       return;
     }
-
     const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
     const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-    document.getElementById("countdown").innerHTML =
-      `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }, 1000);
 
-  // Fetch live meme coin prices
-  const memeCoins = ['dogecoin', 'shiba-inu', 'pepe', 'floki-inu', 'bonk', 'memecoin', 'mogul', 'turbo'];
-
+  const memeCoins = ['dogecoin','shiba-inu','pepe','floki-inu','bonk','memecoin','mogul','turbo'];
   async function fetchLivePrices() {
     try {
       const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=' + memeCoins.join(',') + '&vs_currencies=usd');
       const data = await response.json();
       const track = document.querySelector('.ticker-content');
       track.innerHTML = '';
-
       memeCoins.forEach(coin => {
         const price = data[coin]?.usd;
         const item = document.createElement('span');
         item.className = 'ticker-item';
-        if (price) {
-          item.innerHTML = `${coin.toUpperCase()}: $${price.toFixed(6)}`;
-        } else {
-          item.innerHTML = `${coin.toUpperCase()}: N/A`;
-        }
+        item.innerHTML = `${coin.toUpperCase()}: $${price ? price.toFixed(6) : 'N/A'}`;
         track.appendChild(item);
       });
     } catch (err) {
       console.error('Error fetching data:', err);
-      document.getElementById('ticker-track').textContent = '⚠️ Live prices unavailable at the moment.';
     }
   }
-
   fetchLivePrices();
   setInterval(fetchLivePrices, 60000);
 
-  // Connect wallet function
   async function connectWallet() {
     if (window.ethereum) {
       try {
         const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
         alert("Connected: " + accounts[0]);
-        // Optional: trigger contract interaction to buy $PNEWS
       } catch (err) {
         alert("Wallet connection failed: " + err.message);
       }
     } else {
       alert("MetaMask is not detected. Please install it first.");
-    }
-  }
-</script>
-
-</body>
-</html>
