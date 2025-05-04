@@ -36,6 +36,27 @@
       margin-bottom: 20px;
     }
 
+    /* Language Selection Dropdown */
+    .language-selector {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #FFD700; /* Gold background */
+      border: none;
+      color: black;
+      padding: 10px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .language-selector select {
+      background: #FFD700;
+      color: black;
+      border: none;
+      font-size: 1rem;
+    }
+
     section {
       padding: 40px 20px;
       max-width: 1200px;
@@ -181,6 +202,17 @@
 </head>
 <body>
 
+<!-- Language Selection Dropdown -->
+<div class="language-selector">
+  <select id="language-select">
+    <option value="en">English</option>
+    <option value="fr">Français</option>
+    <option value="es">Español</option>
+    <option value="de">Deutsch</option>
+    <!-- Add more languages as needed -->
+  </select>
+</div>
+
 <!-- Hero Section -->
 <header>
   <!-- Logo with max-width set to 300px -->
@@ -195,6 +227,17 @@
     <div class="ticker-content">
       <!-- The prices will go here dynamically -->
     </div>
+  </div>
+</section>
+
+<!-- Connect Wallet Section -->
+<section class="cta">
+  <h2>🚀 Buy $PNEWS TOKEN — Ride the Meme Wave</h2>
+  <p style="font-size: 1.3em; color: #FFD700; text-align: center; max-width: 800px; margin: 0 auto;">
+    Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!
+  </p>
+  <div style="text-align: center; margin-top: 30px;">
+    <button onclick="connectWallet()">Connect Wallet</button>
   </div>
 </section>
 
@@ -232,53 +275,6 @@
   </div>
 </section>
 
-<!-- Social Media Feeds and Dynamic News -->
-<section>
-  <h2>📢 Latest Updates</h2>
-  
-  <!-- Twitter Feed -->
-  <div>
-    <h3>🦋 Latest Tweets</h3>
-    <a class="twitter-timeline" 
-       href="https://twitter.com/PEPENEWS45" 
-       data-height="400" 
-       data-theme="dark">Tweets by PepeNews</a>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-  </div>
-  
-  <!-- Dynamic News Section -->
-  <div id="dynamic-news">
-    <h3>🔥 Latest Meme News</h3>
-    <div id="news-articles">
-      <!-- Articles will be populated here -->
-    </div>
-  </div>
-</section>
-
-<!-- Latest Updates Section -->
-<section>
-  <h2>📢 Latest Updates</h2>
-  <div class="updates">
-    <ul>
-      <li>🚀 PepeCoin takes the crypto world by storm, increasing by 300% in the last 24 hours!</li>
-      <li>🎉 MemeFest 2025 is coming soon – Join us in July for the biggest meme event of the year!</li>
-      <li>📈 $PNEWS Token launches on May 28, 2025 – get ready for meme-based investments like never before!</li>
-      <li>💬 DogeCoin and PepeCoin rumored to be merging into a super meme token — could this be the next big thing?</li>
-    </ul>
-  </div>
-</section>
-
-<!-- Buy $PNEWS Section (Above Live Meme Prices) -->
-<section class="cta">
-  <h2>🚀 Buy $PNEWS TOKEN — Ride the Meme Wave</h2>
-  <p style="font-size: 1.3em; color: #FFD700; text-align: center; max-width: 800px; margin: 0 auto;">
-    Own a piece of the internet’s wildest newsroom. Connect your wallet and join the meme revolution!
-  </p>
-  <div style="text-align: center; margin-top: 30px;">
-    <button onclick="connectWallet()">Connect Wallet</button>
-  </div>
-</section>
-
 <!-- Footer -->
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
@@ -289,6 +285,12 @@
 </footer>
 
 <script>
+  // Language selection functionality
+  document.getElementById('language-select').addEventListener('change', function() {
+    var language = this.value;
+    alert("Language changed to: " + language); // Placeholder for actual language switching logic
+  });
+
   // Countdown Timer
   const launchDate = new Date("May 28, 2025 09:00:00 EDT").getTime();
   const countdownFunc = setInterval(() => {
@@ -309,36 +311,6 @@
     document.getElementById("countdown").innerHTML =
       `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }, 1000);
-
-  // Fetch live meme coin prices
-  const memeCoins = ['dogecoin', 'shiba-inu', 'pepe', 'floki-inu', 'bonk', 'memecoin', 'mogul', 'turbo'];
-
-  async function fetchLivePrices() {
-    try {
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=' + memeCoins.join(',') + '&vs_currencies=usd');
-      const data = await response.json();
-      const track = document.querySelector('.ticker-content');
-      track.innerHTML = '';
-
-      memeCoins.forEach(coin => {
-        const price = data[coin]?.usd;
-        const item = document.createElement('span');
-        item.className = 'ticker-item';
-        if (price) {
-          item.innerHTML = `${coin.toUpperCase()}: $${price.toFixed(6)}`;
-        } else {
-          item.innerHTML = `${coin.toUpperCase()}: N/A`;
-        }
-        track.appendChild(item);
-      });
-    } catch (err) {
-      console.error('Error fetching data:', err);
-      document.getElementById('ticker-track').textContent = '⚠️ Live prices unavailable at the moment.';
-    }
-  }
-
-  fetchLivePrices();
-  setInterval(fetchLivePrices, 60000);
 
   // Connect wallet function
   async function connectWallet() {
