@@ -28,6 +28,8 @@
     }
     footer { text-align: center; padding: 40px 20px; color: white; }
     footer a { color: #FFD700; margin: 0 10px; text-decoration: none; }
+    .safety-guide { text-align: center; padding: 20px 20px; background-color: #FFD700; margin: 40px 0; }
+    .safety-guide a { color: #1b5e20; font-weight: bold; font-size: 1.2em; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -43,6 +45,7 @@
 </div>
 
 <header>
+  <h2 style="color: #FFD700;">Pepe News Token (PNEWS)</h2>
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo">
   <h1>🚀 Meme Revolution</h1>
   <p>The Future of Meme Journalism, powered by $PNEWS</p>
@@ -63,44 +66,25 @@
   </div>
 </section>
 
+<div class="safety-guide">
+  <h3>🔒 Safety Guide</h3>
+  <p>For your protection, always ensure you are buying from the official contract address. Follow this <a href="https://assets-global.website-files.com/6424006598e25f12a6360e93/6425c5484385fb3e0dd6821f_Shiba_Inu_Safe_Guarding_Guide.pdf" target="_blank">Safety Guide</a> before making any transaction.</p>
+</div>
+
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
     <a href="https://x.com/PepeNewsCoin" target="_blank">X (Twitter)</a> · 
     <a href="#">Telegram</a> · 
     <a href="#">Discord</a>
   </p>
+  <p>&copy; 2025 Pepe News Token (PNEWS). All rights reserved.</p>
 </footer>
 
 <script>
   let web3;
   let userAddress;
   const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
-  const contractABI = [
-    {"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
-    {"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"allowance","type":"uint256"},{"internalType":"uint256","name":"needed","type":"uint256"}],"name":"ERC20InsufficientAllowance","type":"error"},
-    {"inputs":[{"internalType":"address","name":"sender","type":"address"},{"internalType":"uint256","name":"balance","type":"uint256"},{"internalType":"uint256","name":"needed","type":"uint256"}],"name":"ERC20InsufficientBalance","type":"error"},
-    {"inputs":[{"internalType":"address","name":"approver","type":"address"}],"name":"ERC20InvalidApprover","type":"error"},
-    {"inputs":[{"internalType":"address","name":"receiver","type":"address"}],"name":"ERC20InvalidReceiver","type":"error"},
-    {"inputs":[{"internalType":"address","name":"sender","type":"address"}],"name":"ERC20InvalidSender","type":"error"},
-    {"inputs":[{"internalType":"address","name":"spender","type":"address"}],"name":"ERC20InvalidSpender","type":"error"},
-    {"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"OwnableInvalidOwner","type":"error"},
-    {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"OwnableUnauthorizedAccount","type":"error"},
-    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"owner","type":"address"},{"indexed":true,"internalType":"address","name":"spender","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Approval","type":"event"},
-    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"previousOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnershipTransferred","type":"event"},
-    {"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"from","type":"address"},{"indexed":true,"internalType":"address","name":"to","type":"address"},{"indexed":false,"internalType":"uint256","name":"value","type":"uint256"}],"name":"Transfer","type":"event"},
-    {"inputs":[{"internalType":"address","name":"owner","type":"address"},{"internalType":"address","name":"spender","type":"address"}],"name":"allowance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-    {"inputs":[{"internalType":"address","name":"spender","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"approve","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
-    {"inputs":[{"internalType":"address","name":"account","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-    {"inputs":[],"name":"decimals","outputs":[{"internalType":"uint8","name":"","type":"uint8"}],"stateMutability":"view","type":"function"},
-    {"inputs":[],"name":"name","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
-    {"inputs":[],"name":"owner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
-    {"inputs":[],"name":"renounceOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"},
-    {"inputs":[],"name":"symbol","outputs":[{"internalType":"string","name":"","type":"string"}],"stateMutability":"view","type":"function"},
-    {"inputs":[],"name":"totalSupply","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
-    {"inputs":[{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transfer","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
-    {"inputs":[{"internalType":"address","name":"from","type":"address"},{"internalType":"address","name":"to","type":"address"},{"internalType":"uint256","name":"value","type":"uint256"}],"name":"transferFrom","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"nonpayable","type":"function"},
-    {"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"stateMutability":"nonpayable","type":"function"}
-  ];
+  const contractABI = [ /* your full ABI here */ ];
 
   async function connectWallet() {
     if (typeof window.ethereum !== 'undefined') {
@@ -132,19 +116,53 @@
   }
 
   async function buyToken() {
-    if (!userAddress) return alert('Please connect your wallet first');
+    if (!userAddress) return alert('Please connect your wallet!');
+    const amountToBuy = web3.utils.toWei('0.1', 'ether');
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
-    const amount = web3.utils.toWei('10', 'ether'); // Amount to buy in wei
     try {
-      await contract.methods.transfer(userAddress, amount).send({ from: userAddress });
-      alert('Successfully purchased $PNEWS Token!');
-    } catch (error) {
-      alert('Transaction failed. Please try again.');
+      await contract.methods.buyTokens().send({ from: userAddress, value: amountToBuy });
+      alert('Purchase successful!');
+      updateBalance();
+    } catch (err) {
+      console.error(err);
+      alert('Transaction failed.');
     }
   }
 
-  // Call the connectWallet function when the page loads
+  async function fetchLivePrices() {
+    try {
+      const memes = ['pepe', 'dogecoin', 'shiba-inu', 'floki', 'dogelon-mars'];
+      const cryptos = ['bitcoin', 'ethereum', 'solana', 'cardano', 'ripple'];
+      const memeUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${memes.join(',')}&vs_currencies=usd`;
+      const cryptoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptos.join(',')}&vs_currencies=usd`;
+      const [memeRes, cryptoRes] = await Promise.all([fetch(memeUrl), fetch(cryptoUrl)]);
+      const memeData = await memeRes.json();
+      const cryptoData = await cryptoRes.json();
+      document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
+      document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  const targetDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+  const countdownTimer = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+    if (distance < 0) {
+      clearInterval(countdownTimer);
+      document.getElementById('countdown').innerText = "Presale Live!";
+      return;
+    }
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s`;
+  }, 1000);
+
   document.getElementById('connectWallet').addEventListener('click', connectWallet);
+  fetchLivePrices();
 </script>
 
 </body>
