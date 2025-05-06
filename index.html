@@ -10,7 +10,28 @@
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
   <style>
-    /* Style adjustments are the same as before */
+    body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
+    header { padding: 60px 20px 20px; text-align: center; background-color: #1b5e20; position: relative; }
+    header h1 { font-size: 2.5em; margin: 0; color: #FFD700; }
+    header p { font-size: 1.2em; color: #FFD700; }
+    header img { max-width: 250px; margin-bottom: 20px; }
+    #language-selector { position: absolute; top: 20px; right: 20px; padding: 10px; background-color: #FFD700; border-radius: 5px; color: #1b5e20; font-weight: bold; }
+    section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+    .cta { text-align: center; padding: 60px 20px; border-radius: 20px; }
+    .cta a { display: inline-block; background: #FFD700; color: #1b5e20; padding: 16px 32px; font-size: 1.2em; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px; }
+    .cta a:hover { background: #ffcc00; }
+    #price-timer-section { text-align: center; margin-top: 40px; background-color: #FFD700; padding: 20px; border-radius: 10px; position: relative; overflow: hidden; }
+    .ticker { white-space: nowrap; display: inline-block; animation: scroll-left 20s linear infinite; color: red; font-weight: bold; font-size: 1em; }
+    @keyframes scroll-left {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+    footer { text-align: center; padding: 40px 20px; color: white; }
+    footer a { color: #FFD700; margin: 0 10px; text-decoration: none; }
+    .safety-guide { text-align: center; padding: 20px 20px; background-color: #FFD700; margin: 40px 0; }
+    .safety-guide h3 { color: #1b5e20; }
+    .safety-guide img { max-width: 250px; margin-bottom: 20px; }
+    .safety-guide a { color: #1b5e20; font-weight: bold; font-size: 1.2em; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -36,7 +57,7 @@
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
   <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
-  <a href="#" id="buyTokenButton" onclick="buyToken()" style="display: none;">Buy $PNEWS TOKEN</a>
+  <a href="#" id="buyTokenButton" onclick="buyToken()" style="display:none;">Buy $PNEWS TOKEN</a>
   <p id="user-balance">Your $PNEWS Balance: 0</p>
 
   <div id="price-timer-section">
@@ -55,7 +76,6 @@
   <p>For further guidance, follow the official safety guide available below:</p>
   <a href="https://github.com/PEPENEWS45/pepenews/blob/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank">Read the Safety Guide</a>
 </div>
-
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
     <a href="https://x.com/PepeNewsCoin" target="_blank">X (Twitter)</a> · 
@@ -68,60 +88,28 @@
 <script>
   let web3;
   let userAddress;
-  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';  // Update with your BSC token address
+  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
   const contractABI = [ /* your full ABI here */ ];
 
   async function connectWallet() {
-    // Check if MetaMask is installed
     if (typeof window.ethereum !== 'undefined') {
-      console.log('MetaMask is detected');
       web3 = new Web3(window.ethereum);
-
-      try {
-        // Request account access if needed
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        // Switch to Binance Smart Chain (BSC) if not already on it
-        const chainId = await web3.eth.getChainId();
-        if (chainId !== 56) { // BSC Mainnet chain ID
-          console.log('Switching to BSC...');
-          await window.ethereum.request({
-            method: 'wallet_addEthereumChain',
-            params: [{
-              chainId: '0x38', // BSC Mainnet chain ID
-              chainName: 'Binance Smart Chain',
-              nativeCurrency: {
-                name: 'Binance Coin',
-                symbol: 'BNB',
-                decimals: 18,
-              },
-              rpcUrls: ['https://bsc-dataseed.binance.org/'],
-              blockExplorerUrls: ['https://bscscan.com/'],
-            }],
-          });
-        }
-
-        const accounts = await web3.eth.getAccounts();
-        userAddress = accounts[0];
-        document.getElementById('connectWallet').innerText = 'Wallet Connected';
-        document.getElementById('buyTokenButton').style.display = 'inline-block';  // Show "Buy Token" button
-        updateBalance();
-      } catch (error) {
-        console.error(error);
-        alert('Error connecting to wallet or switching to BSC network');
-      }
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await web3.eth.getAccounts();
+      userAddress = accounts[0];
+      document.getElementById('connectWallet').innerText = 'Wallet Connected';
+      document.getElementById('buyTokenButton').style.display = 'inline-block';
+      updateBalance();
     } else {
-      // Fallback if MetaMask is not detected (using WalletConnect)
-      console.log('MetaMask not detected, using WalletConnect');
       const provider = new WalletConnectProvider.default({
-        rpc: { 56: "https://bsc-dataseed.binance.org/" },  // BSC RPC URL
+        rpc: { 1: "https://mainnet.infura.io/v3/YOUR_INFURA_ID" },
       });
       await provider.enable();
       web3 = new Web3(provider);
       const accounts = await web3.eth.getAccounts();
       userAddress = accounts[0];
       document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      document.getElementById('buyTokenButton').style.display = 'inline-block';  // Show "Buy Token" button
+      document.getElementById('buyTokenButton').style.display = 'inline-block';
       updateBalance();
     }
   }
@@ -138,7 +126,7 @@
     if (!userAddress) return alert('Please connect your wallet!');
     
     // Amount to buy (change this to the desired amount)
-    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // 0.1 BNB worth of $PNEWS
+    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // 0.1 ETH worth of $PNEWS
 
     // Interact with the contract to purchase the token
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
@@ -189,6 +177,5 @@
     setInterval(fetchLivePrices, 30000);
   };
 </script>
-
 </body>
 </html>
