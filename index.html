@@ -14,15 +14,20 @@
     header h1 { font-size: 2.5em; margin: 0; color: #FFD700; }
     header p { font-size: 1.2em; color: #FFD700; }
     header img { max-width: 250px; margin-bottom: 20px; }
-    #marketing-statement { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 1.5em; color: #FFD700; font-weight: bold; }
     #language-selector { position: absolute; top: 20px; right: 20px; padding: 10px; background-color: #FFD700; border-radius: 5px; color: #1b5e20; font-weight: bold; }
     section { padding: 40px 20px; max-width: 1200px; margin: auto; }
     .cta { text-align: center; padding: 60px 20px; border-radius: 20px; }
     .cta a { display: inline-block; background: #FFD700; color: #1b5e20; padding: 16px 32px; font-size: 1.2em; border-radius: 50px; text-decoration: none; font-weight: bold; margin-top: 20px; }
     .cta a:hover { background: #ffcc00; }
     #price-timer-section { text-align: center; margin-top: 40px; }
+    .scrolling-prices { position: relative; display: flex; overflow: hidden; white-space: nowrap; margin-top: 20px; font-size: 1.2em; color: red; animation: scroll-left 15s linear infinite; }
+    .scrolling-prices span { margin-right: 30px; }
     footer { text-align: center; padding: 40px 20px; color: white; }
     footer a { color: #FFD700; margin: 0 10px; text-decoration: none; }
+    @keyframes scroll-left {
+      from { transform: translateX(100%); }
+      to { transform: translateX(-100%); }
+    }
   </style>
 </head>
 <body>
@@ -39,7 +44,6 @@
 
 <header>
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo">
-  <div id="marketing-statement">💥 Buy Early Before $PNEWS Explodes! 🚀</div>
   <h1>🚀 Meme Revolution</h1>
   <p>The Future of Meme Journalism, powered by $PNEWS</p>
 </header>
@@ -59,8 +63,10 @@
 
   <div id="price-timer-section">
     <h3 style="color: #FFD700;">📉 Live Prices</h3>
-    <p id="live-memes">Top 10 Meme Coin Prices Loading...</p>
-    <p id="live-cryptos">Top 10 Crypto Prices Loading...</p>
+    <div class="scrolling-prices" id="live-prices">
+      <span>Top Meme Coin Prices: Loading...</span>
+      <span>Top Crypto Prices: Loading...</span>
+    </div>
     <h3 style="color: #FFD700;">⏳ Presale Starts In: <span id="countdown"></span></h3>
   </div>
 </section>
@@ -128,12 +134,16 @@
       const memeData = await memeRes.json();
       const cryptoData = await cryptoRes.json();
 
-      document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
-      document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
+      document.getElementById('live-prices').innerHTML = `
+        <span>${memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ')}</span>
+        <span>${cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ')}</span>
+      `;
     } catch (err) {
       console.error(err);
-      document.getElementById('live-memes').innerText = 'Unavailable';
-      document.getElementById('live-cryptos').innerText = 'Unavailable';
+      document.getElementById('live-prices').innerHTML = `
+        <span>Top Meme Coin Prices: Unavailable</span>
+        <span>Top Crypto Prices: Unavailable</span>
+      `;
     }
   }
 
