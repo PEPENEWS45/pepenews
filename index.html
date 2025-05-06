@@ -56,14 +56,13 @@
 <section class="cta">
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
   <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
-  <a href="#" id="connectWallet">Connect Wallet</a>
+  <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
   <a href="#" onclick="buyToken()">Buy $PNEWS TOKEN</a>
   <p id="user-balance">Your $PNEWS Balance: 0</p>
 
   <div id="price-timer-section">
     <h3 style="color: #1b5e20;">📉 Live Prices</h3>
-    <div class="ticker" id="live-memes">Loading meme prices...</div>
-    <div class="ticker" id="live-cryptos">Loading crypto prices...</div>
+    <div class="ticker" id="live-prices">Loading meme and crypto prices...</div>
     <h3 style="color: #1b5e20;">⏳ Presale Starts In: <span id="countdown"></span></h3>
   </div>
 </section>
@@ -143,8 +142,9 @@
       const [memeRes, cryptoRes] = await Promise.all([fetch(memeUrl), fetch(cryptoUrl)]);
       const memeData = await memeRes.json();
       const cryptoData = await cryptoRes.json();
-      document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
-      document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
+      const memePrices = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
+      const cryptoPrices = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
+      document.getElementById('live-prices').innerText = `${memePrices} | ${cryptoPrices}`;
     } catch (e) {
       console.error(e);
     }
