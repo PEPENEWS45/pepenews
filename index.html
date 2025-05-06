@@ -15,7 +15,56 @@
 </head>
 <body>
 
-<!-- Content of your page remains the same, so I will focus on changes to the script part below -->
+<div id="language-selector">
+  <select id="language-dropdown">
+    <option value="en">English</option>
+    <option value="zh">Chinese</option>
+    <option value="es">Spanish</option>
+    <option value="hi">Hindi</option>
+    <option value="ar">Arabic</option>
+  </select>
+</div>
+
+<header>
+  <h2 style="color: #FFD700;">Pepe News Token (PNEWS)</h2>
+  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo">
+  <h1>🚀 Meme Revolution</h1>
+  <p>The Future of Meme Journalism, powered by $PNEWS</p>
+</header>
+
+<section class="cta">
+  <h3>🚀 How to Buy $PNEWS TOKEN</h3>
+  <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
+  <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
+  <a href="#" id="buyTokenButton" onclick="buyToken()" style="display: none;">Buy $PNEWS TOKEN</a>
+  <p id="user-balance">Your $PNEWS Balance: 0</p>
+
+  <div id="price-timer-section">
+    <h3 style="color: #1b5e20;">📉 Live Prices</h3>
+    <div class="ticker" id="live-memes">Loading meme prices...</div>
+    <div class="ticker" id="live-cryptos">Loading crypto prices...</div>
+    <h3 style="color: #1b5e20;">⏳ Presale Starts In: <span id="countdown"></span></h3>
+  </div>
+</section>
+
+<!-- Safety Guide with PNEWS logo -->
+<div class="safety-guide">
+  <h3>🔒 Stay Safe While Trading $PNEWS</h3>
+  <p>For your safety, always verify that you are using the correct contract address and double-check the platform you're buying from.</p>
+  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe News Logo">
+  <p>For further guidance, follow the official safety guide available below:</p>
+  <a href="https://github.com/PEPENEWS45/pepenews/blob/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank">Read the Safety Guide</a>
+</div>
+
+<footer>
+  <p>💚 Built by the Meme Community · Join us on 
+    <a href="https://x.com/PepeNewsCoin" target="_blank">X (Twitter)</a> · 
+    <a href="#">Telegram</a> · 
+    <a href="#">Discord</a>
+  </p>
+  <p>&copy; 2025 Pepe News Token (PNEWS). All rights reserved.</p>
+</footer>
+
 <script>
   let web3;
   let userAddress;
@@ -23,32 +72,47 @@
   const contractABI = [ /* your full ABI here */ ];
 
   async function connectWallet() {
+    // Check if MetaMask is installed
     if (typeof window.ethereum !== 'undefined') {
+      console.log('MetaMask is detected');
       web3 = new Web3(window.ethereum);
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      // Set BSC network for MetaMask
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: '0x38', // BSC Mainnet chain ID
-          chainName: 'Binance Smart Chain',
-          nativeCurrency: {
-            name: 'Binance Coin',
-            symbol: 'BNB',
-            decimals: 18,
-          },
-          rpcUrls: ['https://bsc-dataseed.binance.org/'],
-          blockExplorerUrls: ['https://bscscan.com/'],
-        }],
-      });
+      try {
+        // Request account access if needed
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      const accounts = await web3.eth.getAccounts();
-      userAddress = accounts[0];
-      document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      document.getElementById('buyTokenButton').style.display = 'inline-block';
-      updateBalance();
+        // Switch to Binance Smart Chain (BSC) if not already on it
+        const chainId = await web3.eth.getChainId();
+        if (chainId !== 56) { // BSC Mainnet chain ID
+          console.log('Switching to BSC...');
+          await window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{
+              chainId: '0x38', // BSC Mainnet chain ID
+              chainName: 'Binance Smart Chain',
+              nativeCurrency: {
+                name: 'Binance Coin',
+                symbol: 'BNB',
+                decimals: 18,
+              },
+              rpcUrls: ['https://bsc-dataseed.binance.org/'],
+              blockExplorerUrls: ['https://bscscan.com/'],
+            }],
+          });
+        }
+
+        const accounts = await web3.eth.getAccounts();
+        userAddress = accounts[0];
+        document.getElementById('connectWallet').innerText = 'Wallet Connected';
+        document.getElementById('buyTokenButton').style.display = 'inline-block';  // Show "Buy Token" button
+        updateBalance();
+      } catch (error) {
+        console.error(error);
+        alert('Error connecting to wallet or switching to BSC network');
+      }
     } else {
+      // Fallback if MetaMask is not detected (using WalletConnect)
+      console.log('MetaMask not detected, using WalletConnect');
       const provider = new WalletConnectProvider.default({
         rpc: { 56: "https://bsc-dataseed.binance.org/" },  // BSC RPC URL
       });
@@ -57,7 +121,7 @@
       const accounts = await web3.eth.getAccounts();
       userAddress = accounts[0];
       document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      document.getElementById('buyTokenButton').style.display = 'inline-block';
+      document.getElementById('buyTokenButton').style.display = 'inline-block';  // Show "Buy Token" button
       updateBalance();
     }
   }
