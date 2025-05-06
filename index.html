@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="PepeNews.io - The Future of Meme Journalism, powered by $PNEWS token" />
+  <meta name="keywords" content="meme, Pepe, news, cryptocurrency, $PNEWS, token, NFT, meme culture" />
   <title>PepeNews.io - Meme Culture</title>
+  <link rel="icon" href="your_favicon_url_here.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <style>
     body {
@@ -224,6 +227,7 @@
   <p>Connect your wallet and join the meme revolution!</p>
   <a href="#" id="connectMetaMaskButton">Connect Wallet</a>
   <a href="#" onclick="buyToken()">Buy $PNEWS TOKEN</a>
+  <p id="user-balance">Your $PNEWS Balance: 0</p>
 </section>
 
 <section id="countdown-updates">
@@ -269,83 +273,59 @@
   }
 
   const launchDate = new Date("May 28, 2025 09:00:00 EDT").getTime();
-  const countdownFunc = setInterval(() => {
+  const countdownTimer = setInterval(() => {
     const now = new Date().getTime();
-    const timeLeft = launchDate - now;
-    if (timeLeft <= 0) {
-      clearInterval(countdownFunc);
-      document.getElementById("timer").innerHTML = "🚀 Launched!";
-      return;
+    const distance = launchDate - now;
+    
+    if (distance < 0) {
+      clearInterval(countdownTimer);
+      document.getElementById('timer').innerText = "Token Launched!";
+    } else {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById('timer').innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
     }
-    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-    document.getElementById("timer").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }, 1000);
 
-  const memeCoins = ['dogecoin','shiba-inu','pepe','floki-inu','bonk','memecoin','mogul','turbo'];
-  async function fetchLivePrices() {
-    try {
-      const response = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=' + memeCoins.join(',') + '&vs_currencies=usd');
-      const data = await response.json();
-      const track = document.querySelector('.ticker-content');
-      track.innerHTML = '';
-      memeCoins.forEach(coin => {
-        const price = data[coin]?.usd;
-        const item = document.createElement('span');
-        item.className = 'ticker-item';
-        item.innerHTML = `${coin.toUpperCase()}: $${price ? price.toFixed(6) : 'N/A'}`;
-        track.appendChild(item);
-      });
-    } catch (err) {
-      console.error('Error fetching data:', err);
-    }
-  }
-  fetchLivePrices();
-  setInterval(fetchLivePrices, 60000);
+  const web3 = new Web3(window.ethereum);
+  const tokenContractAddress = '0xYourTokenContractAddressHere';
+  const contractABI = []; // Replace with your contract's ABI
 
-  async function connectMetaMask() {
+  async function connectWallet() {
     if (typeof window.ethereum !== 'undefined') {
-      try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        alert("🔗 Connected to wallet: " + accounts[0]);
+      await ethereum.request({ method: 'eth_requestAccounts' });
+      web3.eth.getAccounts().then(accounts => {
         window.userAddress = accounts[0];
-      } catch (error) {
-        console.error(error);
-        alert("❌ Wallet connection failed.");
-      }
+        document.getElementById('connectMetaMaskButton').innerText = 'Wallet Connected';
+      });
     } else {
-      alert("⚠️ MetaMask not installed. Please install MetaMask to continue.");
+      alert('Please install MetaMask');
     }
   }
-
-  document.getElementById('connectMetaMaskButton').addEventListener('click', connectMetaMask);
 
   async function buyToken() {
-    if (!window.ethereum || !window.userAddress) {
-      alert("⚠️ Please connect your wallet first.");
+    if (!window.userAddress) {
+      alert("Please connect your wallet first!");
       return;
     }
 
-    const web3 = new Web3(window.ethereum);
-    const tokenContractAddress = "0xYourTokenContractAddressHere"; // 🔁 Replace with actual token contract address
-    const contractABI = []; // 🔁 Replace with your token sale contract ABI
-
+    const amountToBuy = web3.utils.toWei('0.1', 'ether');  // Adjust the amount you want to buy
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
-    
-    try {
-      const valueToSend = web3.utils.toWei("0.01", "ether");
-      const tx = await contract.methods.buyTokens(window.userAddress).send({
-        from: window.userAddress,
-        value: valueToSend
-      });
-      alert("✅ Token purchase successful! TX: " + tx.transactionHash);
-    } catch (error) {
-      console.error(error);
-      alert("❌ Purchase failed: " + error.message);
-    }
+    await contract.methods.buyTokens().send({ from: window.userAddress, value: amountToBuy });
+    alert('Purchase successful!');
+    updateBalance();
   }
+
+  async function updateBalance() {
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+    const balance = await contract.methods.balanceOf(window.userAddress).call();
+    const formattedBalance = web3.utils.fromWei(balance, "ether");
+    document.getElementById("user-balance").innerText = `Your $PNEWS Balance: ${formattedBalance}`;
+  }
+
+  document.getElementById('connectMetaMaskButton').addEventListener('click', connectWallet);
 </script>
 
 </body>
