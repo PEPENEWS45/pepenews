@@ -22,6 +22,8 @@
     .cta a:hover { background: #ffcc00; }
     #price-timer-section { text-align: center; margin-top: 40px; background-color: #FFD700; padding: 20px; border-radius: 10px; position: relative; overflow: hidden; }
     .ticker { white-space: nowrap; display: inline-block; animation: scroll-left 20s linear infinite; color: red; font-weight: bold; font-size: 1em; }
+    #live-prices-container { display: flex; justify-content: center; flex-wrap: nowrap; overflow: hidden; }
+    #live-prices-container div { margin-right: 20px; }
     @keyframes scroll-left {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
@@ -56,13 +58,16 @@
 <section class="cta">
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
   <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
-  <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
+  <a href="#" id="connectWallet">Connect Wallet</a>
   <a href="#" onclick="buyToken()">Buy $PNEWS TOKEN</a>
   <p id="user-balance">Your $PNEWS Balance: 0</p>
 
   <div id="price-timer-section">
     <h3 style="color: #1b5e20;">📉 Live Prices</h3>
-    <div class="ticker" id="live-prices">Loading meme and crypto prices...</div>
+    <div id="live-prices-container">
+      <div class="ticker" id="live-memes">Loading meme prices...</div>
+      <div class="ticker" id="live-cryptos">Loading crypto prices...</div>
+    </div>
     <h3 style="color: #1b5e20;">⏳ Presale Starts In: <span id="countdown"></span></h3>
   </div>
 </section>
@@ -91,23 +96,19 @@
   const contractABI = [ /* your full ABI here */ ];
 
   async function connectWallet() {
-    if (typeof window.ethereum !== 'undefined') {
+    if (window.ethereum) {
       web3 = new Web3(window.ethereum);
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const accounts = await web3.eth.getAccounts();
-      userAddress = accounts[0];
-      document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      updateBalance();
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const accounts = await web3.eth.getAccounts();
+        userAddress = accounts[0];
+        document.getElementById('connectWallet').innerText = 'Wallet Connected';
+        updateBalance();
+      } catch (err) {
+        console.error("Error connecting wallet:", err);
+      }
     } else {
-      const provider = new WalletConnectProvider.default({
-        rpc: { 1: "https://mainnet.infura.io/v3/YOUR_INFURA_ID" },
-      });
-      await provider.enable();
-      web3 = new Web3(provider);
-      const accounts = await web3.eth.getAccounts();
-      userAddress = accounts[0];
-      document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      updateBalance();
+      alert('Please install MetaMask!');
     }
   }
 
@@ -142,9 +143,8 @@
       const [memeRes, cryptoRes] = await Promise.all([fetch(memeUrl), fetch(cryptoUrl)]);
       const memeData = await memeRes.json();
       const cryptoData = await cryptoRes.json();
-      const memePrices = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
-      const cryptoPrices = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
-      document.getElementById('live-prices').innerText = `${memePrices} | ${cryptoPrices}`;
+      document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
+      document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
     } catch (e) {
       console.error(e);
     }
