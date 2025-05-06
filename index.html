@@ -8,7 +8,6 @@
   <title>PepeNews.io - Meme Culture</title>
   <link rel="icon" href="your_favicon_url_here.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
   <style>
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header { padding: 60px 20px 20px; text-align: center; background-color: #1b5e20; position: relative; }
@@ -55,7 +54,7 @@
 
 <section class="cta">
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
-  <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
+  <p>Connect your wallet (MetaMask only for now) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
   <a href="#" id="buyTokenButton" onclick="buyToken()" style="display:none;">Buy $PNEWS TOKEN</a>
   <p id="user-balance">Your $PNEWS Balance: 0</p>
@@ -68,14 +67,14 @@
   </div>
 </section>
 
-<!-- Safety Guide with PNEWS logo -->
 <div class="safety-guide">
   <h3>🔒 Stay Safe While Trading $PNEWS</h3>
-  <p>For your safety, always verify that you are using the correct contract address and double-check the platform you're buying from.</p>
+  <p>Always verify that you are using the correct contract address and double-check the platform you're buying from.</p>
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe News Logo">
-  <p>For further guidance, follow the official safety guide available below:</p>
+  <p>For further guidance, follow the official safety guide below:</p>
   <a href="https://github.com/PEPENEWS45/pepenews/blob/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank">Read the Safety Guide</a>
 </div>
+
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
     <a href="https://x.com/PepeNewsCoin" target="_blank">X (Twitter)</a> · 
@@ -88,34 +87,46 @@
 <script>
   let web3;
   let userAddress;
-  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
-  const contractABI = [ /* your full ABI here */ ];
+  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6'; // Replace with your contract address
+  const contractABI = [ /* your full ABI here */ ]; // Paste your ABI here
 
   async function connectWallet() {
-    if (typeof window.ethereum !== 'undefined') {
-      web3 = new Web3(window.ethereum);
+    if (typeof window.ethereum === 'undefined') {
+      alert("MetaMask is not installed!");
+      return;
+    }
+
+    web3 = new Web3(window.ethereum);
+    try {
+      // Switch to BNB Smart Chain
+      await window.ethereum.request({
+        method: 'wallet_addEthereumChain',
+        params: [{
+          chainId: '0x38',
+          chainName: 'BNB Smart Chain',
+          nativeCurrency: {
+            name: 'BNB',
+            symbol: 'BNB',
+            decimals: 18
+          },
+          rpcUrls: ['https://bsc-dataseed.binance.org/'],
+          blockExplorerUrls: ['https://bscscan.com']
+        }]
+      });
+
       await window.ethereum.request({ method: 'eth_requestAccounts' });
       const accounts = await web3.eth.getAccounts();
       userAddress = accounts[0];
       document.getElementById('connectWallet').innerText = 'Wallet Connected';
       document.getElementById('buyTokenButton').style.display = 'inline-block';
       updateBalance();
-    } else {
-      const provider = new WalletConnectProvider.default({
-        rpc: { 1: "https://mainnet.infura.io/v3/YOUR_INFURA_ID" },
-      });
-      await provider.enable();
-      web3 = new Web3(provider);
-      const accounts = await web3.eth.getAccounts();
-      userAddress = accounts[0];
-      document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      document.getElementById('buyTokenButton').style.display = 'inline-block';
-      updateBalance();
+    } catch (err) {
+      console.error("Wallet connection error:", err);
+      alert("Failed to connect wallet.");
     }
   }
 
   async function updateBalance() {
-    if (!userAddress) return;
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
     const balance = await contract.methods.balanceOf(userAddress).call();
     const formatted = web3.utils.fromWei(balance, 'ether');
@@ -123,20 +134,18 @@
   }
 
   async function buyToken() {
-    if (!userAddress) return alert('Please connect your wallet!');
+    if (!userAddress) return alert('Please connect your wallet first.');
     
-    // Amount to buy (change this to the desired amount)
-    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // 0.1 ETH worth of $PNEWS
-
-    // Interact with the contract to purchase the token
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // 0.1 BNB
+
     try {
       await contract.methods.buyTokens().send({ from: userAddress, value: amountToBuy });
       alert('Purchase successful!');
       updateBalance();
     } catch (err) {
       console.error(err);
-      alert('Transaction failed.');
+      alert('Purchase failed.');
     }
   }
 
@@ -152,7 +161,7 @@
       document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
       document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
     } catch (e) {
-      console.error(e);
+      console.error("Error fetching prices:", e);
     }
   }
 
