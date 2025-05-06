@@ -9,7 +9,7 @@
     body {
       margin: 0;
       font-family: 'Fredoka', sans-serif;
-      background-color: #1b5e20; /* Keep original background color */
+      background-color: #1b5e20;
       color: white;
     }
 
@@ -237,14 +237,14 @@
     <ul>
       <li>📈 $PNEWS Token sale starts on 28 May 2025!</li>
       <li>🎉 Join our <a href="#">Discord</a> for live updates.</li>
-      <li>💬 Follow us on <a href="#">Twitter</a> for more news.</li>
+      <li>💬 Follow us on <a href="https://x.com/PepeNewsCoin" target="_blank" rel="noopener noreferrer">X (Twitter)</a> for more news.</li>
     </ul>
   </div>
 </section>
 
 <footer>
   <p>💚 Built by the Meme Community · Join us on 
-    <a href="#">Twitter</a> · 
+    <a href="https://x.com/PepeNewsCoin" target="_blank" rel="noopener noreferrer">X (Twitter)</a> · 
     <a href="#">Telegram</a> · 
     <a href="#">Discord</a>
   </p>
@@ -305,7 +305,6 @@
   fetchLivePrices();
   setInterval(fetchLivePrices, 60000);
 
-  // ✅ MetaMask Wallet Connection
   async function connectMetaMask() {
     if (typeof window.ethereum !== 'undefined') {
       try {
@@ -323,7 +322,6 @@
 
   document.getElementById('connectMetaMaskButton').addEventListener('click', connectMetaMask);
 
-  // ✅ Buy Token (Placeholder Logic — update with real contract)
   async function buyToken() {
     if (!window.ethereum || !window.userAddress) {
       alert("⚠️ Please connect your wallet first.");
@@ -331,14 +329,13 @@
     }
 
     const web3 = new Web3(window.ethereum);
-    
     const tokenContractAddress = "0xYourTokenContractAddressHere"; // 🔁 Replace with actual token contract address
     const contractABI = []; // 🔁 Replace with your token sale contract ABI
 
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
     
     try {
-      const valueToSend = web3.utils.toWei("0.01", "ether"); // Example: 0.01 ETH
+      const valueToSend = web3.utils.toWei("0.01", "ether");
       const tx = await contract.methods.buyTokens(window.userAddress).send({
         from: window.userAddress,
         value: valueToSend
