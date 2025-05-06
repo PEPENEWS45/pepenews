@@ -8,87 +8,26 @@
   <title>PepeNews.io - Meme Culture</title>
   <link rel="icon" href="your_favicon_url_here.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@walletconnect/web3-provider@1.7.8/dist/umd/index.min.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Fredoka', sans-serif;
-      background-color: #1b5e20;
-      color: white;
-    }
-    header {
-      padding: 60px 20px 20px;
-      text-align: center;
-      background-color: #1b5e20;
-      position: relative;
-    }
-    header h1 {
-      font-size: 2.5em;
-      margin: 0;
-      color: #FFD700;
-    }
-    header p {
-      font-size: 1.2em;
-      color: #FFD700;
-    }
-    header img {
-      max-width: 250px;
-      margin-bottom: 20px;
-    }
-    #language-selector {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      padding: 10px;
-      background-color: #FFD700;
-      border-radius: 5px;
-      color: #1b5e20;
-      font-weight: bold;
-    }
-    section {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: auto;
-    }
-    .cta {
-      text-align: center;
-      padding: 60px 20px;
-      border-radius: 20px;
-    }
-    #price-timer-section {
-      text-align: center;
-      margin-top: 40px;
-      background-color: #FFD700;
-      padding: 30px 10px;
-      border-radius: 15px;
-    }
-    .ticker {
-      width: 100%;
-      overflow: hidden;
-      white-space: nowrap;
-      box-sizing: border-box;
-      padding: 10px 0;
-    }
-    .ticker span {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scroll-left 20s linear infinite;
-      color: red;
-      font-weight: bold;
-    }
+    body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
+    header { padding: 60px 20px 20px; text-align: center; background-color: #1b5e20; position: relative; }
+    header h1 { font-size: 2.5em; margin: 0; color: #FFD700; }
+    header p { font-size: 1.2em; color: #FFD700; }
+    header img { max-width: 250px; margin-bottom: 20px; }
+    #language-selector { position: absolute; top: 20px; right: 20px; padding: 10px; background-color: #FFD700; border-radius: 5px; color: #1b5e20; font-weight: bold; }
+    section { padding: 40px 20px; max-width: 1200px; margin: auto; }
+    .cta { text-align: center; padding: 60px 20px; border-radius: 20px; }
+    .cta a { display: inline-block; background: #FFD700; color: #1b5e20; padding: 16px 32px; font-size: 1.2em; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px; }
+    .cta a:hover { background: #ffcc00; }
+    #price-timer-section { text-align: center; margin-top: 40px; background-color: #FFD700; padding: 20px; border-radius: 10px; position: relative; overflow: hidden; }
+    .ticker { white-space: nowrap; display: inline-block; animation: scroll-left 20s linear infinite; color: red; font-weight: bold; font-size: 1em; }
     @keyframes scroll-left {
-      0% { transform: translateX(0%); }
+      0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-    footer {
-      text-align: center;
-      padding: 40px 20px;
-      color: white;
-    }
-    footer a {
-      color: #FFD700;
-      margin: 0 10px;
-      text-decoration: none;
-    }
+    footer { text-align: center; padding: 40px 20px; color: white; }
+    footer a { color: #FFD700; margin: 0 10px; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -110,14 +49,16 @@
 </header>
 
 <section class="cta">
+  <h3>🚀 How to Buy $PNEWS TOKEN</h3>
+  <p>Connect your wallet (MetaMask or WalletConnect) and ride the meme wave!</p>
+  <a href="#" id="connectWallet">Connect Wallet</a>
+  <a href="#" onclick="buyToken()">Buy $PNEWS TOKEN</a>
+  <p id="user-balance">Your $PNEWS Balance: 0</p>
+
   <div id="price-timer-section">
     <h3 style="color: #1b5e20;">📉 Live Prices</h3>
-    <div class="ticker">
-      <span id="live-memes">Top 10 Meme Coin Prices Loading...</span>
-    </div>
-    <div class="ticker">
-      <span id="live-cryptos">Top 10 Crypto Prices Loading...</span>
-    </div>
+    <div class="ticker" id="live-memes">Loading meme prices...</div>
+    <div class="ticker" id="live-cryptos">Loading crypto prices...</div>
     <h3 style="color: #1b5e20;">⏳ Presale Starts In: <span id="countdown"></span></h3>
   </div>
 </section>
@@ -131,23 +72,67 @@
 </footer>
 
 <script>
+  let web3;
+  let userAddress;
+  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
+  const contractABI = [/* your full ABI here */];
+
+  async function connectWallet() {
+    if (typeof window.ethereum !== 'undefined') {
+      web3 = new Web3(window.ethereum);
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await web3.eth.getAccounts();
+      userAddress = accounts[0];
+      document.getElementById('connectWallet').innerText = 'Wallet Connected';
+      updateBalance();
+    } else {
+      const provider = new WalletConnectProvider.default({
+        rpc: { 1: "https://mainnet.infura.io/v3/YOUR_INFURA_ID" },
+      });
+      await provider.enable();
+      web3 = new Web3(provider);
+      const accounts = await web3.eth.getAccounts();
+      userAddress = accounts[0];
+      document.getElementById('connectWallet').innerText = 'Wallet Connected';
+      updateBalance();
+    }
+  }
+
+  async function updateBalance() {
+    if (!userAddress) return;
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+    const balance = await contract.methods.balanceOf(userAddress).call();
+    const formatted = web3.utils.fromWei(balance, 'ether');
+    document.getElementById('user-balance').innerText = `Your $PNEWS Balance: ${formatted}`;
+  }
+
+  async function buyToken() {
+    if (!userAddress) return alert('Please connect your wallet!');
+    const amountToBuy = web3.utils.toWei('0.1', 'ether');
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+    try {
+      await contract.methods.buyTokens().send({ from: userAddress, value: amountToBuy });
+      alert('Purchase successful!');
+      updateBalance();
+    } catch (err) {
+      console.error(err);
+      alert('Transaction failed.');
+    }
+  }
+
   async function fetchLivePrices() {
     try {
-      const memes = ['pepe', 'dogecoin', 'shiba-inu', 'floki', 'dogelon-mars', 'akita-inu', 'samoyedcoin', 'babydoge-coin', 'cult-dao', 'volt-inu'];
-      const cryptos = ['bitcoin', 'ethereum', 'binancecoin', 'solana', 'cardano', 'ripple', 'ton', 'avalanche-2', 'polkadot', 'chainlink'];
+      const memes = ['pepe', 'dogecoin', 'shiba-inu', 'floki', 'dogelon-mars'];
+      const cryptos = ['bitcoin', 'ethereum', 'solana', 'cardano', 'ripple'];
       const memeUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${memes.join(',')}&vs_currencies=usd`;
       const cryptoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptos.join(',')}&vs_currencies=usd`;
-
       const [memeRes, cryptoRes] = await Promise.all([fetch(memeUrl), fetch(cryptoUrl)]);
       const memeData = await memeRes.json();
       const cryptoData = await cryptoRes.json();
-
       document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
       document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
-    } catch (err) {
-      console.error(err);
-      document.getElementById('live-memes').innerText = 'Unavailable';
-      document.getElementById('live-cryptos').innerText = 'Unavailable';
+    } catch (e) {
+      console.error(e);
     }
   }
 
@@ -160,15 +145,15 @@
       document.getElementById('countdown').innerText = "Presale Live!";
       return;
     }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById('countdown').innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById('countdown').innerText = `${d}d ${h}h ${m}m ${s}s`;
   }, 1000);
 
+  document.getElementById('connectWallet').addEventListener('click', connectWallet);
   fetchLivePrices();
-  setInterval(fetchLivePrices, 60000); // Refresh prices every 60 seconds
 </script>
 
 </body>
