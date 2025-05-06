@@ -120,16 +120,13 @@
 </footer>
 
 <script>
-  // Global Web3 instance
   let web3;
-
-  // Smart contract details
-  const tokenContractAddress = '0xYourTokenContractAddressHere'; // Replace with your actual contract address
-  const contractABI = []; // Replace with your contract's ABI
-
   let userAddress;
 
-  // Check if MetaMask is installed and connect wallet
+  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
+
+  const contractABI = [/* PASTE FULL ABI HERE */];
+
   async function connectWallet() {
     if (typeof window.ethereum !== 'undefined') {
       web3 = new Web3(window.ethereum);
@@ -143,7 +140,6 @@
     }
   }
 
-  // Function to update the user's token balance
   async function updateBalance() {
     if (!userAddress) {
       alert('Please connect your wallet first.');
@@ -155,22 +151,19 @@
     document.getElementById('user-balance').innerText = `Your $PNEWS Balance: ${formattedBalance}`;
   }
 
-  // Function to handle token purchase
   async function buyToken() {
     if (!userAddress) {
       alert('Please connect your wallet first!');
       return;
     }
 
-    // Set the amount of Ether you want to spend for the token purchase
-    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // Adjust the amount to buy (example: 0.1 ETH)
-
+    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // example amount
     const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
 
     try {
       await contract.methods.buyTokens().send({
         from: userAddress,
-        value: amountToBuy, // Send Ether
+        value: amountToBuy
       });
 
       alert('Purchase successful!');
@@ -181,7 +174,6 @@
     }
   }
 
-  // Event listener for connect button
   document.getElementById('connectMetaMaskButton').addEventListener('click', connectWallet);
 </script>
 
