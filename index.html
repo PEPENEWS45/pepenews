@@ -80,5 +80,41 @@
   <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
 </footer>
 
+<script>
+  let web3;
+  async function connectWallet() {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        web3 = new Web3(window.ethereum);
+        alert("Wallet connected!");
+      } catch (error) {
+        alert("Connection rejected.");
+      }
+    } else {
+      alert("MetaMask is not installed. Please install it to use this feature.");
+    }
+  }
+
+  async function buyToken() {
+    if (!web3) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+
+    const accounts = await web3.eth.getAccounts();
+    const from = accounts[0];
+    const to = "0xYourTokenSaleAddressHere"; // Replace with actual recipient address
+    const value = web3.utils.toWei("0.01", "ether");
+
+    try {
+      await web3.eth.sendTransaction({ from, to, value });
+      alert("Purchase successful! $PNEWS token sent.");
+    } catch (err) {
+      alert("Transaction failed.");
+    }
+  }
+</script>
+
 </body>
 </html>
