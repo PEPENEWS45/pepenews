@@ -29,8 +29,13 @@
     footer a { color: #FFD700; margin: 0 10px; text-decoration: none; }
     .safety-guide { text-align: center; padding: 20px 20px; background-color: #FFD700; margin: 40px 0; }
     .safety-guide h3 { color: #1b5e20; }
-    .safety-guide img { max-width: 250px; margin-bottom: 20px; }
     .safety-guide a { color: #1b5e20; font-weight: bold; font-size: 1.2em; text-decoration: none; }
+    .floating-pepe { display: block; margin: 40px auto; max-width: 200px; animation: float 3s ease-in-out infinite; }
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
@@ -52,155 +57,28 @@
   <p>The Future of Meme Journalism, powered by $PNEWS</p>
 </header>
 
+<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
+
 <section class="cta">
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
   <p>Connect your wallet (MetaMask only for now) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
-  <a href="#" id="buyTokenButton" onclick="buyToken()" style="display:none;">Buy $PNEWS TOKEN</a>
-  <p id="user-balance">Your $PNEWS Balance: 0</p>
-
-  <div id="price-timer-section">
-    <h3 style="color: #1b5e20;">📉 Live Prices</h3>
-    <div class="ticker" id="live-memes">Loading meme prices...</div>
-    <div class="ticker" id="live-cryptos">Loading crypto prices...</div>
-    <h3 style="color: #1b5e20;">⏳ Presale Starts In: <span id="countdown"></span></h3>
-  </div>
-</section>
-
-<section class="cta">
-  <h3>🔥 Token Burn Events</h3>
-  <p>We regularly reduce the total supply of $PNEWS through public burn events to increase scarcity and value.</p>
-
-  <div style="background-color: #2e7d32; padding: 20px; border-radius: 10px; margin-top: 20px;">
-    <h4 style="color: #FFD700;">Burn Event #1</h4>
-    <p><strong>Date:</strong> July 7, 2025</p>
-    <p><strong>Amount Burned:</strong> 10,000,000,000 PNEWS</p>
-    <p><strong>Tx Hash:</strong> <a href="https://bscscan.com/tx/0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890" target="_blank" style="color: #FFD700;">0xabcdef...7890</a></p>
-    <p><strong>Announcement:</strong> <a href="https://twitter.com/PepeNewsCoin/status/1234567890123456789" target="_blank" style="color: #FFD700;">View on Twitter</a></p>
-  </div>
-
-  <div style="background-color: #2e7d32; padding: 20px; border-radius: 10px; margin-top: 20px;">
-    <h4 style="color: #FFD700;">Burn Event #2</h4>
-    <p><strong>Date:</strong> October 28, 2025</p>
-    <p><strong>Amount Burned:</strong> 5,000,000,000 PNEWS TOKENS</p>
-    <p><strong>Tx Hash:</strong> <a href="https://bscscan.com/tx/0x1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef" target="_blank" style="color: #FFD700;">0x123456...cdef</a></p>
-    <p><strong>Announcement:</strong> <a href="https://pepenews.io/burn-event-2" target="_blank" style="color: #FFD700;">Read More</a></p>
-  </div>
+  <a href="#" id="buyTokenButton" onclick="buyToken()">Buy $PNEWS for 0.01 ETH</a>
 </section>
 
 <div class="safety-guide">
-  <h3>🔒 Stay Safe While Trading $PNEWS</h3>
-  <p>Always verify that you are using the correct contract address and double-check the platform you're buying from.</p>
-  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe News Logo">
-  <p>For further guidance, follow the official safety guide below:</p>
-  <a href="https://raw.githubusercontent.com/PEPENEWS45/pepenews/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank" rel="noopener noreferrer">Read the Safety Guide</a>
+  <h3>Stay Safe in the Meme World</h3>
+  <a href="/safety-guide.pdf" download>Download Safety Guide (PDF)</a>
+</div>
+
+<div class="safety-guide">
+  <h3>Read the Whitepaper</h3>
+  <a href="/whitepaper.pdf" download>Download Whitepaper (PDF)</a>
 </div>
 
 <footer>
-  <p>💚 Built by the Meme Community · Join us on 
-    <a href="https://x.com/PepeNewsCoin" target="_blank">X (Twitter)</a> · 
-    <a href="#">Telegram</a> · 
-    <a href="#">Discord</a>
-  </p>
-  <p>&copy; 2025 Pepe News Token (PNEWS). All rights reserved.</p>
+  <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
 </footer>
 
-<script>
-  let web3;
-  let userAddress;
-  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
-  const contractABI = [ /* your full ABI here */ ];
-
-  async function connectWallet() {
-    if (typeof window.ethereum === 'undefined') {
-      alert("MetaMask is not installed!");
-      return;
-    }
-
-    web3 = new Web3(window.ethereum);
-    try {
-      await window.ethereum.request({
-        method: 'wallet_addEthereumChain',
-        params: [{
-          chainId: '0x38',
-          chainName: 'BNB Smart Chain',
-          nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
-          rpcUrls: ['https://bsc-dataseed.binance.org/'],
-          blockExplorerUrls: ['https://bscscan.com']
-        }]
-      });
-
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      const accounts = await web3.eth.getAccounts();
-      userAddress = accounts[0];
-      document.getElementById('connectWallet').innerText = 'Wallet Connected';
-      document.getElementById('buyTokenButton').style.display = 'inline-block';
-      updateBalance();
-    } catch (err) {
-      console.error("Wallet connection error:", err);
-      alert("Failed to connect wallet.");
-    }
-  }
-
-  async function updateBalance() {
-    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
-    const balance = await contract.methods.balanceOf(userAddress).call();
-    const formatted = web3.utils.fromWei(balance, 'ether');
-    document.getElementById('user-balance').innerText = `Your $PNEWS Balance: ${formatted}`;
-  }
-
-  async function buyToken() {
-    if (!userAddress) return alert('Please connect your wallet first.');
-    
-    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
-    const amountToBuy = web3.utils.toWei('0.1', 'ether'); // 0.1 BNB
-
-    try {
-      await contract.methods.buyTokens().send({ from: userAddress, value: amountToBuy });
-      alert('Purchase successful!');
-      updateBalance();
-    } catch (err) {
-      console.error(err);
-      alert('Purchase failed.');
-    }
-  }
-
-  async function fetchLivePrices() {
-    try {
-      const memes = ['pepe', 'dogecoin', 'shiba-inu', 'floki', 'dogelon-mars'];
-      const cryptos = ['bitcoin', 'ethereum', 'solana', 'cardano', 'ripple'];
-      const memeUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${memes.join(',')}&vs_currencies=usd`;
-      const cryptoUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${cryptos.join(',')}&vs_currencies=usd`;
-      const [memeRes, cryptoRes] = await Promise.all([fetch(memeUrl), fetch(cryptoUrl)]);
-      const memeData = await memeRes.json();
-      const cryptoData = await cryptoRes.json();
-      document.getElementById('live-memes').innerText = memes.map(id => `${id.toUpperCase()}: $${memeData[id]?.usd}`).join(' | ');
-      document.getElementById('live-cryptos').innerText = cryptos.map(id => `${id.toUpperCase()}: $${cryptoData[id]?.usd}`).join(' | ');
-    } catch (e) {
-      console.error("Error fetching prices:", e);
-    }
-  }
-
-  const targetDate = new Date("2025-05-28T09:00:00-04:00").getTime();
-  const countdownTimer = setInterval(() => {
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-    if (distance < 0) {
-      clearInterval(countdownTimer);
-      document.getElementById('countdown').innerText = "Presale Live!";
-      return;
-    }
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    document.getElementById('countdown').innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  }, 1000);
-
-  window.onload = function () {
-    fetchLivePrices();
-    setInterval(fetchLivePrices, 30000);
-  };
-</script>
 </body>
 </html>
