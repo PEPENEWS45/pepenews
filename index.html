@@ -93,7 +93,7 @@
   <p>Always verify that you are using the correct contract address and double-check the platform you're buying from.</p>
   <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe News Logo">
   <p>For further guidance, follow the official safety guide below:</p>
-  <a href="https://github.com/PEPENEWS45/pepenews/blob/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank">Read the Safety Guide</a>
+  <a href="https://raw.githubusercontent.com/PEPENEWS45/pepenews/main/PNEWS_Safety_Guide%20(1).pdf" target="_blank" rel="noopener noreferrer">Read the Safety Guide</a>
 </div>
 
 <footer>
@@ -108,8 +108,8 @@
 <script>
   let web3;
   let userAddress;
-  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6'; // Replace with your contract address
-  const contractABI = [ /* your full ABI here */ ]; // Paste your ABI here
+  const tokenContractAddress = '0xE929Ed70A86e83de09fE9d6511C76C7d458Ba5B6';
+  const contractABI = [ /* your full ABI here */ ];
 
   async function connectWallet() {
     if (typeof window.ethereum === 'undefined') {
@@ -124,11 +124,7 @@
         params: [{
           chainId: '0x38',
           chainName: 'BNB Smart Chain',
-          nativeCurrency: {
-            name: 'BNB',
-            symbol: 'BNB',
-            decimals: 18
-          },
+          nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
           rpcUrls: ['https://bsc-dataseed.binance.org/'],
           blockExplorerUrls: ['https://bscscan.com']
         }]
