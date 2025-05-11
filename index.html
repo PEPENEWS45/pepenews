@@ -118,7 +118,7 @@
   <h3>🚀 How to Buy $PNEWS TOKEN</h3>
   <p>Connect your wallet (MetaMask only for now) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
-  <a href="#" id="buyTokenButton" onclick="buyToken()">Buy $PNEWS TOKEN</a>
+  <a href="#" id="buyTokenButton" onclick="buyToken()" style="display:none;">Buy $PNEWS TOKEN</a>
   <a href="#" onclick="getBalance()">Check Balance</a>
   <a href="#" onclick="transferTokens()">Transfer Tokens</a>
   <h3 style="color: #FFD700;">⏳ Token Launch In: <span id="countdown"></span></h3>
@@ -281,7 +281,7 @@
       try {
         await window.ethereum.request({ method: 'eth_requestAccounts' });
         web3 = new Web3(window.ethereum);
-        alert("Wallet connected!");
+        alert("Wallet connected! You can now proceed to buy $PNEWS."); document.getElementById('buyTokenButton').style.display = 'inline-block';
       } catch (error) {
         alert("Connection rejected.");
       }
