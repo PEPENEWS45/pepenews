@@ -7,7 +7,8 @@
   <meta name="keywords" content="meme, Pepe, news, cryptocurrency, $PNEWS, token, NFT, meme culture" />
   <title>PepeNews.io - Meme Culture</title>
   <link rel="icon" href="your_favicon_url_here.ico" type="image/x-icon" />
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+<script>
 
   // Function to get the token balance of the connected wallet
   async function getBalance() {
@@ -60,9 +61,6 @@
       alert("Transfer failed. Check console for details.");
     }
   }
-  }
-
-
 
   // Fetch live data from GeckoTerminal (example token pair or pool required)
   async function updateStats() {
@@ -84,7 +82,9 @@
 
   updateStats();
   setInterval(updateStats, 60000);
-  <style>
+
+</script>
+<style>
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header { padding: 60px 20px 20px; text-align: center; background-color: #1b5e20; position: relative; }
     header h1 { font-size: 2.5em; margin: 0; color: #FFD700; }
