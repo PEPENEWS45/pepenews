@@ -7,7 +7,62 @@
   <meta name="keywords" content="meme, Pepe, news, cryptocurrency, $PNEWS, token, NFT, meme culture" />
   <title>PepeNews.io - Meme Culture</title>
   <link rel="icon" href="your_favicon_url_here.ico" type="image/x-icon" />
-  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js">
+
+  // Function to get the token balance of the connected wallet
+  async function getBalance() {
+    if (!web3) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+
+    const accounts = await web3.eth.getAccounts();
+    const userAddress = accounts[0];
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+
+    try {
+      const balance = await contract.methods.balanceOf(userAddress).call();
+      const decimals = await contract.methods.decimals().call();
+      const formattedBalance = balance / (10 ** decimals);
+      alert("Your PNEWS Balance: " + formattedBalance);
+    } catch (err) {
+      console.error(err);
+      alert("Failed to retrieve balance.");
+    }
+  }
+
+  // Function to transfer PNEWS tokens to another address
+  async function transferTokens() {
+    if (!web3) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+
+    const to = prompt("Enter recipient address:");
+    const amount = prompt("Enter amount of PNEWS to transfer:");
+
+    if (!web3.utils.isAddress(to)) {
+      alert("Invalid recipient address.");
+      return;
+    }
+
+    const accounts = await web3.eth.getAccounts();
+    const userAddress = accounts[0];
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+
+    try {
+      const decimals = await contract.methods.decimals().call();
+      const adjustedAmount = web3.utils.toBN(amount * (10 ** decimals));
+      const tx = await contract.methods.transfer(to, adjustedAmount).send({ from: userAddress });
+      alert("Transfer successful! View transaction: https://bscscan.com/tx/" + tx.transactionHash);
+    } catch (err) {
+      console.error(err);
+      alert("Transfer failed. Check console for details.");
+    }
+  }
+  }
+
+</script>
   <style>
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header { padding: 60px 20px 20px; text-align: center; background-color: #1b5e20; position: relative; }
@@ -64,6 +119,8 @@
   <p>Connect your wallet (MetaMask only for now) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
   <a href="#" id="buyTokenButton" onclick="buyToken()">Buy $PNEWS TOKEN</a>
+  <a href="#" onclick="getBalance()">Check Balance</a>
+  <a href="#" onclick="transferTokens()">Transfer Tokens</a>
   <h3 style="color: #FFD700;">⏳ Token Launch In: <span id="countdown"></span></h3>
   <br>
   <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Our Telegram</a>
@@ -87,7 +144,137 @@
 
 <script>
   let web3;
-  const saleAddress = "0xYourTokenSaleAddressHere"; // Replace with actual recipient address
+  const tokenContractAddress = "0xYourPNEWSTokenAddress"; // Replace with your token contract address
+  const contractABI = [
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "allowance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
+    ],
+    "name": "ERC20InsufficientAllowance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "uint256", "name": "balance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
+    ],
+    "name": "ERC20InsufficientBalance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "approver", "type": "address" }
+    ],
+    "name": "ERC20InvalidApprover",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "receiver", "type": "address" }
+    ],
+    "name": "ERC20InvalidReceiver",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "sender", "type": "address" }
+    ],
+    "name": "ERC20InvalidSender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" }
+    ],
+    "name": "ERC20InvalidSpender",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" }
+    ],
+    "name": "OwnableInvalidOwner",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "OwnableUnauthorizedAccount",
+    "type": "error"
+  },
+  { "anonymous": false, "inputs": [
+      { "indexed": true, "internalType": "address", "name": "owner", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "spender", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }
+    ], "name": "Approval", "type": "event" },
+  { "anonymous": false, "inputs": [
+      { "indexed": true, "internalType": "address", "name": "previousOwner", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "newOwner", "type": "address" }
+    ], "name": "OwnershipTransferred", "type": "event" },
+  { "anonymous": false, "inputs": [
+      { "indexed": true, "internalType": "address", "name": "from", "type": "address" },
+      { "indexed": true, "internalType": "address", "name": "to", "type": "address" },
+      { "indexed": false, "internalType": "uint256", "name": "value", "type": "uint256" }
+    ], "name": "Transfer", "type": "event" },
+  { "inputs": [
+      { "internalType": "address", "name": "owner", "type": "address" },
+      { "internalType": "address", "name": "spender", "type": "address" }
+    ], "name": "allowance", "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ], "name": "approve", "outputs": [
+      { "internalType": "bool", "name": "", "type": "bool" }
+    ], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ], "name": "balanceOf", "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "decimals", "outputs": [
+      { "internalType": "uint8", "name": "", "type": "uint8" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "name", "outputs": [
+      { "internalType": "string", "name": "", "type": "string" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "owner", "outputs": [
+      { "internalType": "address", "name": "", "type": "address" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "renounceOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [], "name": "symbol", "outputs": [
+      { "internalType": "string", "name": "", "type": "string" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [], "name": "totalSupply", "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ], "stateMutability": "view", "type": "function" },
+  { "inputs": [
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ], "name": "transfer", "outputs": [
+      { "internalType": "bool", "name": "", "type": "bool" }
+    ], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [
+      { "internalType": "address", "name": "from", "type": "address" },
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ], "name": "transferFrom", "outputs": [
+      { "internalType": "bool", "name": "", "type": "bool" }
+    ], "stateMutability": "nonpayable", "type": "function" },
+  { "inputs": [
+      { "internalType": "address", "name": "newOwner", "type": "address" }
+    ], "name": "transferOwnership", "outputs": [], "stateMutability": "nonpayable", "type": "function" }
+]; // Paste your actual ABI here
 
   async function connectWallet() {
     if (window.ethereum) {
@@ -110,14 +297,15 @@
     }
 
     const accounts = await web3.eth.getAccounts();
-    const from = accounts[0];
-    const value = web3.utils.toWei("0.01", "ether");
+    const userAddress = accounts[0];
+    const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
 
     try {
-      await web3.eth.sendTransaction({ from, to: saleAddress, value });
-      alert("Purchase successful! $PNEWS token sent.");
+      const tx = await contract.methods.buyTokens().send({ from: userAddress });
+      alert("Purchase successful! View transaction: https://bscscan.com/tx/" + tx.transactionHash);
     } catch (err) {
-      alert("Transaction failed.");
+      console.error(err);
+      alert("Transaction failed. Check console for details.");
     }
   }
 
