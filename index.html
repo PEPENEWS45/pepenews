@@ -90,7 +90,7 @@
     header h1 { font-size: 2.5em; margin: 0; color: #FFD700; }
     header p { font-size: 1.2em; color: #FFD700; }
     header img { max-width: 250px; margin-bottom: 20px; }
-    #language-selector { position: absolute; top: 20px; right: 20px; padding: 10px; background-color: #FFD700; border-radius: 5px; color: #1b5e20; font-weight: bold; }
+    
     section { padding: 40px 20px; max-width: 1200px; margin: auto; }
     .cta { text-align: center; padding: 60px 20px; border-radius: 20px; }
     .cta a { display: inline-block; background: #FFD700; color: #1b5e20; padding: 16px 32px; font-size: 1.2em; border-radius: 50px; text-decoration: none; font-weight: bold; margin: 10px; }
@@ -112,25 +112,18 @@
       50% { transform: translateY(-20px); }
       100% { transform: translateY(0); }
     }
-    .center-logo {
-    display: block;
-    margin: 0 auto 20px;
-    max-width: 200px;
-    animation: float 3s ease-in-out infinite;
+    $1
+  filter: drop-shadow(0 0 10px #FFD700);
+  transition: filter 0.3s ease;
+  &:hover {
+    filter: drop-shadow(0 0 15px #FFFF00);
   }
+}
 </style>
 </head>
 <body>
 
-<div id="language-selector">
-  <select id="language-dropdown">
-    <option value="en">English</option>
-    <option value="zh">Chinese</option>
-    <option value="es">Spanish</option>
-    <option value="hi">Hindi</option>
-    <option value="ar">Arabic</option>
-  </select>
-</div>
+
 
 
   </div>
