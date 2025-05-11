@@ -64,6 +64,9 @@
   <p>Connect your wallet (MetaMask only for now) and ride the meme wave!</p>
   <a href="#" id="connectWallet" onclick="connectWallet()">Connect Wallet</a>
   <a href="#" id="buyTokenButton" onclick="buyToken()">Buy $PNEWS TOKEN</a>
+  <h3 style="color: #FFD700;">⏳ Token Launch In: <span id="countdown"></span></h3>
+  <br>
+  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Our Telegram</a>
 </section>
 
 <div class="safety-guide">
@@ -82,6 +85,8 @@
 
 <script>
   let web3;
+  const saleAddress = "0xYourTokenSaleAddressHere"; // Replace with actual recipient address
+
   async function connectWallet() {
     if (window.ethereum) {
       try {
@@ -104,16 +109,27 @@
 
     const accounts = await web3.eth.getAccounts();
     const from = accounts[0];
-    const to = "0xYourTokenSaleAddressHere"; // Replace with actual recipient address
     const value = web3.utils.toWei("0.01", "ether");
 
     try {
-      await web3.eth.sendTransaction({ from, to, value });
+      await web3.eth.sendTransaction({ from, to: saleAddress, value });
       alert("Purchase successful! $PNEWS token sent.");
     } catch (err) {
       alert("Transaction failed.");
     }
   }
+
+  const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+  setInterval(() => {
+    const now = Date.now();
+    const diff = launchDate - now;
+    if (diff < 0) return document.getElementById("countdown").innerText = "Launched!";
+    const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+    document.getElementById("countdown").innerText = `${d}d ${h}h ${m}m ${s}s`;
+  }, 1000);
 </script>
 
 </body>
