@@ -82,6 +82,67 @@
     gtag('js', new Date());
     gtag('config', 'G-XXXXXXX');
   </script></head>
+<style>
+  #prelaunch-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(27, 94, 32, 0.98);
+    color: #FFD700;
+    z-index: 10000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: 'Fredoka', sans-serif;
+  }
+  #prelaunch-overlay h1 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  #prelaunch-overlay button,
+  #prelaunch-overlay a {
+    background: #FFD700;
+    color: #1b5e20;
+    border: none;
+    padding: 12px 20px;
+    margin: 10px;
+    border-radius: 10px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+</style>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const overlay = document.getElementById("prelaunch-overlay");
+    const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+      if (distance <= 0) {
+        overlay.style.display = "none";
+        return;
+      }
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("launch-timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>
+<div id="prelaunch-overlay">
+  <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
+  <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
+  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+</div>
 <body id="top">
 
 <nav>
@@ -131,8 +192,9 @@
   </ul>
 
   <div class="market-cap-widget">
-  <h3 style="color: #FFD700;">📊 Live Stats: Top 10 Meme Coins</h3>
-  <iframe src="https://www.geckoterminal.com/network/bsc" width="100%" height="450" frameborder="0" style="border-radius: 10px;"></iframe>
+  <h3 style="color: #FFD700;">📊 Live Stats: $PNEWS Bullish Chart</h3>
+  <iframe src="https://dexscreener.com/bsc/0x5F4ceFFbfD532dc3477e81f09079Bf1EB5138F6C" width="100%" height="450" frameborder="0" style="border-radius: 10px;"></iframe>
+</div>
   </div></section>
 
 <section class="cta" style="text-align: center;">
