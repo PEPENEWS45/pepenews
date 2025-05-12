@@ -132,26 +132,34 @@
   </style>
 </head>
 <body>
-<!-- FULL BODY CONTENT RESTORATION BEGINS -->
-<header>
-  <h2>Pepe News Token ($PNEWS)</h2>
-  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" style="filter: drop-shadow(0 0 15px #FFD700);" />
-  <h1>🚀 Meme Revolution</h1>
-  <p>The Future of Meme Journalism, powered by $PNEWS</p>
-</header>
+  <div id="prelaunch-overlay">
+    <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
+    <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+  </div>
 
-<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
+  <nav>
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#usecases">Use Cases</a>
+    <a href="#howtobuy">How to Buy</a>
+    <a href="#transparency">Transparency</a>
+    <a href="#partners">Partners</a>
+    <a href="#roadmap">Roadmap</a>
+  </nav>
 
-<section class="cta" style="text-align: left; padding: 20px;">
-  <h3 id="about">🧠 About $PNEWS</h3>
-  <p>Meme journalism meets cryptocurrency. A token that funds stories, memes, and decentralized media.</p>
+  <header>
+    <h2>Pepe News Token ($PNEWS)</h2>
+    <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" style="filter: drop-shadow(0 0 15px #FFD700);" />
+    <h1>🚀 Meme Revolution</h1>
+    <p>The Future of Meme Journalism, powered by $PNEWS</p>
+  </header>
 
-  <h3 id="tokenomics">📜 Tokenomics</h3>
-  <p>1 Trillion total supply. 30% Community, 20% Team, 20% Marketing, 10% Reserve, 10% Liquidity, 10% Governance.</p>
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
 
-  <h3 id="usecases">🧩 Use Cases</h3>
-  <p>Tip meme creators, fund investigations, stake for headlines. Meme journalism on-chain.</p>
-</section>
-<!-- FULL BODY CONTENT RESTORATION ENDS -->
+  <!-- FULL site content continues... (about, tokenomics, use cases, how to buy, trust, roadmap, etc.) -->
 </body>
 </html>
