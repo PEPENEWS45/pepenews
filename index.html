@@ -116,6 +116,11 @@
 </style>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+  if (localStorage.getItem('enteredSite') === 'true') {
+    const overlay = document.getElementById("prelaunch-overlay");
+    if (overlay) overlay.style.display = "none";
+    return;
+  }
     const overlay = document.getElementById("prelaunch-overlay");
     const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
 
@@ -141,7 +146,7 @@
   <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
   <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
   <button onclick="connectWallet()">Connect Wallet</button>
-  <button onclick="document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+  <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
 </div>
 <body id="top">
 
