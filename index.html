@@ -163,5 +163,130 @@
 </footer>
 
 
-  <a href="#top" style="position:fixed;bottom:20px;right:20px;background:#FFD700;color:#1b5e20;padding:12px 16px;border-radius:50%;text-decoration:none;font-weight:bold;z-index:999;">↑</a></body>
+  <a href="#top" style="position:fixed;bottom:20px;right:20px;background:#FFD700;color:#1b5e20;padding:12px 16px;border-radius:50%;text-decoration:none;font-weight:bold;z-index:999;">↑</a>
+<script>
+let web3;
+const tokenContractAddress = "0x5F4ceFFbfD532dc3477e81f09079Bf1EB5138F6C"; // Replace this with your actual contract address
+const contractABI = [
+  {
+    "inputs": [],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "spender", "type": "address" },
+      { "internalType": "uint256", "name": "allowance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
+    ],
+    "name": "ERC20InsufficientAllowance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "sender", "type": "address" },
+      { "internalType": "uint256", "name": "balance", "type": "uint256" },
+      { "internalType": "uint256", "name": "needed", "type": "uint256" }
+    ],
+    "name": "ERC20InsufficientBalance",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "account", "type": "address" }
+    ],
+    "name": "balanceOf",
+    "outputs": [
+      { "internalType": "uint256", "name": "", "type": "uint256" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "decimals",
+    "outputs": [
+      { "internalType": "uint8", "name": "", "type": "uint8" }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      { "internalType": "address", "name": "to", "type": "address" },
+      { "internalType": "uint256", "name": "value", "type": "uint256" }
+    ],
+    "name": "transfer",
+    "outputs": [
+      { "internalType": "bool", "name": "", "type": "bool" }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  }
+];
+
+async function connectWallet() {
+  if (window.ethereum) {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      web3 = new Web3(window.ethereum);
+      alert("Wallet connected! You can now buy $PNEWS.");
+      document.getElementById('buyTokenButton').style.display = 'inline-block';
+    } catch (error) {
+      alert("Connection rejected.");
+    }
+  } else {
+    alert("MetaMask is not installed. Please install it to use this feature.");
+  }
+}
+
+async function getBalance() {
+  if (!web3) {
+    alert("Please connect your wallet first.");
+    return;
+  }
+  const accounts = await web3.eth.getAccounts();
+  const userAddress = accounts[0];
+  const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+
+  try {
+    const balance = await contract.methods.balanceOf(userAddress).call();
+    const decimals = await contract.methods.decimals().call();
+    const formattedBalance = balance / (10 ** decimals);
+    alert("Your PNEWS Balance: " + formattedBalance);
+  } catch (err) {
+    console.error(err);
+    alert("Failed to retrieve balance.");
+  }
+}
+
+async function transferTokens() {
+  if (!web3) {
+    alert("Please connect your wallet first.");
+    return;
+  }
+  const to = prompt("Enter recipient address:");
+  const amount = prompt("Enter amount of PNEWS to transfer:");
+
+  if (!web3.utils.isAddress(to)) {
+    alert("Invalid recipient address.");
+    return;
+  }
+
+  const accounts = await web3.eth.getAccounts();
+  const userAddress = accounts[0];
+  const contract = new web3.eth.Contract(contractABI, tokenContractAddress);
+
+  try {
+    const decimals = await contract.methods.decimals().call();
+    const adjustedAmount = web3.utils.toBN(amount * (10 ** decimals));
+    const tx = await contract.methods.transfer(to, adjustedAmount).send({ from: userAddress });
+    alert("Transfer successful! View on BscScan: https://bscscan.com/tx/" + tx.transactionHash);
+  } catch (err) {
+    console.error(err);
+    alert("Transfer failed.");
+  }
+}
+</script>
+</body>
 </html>
