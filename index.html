@@ -16,7 +16,7 @@
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header, footer, section { max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
     h1, h2, h3 { color: #FFD700; }
-    .cta a, footer a, .action-buttons a, .action-buttons button { color: #1b5e20; background: #FFD700; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 10px; display: inline-block; font-weight: bold; }
+    .cta a, footer a, .action-buttons a, .action-buttons button { color: #1b5e20; background: #FFD700; padding: 10px 18px; border-radius: 8px; text-decoration: none; margin: 8px; display: inline-block; font-weight: bold; font-size: 0.95em; }
     .cta a:hover, .action-buttons a:hover, .action-buttons button:hover { background: #ffcc00; }
     .floating-pepe {
       animation: float 3s ease-in-out infinite;
@@ -28,7 +28,6 @@
     nav a { color: #FFD700; margin: 0 15px; font-weight: bold; text-decoration: none; }
     nav a:hover { text-decoration: underline; }
     html { scroll-behavior: smooth; }
-
     @media (max-width: 768px) {
       header, footer, section { padding: 10px; }
       header h1 { font-size: 1.6em; margin-top: 10px; }
@@ -37,17 +36,14 @@
       .floating-pepe { max-width: 150px; }
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
-
     @media (min-width: 769px) {
       header .floating-pepe, body > img.floating-pepe {
         max-width: 2.5% !important;
         height: auto;
         display: block;
-        margin-left: auto;
-        margin-right: auto;
+        margin: 0 auto;
       }
     }
-
     #prelaunch-overlay {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
@@ -101,18 +97,15 @@
     });
 
     async function connectWallet() {
+      if (typeof window.ethereum === 'undefined') {
+        alert("Please install MetaMask to connect your wallet.");
+        return;
+      }
       try {
-        if (typeof window.ethereum !== 'undefined') {
-          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-          alert("Wallet connected: " + accounts[0]);
-        } else if (window.web3) {
-          const accounts = await web3.eth.getAccounts();
-          alert("Wallet connected: " + accounts[0]);
-        } else {
-          alert("Please install MetaMask or use a Web3-enabled browser.");
-        }
-      } catch (err) {
-        console.error(err);
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        alert("Wallet connected: " + accounts[0]);
+      } catch (error) {
+        console.error(error);
         alert("Failed to connect wallet.");
       }
     }
@@ -153,11 +146,15 @@
   <section class="cta action-buttons">
     <h3>🎮 Action Center</h3>
     <button onclick="connectWallet()">🔌 Connect Wallet</button>
-    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
-    <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow on X</a>
     <a href="#" onclick="alert('Buy PNEWS - Coming Soon!')">💰 Buy $PNEWS</a>
     <a href="#" onclick="alert('Check balance - Coming Soon!')">📊 Check Balance</a>
     <a href="#" onclick="alert('Transfer tokens - Coming Soon!')">🔄 Transfer Tokens</a>
+  </section>
+
+  <section class="cta action-buttons">
+    <h3>🌐 Social Media</h3>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow on X</a>
   </section>
 
   <section class="cta" id="roadmap">
