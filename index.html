@@ -37,8 +37,16 @@
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-      header .floating-pepe { width: 35% !important; height: auto; }
-      body > img.floating-pepe { width: 35% !important; height: auto; }
+      header .floating-pepe {
+        width: 24.5% !important;
+        height: auto;
+      }
+      body > img.floating-pepe {
+        width: 24.5% !important;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
     }
     #prelaunch-overlay {
       position: fixed;
@@ -72,114 +80,3 @@
     }
   </style>
 </head>
-<body>
-<div id="prelaunch-overlay">
-  <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
-  <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
-  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
-  <button onclick="connectWallet()">Connect Wallet</button>
-  <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
-</div>
-
-<nav>
-  <a href="#top">Home</a>
-  <a href="#about">About</a>
-  <a href="#tokenomics">Tokenomics</a>
-  <a href="#usecases">Use Cases</a>
-  <a href="#howtobuy">How to Buy</a>
-  <a href="#transparency">Transparency</a>
-  <a href="#partners">Partners</a>
-  <a href="#roadmap">Roadmap</a>
-</nav>
-
-<header>
-  <h2>Pepe News Token ($PNEWS)</h2>
-  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" style="filter: drop-shadow(0 0 15px #FFD700);" />
-  <h1>🚀 Meme Revolution</h1>
-  <p>The Future of Meme Journalism, powered by $PNEWS</p>
-</header>
-
-<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
-
-<section class="cta" style="text-align: center;">
-  <h3>🚀 How to Get Started</h3>
-  <p>Connect your wallet and jump on the meme wave with $PNEWS!</p>
-  <a href="#" onclick="connectWallet()">Connect Wallet</a>
-  <a href="#" onclick="getBalance()">Check Balance</a>
-  <a href="#" onclick="transferTokens()">Transfer Tokens</a>
-  <br><br>
-  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Our Telegram</a>
-  <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
-  <div class="safety-guide">
-    <h3>Stay Safe in the Meme World</h3>
-    <a href="/safety-guide.pdf" download>Download Safety Guide (PDF)</a>
-  </div>
-  <div class="safety-guide">
-    <h3>Read the Whitepaper</h3>
-    <a href="https://raw.githubusercontent.com/PEPENEWS45/pepenews/main/Pepe%20News%20Token%20White%20Paper.pdf" download>Download Whitepaper (PDF)</a>
-  </div>
-</section>
-
-<footer>
-  <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
-</footer>
-
-<script>
-  async function connectWallet() {
-    if (typeof window.ethereum === 'undefined') {
-      window.location.href = "https://metamask.app.link/dapp/pepenews.io";
-      return;
-    }
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      window.web3 = new Web3(window.ethereum);
-      alert("Wallet connected! You can now buy $PNEWS.");
-    } catch (error) {
-      alert("Connection rejected.");
-    }
-  }
-
-  async function getBalance() {
-    if (!window.web3) {
-      alert("Please connect your wallet first.");
-      return;
-    }
-    const accounts = await web3.eth.getAccounts();
-    const contract = new web3.eth.Contract([], '');
-    // Replace above line with actual ABI and contract address if balanceOf is needed.
-    alert("Balance feature is under maintenance.");
-  }
-
-  async function transferTokens() {
-    if (!window.web3) {
-      alert("Please connect your wallet first.");
-      return;
-    }
-    alert("Transfer feature coming soon.");
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    if (localStorage.getItem('enteredSite') === 'true') {
-      const overlay = document.getElementById("prelaunch-overlay");
-      if (overlay) overlay.style.display = "none";
-    }
-    const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = launchDate - now;
-      if (distance <= 0) {
-        document.getElementById("prelaunch-overlay").style.display = "none";
-        return;
-      }
-      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((distance % (1000 * 60)) / 1000);
-      document.getElementById("launch-timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  });
-</script>
-</body>
-</html>
