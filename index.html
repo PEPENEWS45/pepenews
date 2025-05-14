@@ -40,10 +40,11 @@
 
     @media (min-width: 769px) {
       header .floating-pepe, body > img.floating-pepe {
-        max-width: 3.5% !important;
+        max-width: 2.5% !important;
         height: auto;
         display: block;
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
       }
     }
 
@@ -100,15 +101,18 @@
     });
 
     async function connectWallet() {
-      if (typeof window.ethereum === 'undefined') {
-        alert("Please install MetaMask to connect your wallet.");
-        return;
-      }
       try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        alert("Wallet connected: " + accounts[0]);
-      } catch (error) {
-        console.error(error);
+        if (typeof window.ethereum !== 'undefined') {
+          const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+          alert("Wallet connected: " + accounts[0]);
+        } else if (window.web3) {
+          const accounts = await web3.eth.getAccounts();
+          alert("Wallet connected: " + accounts[0]);
+        } else {
+          alert("Please install MetaMask or use a Web3-enabled browser.");
+        }
+      } catch (err) {
+        console.error(err);
         alert("Failed to connect wallet.");
       }
     }
