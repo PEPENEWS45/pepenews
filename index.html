@@ -16,8 +16,8 @@
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header, footer, section { max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
     h1, h2, h3 { color: #FFD700; }
-    .cta a, footer a { color: #1b5e20; background: #FFD700; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 10px; display: inline-block; font-weight: bold; }
-    .cta a:hover { background: #ffcc00; }
+    .cta a, footer a, .action-buttons a, .action-buttons button { color: #1b5e20; background: #FFD700; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 10px; display: inline-block; font-weight: bold; }
+    .cta a:hover, .action-buttons a:hover, .action-buttons button:hover { background: #ffcc00; }
     .floating-pepe {
       animation: float 3s ease-in-out infinite;
       filter: drop-shadow(0 0 12px #FFD700);
@@ -33,18 +33,14 @@
       header, footer, section { padding: 10px; }
       header h1 { font-size: 1.6em; margin-top: 10px; }
       header h2 { font-size: 1.2em; }
-      .cta a { display: block; margin: 10px auto; width: 90%; font-size: 1em; }
+      .cta a, .action-buttons a, .action-buttons button { display: block; margin: 10px auto; width: 90%; font-size: 1em; }
       .floating-pepe { max-width: 150px; }
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
 
     @media (min-width: 769px) {
-      header .floating-pepe {
-        max-width: 8% !important;
-        height: auto;
-      }
-      body > img.floating-pepe {
-        max-width: 8% !important;
+      header .floating-pepe, body > img.floating-pepe {
+        max-width: 5% !important;
         height: auto;
         display: block;
         margin: 0 auto;
@@ -64,23 +60,9 @@
       text-align: center;
       font-family: 'Fredoka', sans-serif;
     }
-    #prelaunch-overlay h1 {
-      font-size: 2em;
-      margin-bottom: 10px;
-    }
+    #prelaunch-overlay h1 { font-size: 2em; margin-bottom: 10px; }
     #prelaunch-overlay button,
-    #prelaunch-overlay a {
-      background: #FFD700;
-      color: #1b5e20;
-      border: none;
-      padding: 12px 20px;
-      margin: 10px;
-      border-radius: 10px;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-    }
+    #prelaunch-overlay a { background: #FFD700; color: #1b5e20; border: none; padding: 12px 20px; margin: 10px; border-radius: 10px; font-size: 1em; font-weight: bold; cursor: pointer; text-decoration: none; }
   </style>
 </head>
 <body>
@@ -162,6 +144,13 @@
   <section class="cta" id="howtobuy">
     <h3>🪙 How to Buy</h3>
     <p>Connect MetaMask and swap BNB for $PNEWS via PancakeSwap.</p>
+  </section>
+
+  <section class="cta action-buttons">
+    <h3>🎮 Action Center</h3>
+    <button onclick="connectWallet()">🔌 Connect Wallet</button>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow on X</a>
   </section>
 
   <section class="cta" id="roadmap">
