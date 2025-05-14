@@ -38,8 +38,8 @@
     }
     @media (min-width: 769px) {
       .floating-logo, .floating-rocket {
-        width: 7% !important;
-        max-width: 100px;
+        width: 5% !important;
+        max-width: 80px;
         display: block;
         margin: 0 auto;
       }
@@ -119,15 +119,12 @@
     let web3;
     let contract;
 
-    function copySaleAddress() {
-      const address = document.getElementById('sale-address').textContent;
-      navigator.clipboard.writeText(address).then(() => {
-        alert('Sale address copied to clipboard');
-      });
+    function isMobileDevice() {
+      return /android|iphone|ipad|ipod/i.test(navigator.userAgent);
     }
 
     async function connectWallet() {
-      if (window.ethereum) {
+      if (window.ethereum && !isMobileDevice()) {
         try {
           await window.ethereum.request({ method: 'eth_requestAccounts' });
           web3 = new Web3(window.ethereum);
@@ -137,9 +134,19 @@
           console.error(error);
           alert("Connection failed.");
         }
+      } else if (isMobileDevice()) {
+        const dappUrl = encodeURIComponent(window.location.href.replace(/^https?:\/\//, ''));
+        window.location.href = `https://metamask.app.link/dapp/${dappUrl}`;
       } else {
         alert("MetaMask not found. Please install MetaMask and try again.");
       }
+    }
+
+    function copySaleAddress() {
+      const address = document.getElementById('sale-address').textContent;
+      navigator.clipboard.writeText(address).then(() => {
+        alert('Sale address copied to clipboard');
+      });
     }
 
     async function getBalance() {
