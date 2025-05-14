@@ -37,32 +37,25 @@
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-      header .floating-pepe, body > img.floating-pepe {
-        max-width: 70px !important;
-        height: auto;
+      .floating-logo, .floating-rocket {
+        width: 35% !important;
+        max-width: 300px;
         display: block;
         margin: 0 auto;
       }
     }
-    #prelaunch-overlay {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(27, 94, 32, 0.98);
-      color: #FFD700;
-      z-index: 10000;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      font-family: 'Fredoka', sans-serif;
-    }
-    #prelaunch-overlay h1 { font-size: 2em; margin-bottom: 10px; }
-    #prelaunch-overlay button,
-    #prelaunch-overlay a { background: #FFD700; color: #1b5e20; border: none; padding: 12px 20px; margin: 10px; border-radius: 10px; font-size: 1em; font-weight: bold; cursor: pointer; text-decoration: none; }
   </style>
 </head>
 <body>
+  <header>
+    <h2>Pepe News Token ($PNEWS)</h2>
+    <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe floating-logo" />
+    <h1>🚀 Meme Revolution</h1>
+    <p>The Future of Meme Journalism, powered by $PNEWS</p>
+  </header>
+
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket" />
+
   <section class="cta" id="tokenomics">
     <h3>📜 Tokenomics</h3>
     <div style="max-width: 700px; margin: auto; text-align: left;">
