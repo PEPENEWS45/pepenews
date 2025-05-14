@@ -40,11 +40,11 @@
 
     @media (min-width: 769px) {
       header .floating-pepe {
-        max-width: 17.15% !important;
+        max-width: 12% !important;
         height: auto;
       }
       body > img.floating-pepe {
-        max-width: 17.15% !important;
+        max-width: 12% !important;
         height: auto;
         display: block;
         margin: 0 auto;
@@ -84,6 +84,41 @@
   </style>
 </head>
 <body>
-  <!-- Content should follow here -->
+  <div id="prelaunch-overlay">
+    <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
+    <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const overlay = document.getElementById("prelaunch-overlay");
+      if (localStorage.getItem('enteredSite') === 'true') {
+        overlay.style.display = "none";
+        return;
+      }
+      const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+        if (distance <= 0) {
+          overlay.style.display = "none";
+          return;
+        }
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("launch-timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
+  </script>
+
+  <!-- Insert the rest of your HTML content like header, nav, logo, sections, etc. below this point -->
+  <!-- If you want, I can now restore your entire full content here with all fixed styling -->
 </body>
 </html>
