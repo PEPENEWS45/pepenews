@@ -38,8 +38,8 @@
     }
     @media (min-width: 769px) {
       .floating-logo, .floating-rocket {
-        width: 10% !important;
-        max-width: 120px;
+        width: 7% !important;
+        max-width: 100px;
         display: block;
         margin: 0 auto;
       }
@@ -104,6 +104,16 @@
         name: "balanceOf",
         outputs: [{ name: "", type: "uint256" }],
         type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "to", type: "address" },
+          { name: "value", type: "uint256" }
+        ],
+        name: "transfer",
+        outputs: [{ name: "", type: "bool" }],
+        type: "function"
       }
     ];
     let web3;
@@ -117,23 +127,18 @@
     }
 
     async function connectWallet() {
-      if (typeof window.ethereum === 'undefined') {
-        alert("MetaMask not found. Please install MetaMask and try again.");
-        return;
-      }
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(window.ethereum);
-        contract = new web3.eth.Contract(tokenABI, tokenAddress);
-        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-        if (chainId !== '0x38') {
-          alert("Please switch to Binance Smart Chain Mainnet in MetaMask.");
-        } else {
-          alert("Wallet connected: " + accounts[0]);
+      if (window.ethereum) {
+        try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          web3 = new Web3(window.ethereum);
+          contract = new web3.eth.Contract(tokenABI, tokenAddress);
+          alert("Wallet connected successfully.");
+        } catch (error) {
+          console.error(error);
+          alert("Connection failed.");
         }
-      } catch (err) {
-        console.error(err);
-        alert("Connection failed.");
+      } else {
+        alert("MetaMask not found. Please install MetaMask and try again.");
       }
     }
 
@@ -153,7 +158,27 @@
     }
 
     async function transferTokens() {
-      alert("Transfer functionality coming soon.");
+      if (!web3 || !contract) {
+        alert("Connect your wallet first.");
+        return;
+      }
+      const to = prompt("Enter recipient address:");
+      const amount = prompt("Enter amount of PNEWS to transfer:");
+
+      if (!web3.utils.isAddress(to)) {
+        alert("Invalid recipient address.");
+        return;
+      }
+
+      try {
+        const accounts = await web3.eth.getAccounts();
+        const value = web3.utils.toWei(amount);
+        const tx = await contract.methods.transfer(to, value).send({ from: accounts[0] });
+        alert("Transfer successful! TX: " + tx.transactionHash);
+      } catch (err) {
+        console.error(err);
+        alert("Transfer failed.");
+      }
     }
   </script>
 </body>
