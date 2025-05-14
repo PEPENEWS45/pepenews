@@ -38,7 +38,7 @@
     }
     @media (min-width: 769px) {
       header .floating-pepe, body > img.floating-pepe {
-        max-width: 2.5% !important;
+        max-width: 1.75% !important;
         height: auto;
         display: block;
         margin: 0 auto;
@@ -63,22 +63,122 @@
   </style>
 </head>
 <body>
-<!-- Existing content omitted for brevity -->
+  <div id="prelaunch-overlay">
+    <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
+    <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <button onclick="connectWallet()">Connect Wallet</button>
+    <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const overlay = document.getElementById("prelaunch-overlay");
+      if (localStorage.getItem('enteredSite') === 'true') {
+        overlay.style.display = "none";
+        return;
+      }
+      const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const distance = launchDate - now;
+        if (distance <= 0) {
+          overlay.style.display = "none";
+          return;
+        }
+        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const s = Math.floor((distance % (1000 * 60)) / 1000);
+        document.getElementById("launch-timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
+
+    async function connectWallet() {
+      if (typeof window.ethereum === 'undefined') {
+        alert("Please install MetaMask to connect your wallet.");
+        return;
+      }
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        alert("Wallet connected: " + accounts[0]);
+      } catch (error) {
+        console.error(error);
+        alert("Failed to connect wallet.");
+      }
+    }
+  </script>
+
+  <nav>
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#howtobuy">How to Buy</a>
+    <a href="#roadmap">Roadmap</a>
+  </nav>
+
+  <header>
+    <h2>Pepe News Token ($PNEWS)</h2>
+    <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" />
+    <h1>🚀 Meme Revolution</h1>
+    <p>The Future of Meme Journalism, powered by $PNEWS</p>
+  </header>
+
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe" />
+
+  <section class="cta" id="about">
+    <h3>🧠 About $PNEWS</h3>
+    <p>Meme journalism meets cryptocurrency. A token that funds stories, memes, and decentralized media.</p>
+  </section>
+
   <section class="cta" id="tokenomics">
     <h3>📜 Tokenomics</h3>
-    <p><strong>Token Name:</strong> Pepe News Token</p>
-    <p><strong>Symbol:</strong> PNEWS</p>
-    <p><strong>Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
-    <p><strong>Distribution:</strong></p>
-    <ul style="text-align: left; max-width: 700px; margin: auto;">
-      <li><strong>30% Community:</strong> Allocated for incentives, rewards, staking, airdrops, with a vesting period.</li>
-      <li><strong>20% Team:</strong> Locked with a 1-year cliff and monthly releases post-launch.</li>
-      <li><strong>20% Marketing:</strong> For influencer campaigns, promotions, and meme content partnerships.</li>
-      <li><strong>10% Reserve:</strong> Set aside for future development, strategic partnerships, and unforeseen costs, with a defined release schedule.</li>
-      <li><strong>10% Liquidity:</strong> Ensures smooth trading and liquidity across decentralized and centralized exchanges.</li>
-      <li><strong>10% Charity & Governance:</strong> For charity initiatives and governance mechanisms, allowing community members to participate in decision-making.</li>
+    <p>
+      <strong>Token Name:</strong> Pepe News Token<br />
+      <strong>Symbol:</strong> PNEWS<br />
+      <strong>Total Supply:</strong> 1,000,000,000,000 PNEWS<br />
+      <strong>Distribution:</strong><br />
+      • 30% Community — Incentives, staking, airdrops, with vesting.<br />
+      • 20% Team — 1-year lock, monthly post-launch releases.<br />
+      • 20% Marketing — Campaigns, influencer partnerships.<br />
+      • 10% Reserve — Strategic use, future development.<br />
+      • 10% Liquidity — DEX and CEX trading stability.<br />
+      • 10% Charity & Governance — Community voting and charity.
+    </p>
+  </section>
+
+  <section class="cta" id="howtobuy">
+    <h3>🪙 How to Buy</h3>
+    <p>Connect MetaMask and swap BNB for $PNEWS via PancakeSwap.</p>
+  </section>
+
+  <section class="cta action-buttons">
+    <h3>🎮 Action Center</h3>
+    <button onclick="connectWallet()">🔌 Connect Wallet</button>
+    <a href="#" onclick="alert('Buy PNEWS - Coming Soon!')">💰 Buy $PNEWS</a>
+    <a href="#" onclick="alert('Check balance - Coming Soon!')">📊 Check Balance</a>
+    <a href="#" onclick="alert('Transfer tokens - Coming Soon!')">🔄 Transfer Tokens</a>
+  </section>
+
+  <section class="cta action-buttons">
+    <h3>🌐 Social Media</h3>
+    <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+    <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow on X</a>
+  </section>
+
+  <section class="cta" id="roadmap">
+    <h3>🗓️ Roadmap</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>Q2 2025:</strong> Fair Launch, Meme campaign</li>
+      <li><strong>Q3 2025:</strong> Listings, NFT drop, DAO voting</li>
+      <li><strong>Q4 2025:</strong> Meme Journalism dApp beta, partnerships</li>
     </ul>
   </section>
-<!-- Remaining content continues -->
+
+  <footer>
+    <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
+  </footer>
 </body>
 </html>
