@@ -101,51 +101,55 @@
 
 <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
 
-<section class="cta" style="text-align: left; padding: 20px;">
-  <h3 id="about">🧠 About $PNEWS</h3>
-  <p>Meme journalism meets cryptocurrency. A token that funds stories, memes, and decentralized media.</p>
-
-  <h3 id="tokenomics">📜 Tokenomics</h3>
-  <p>1 Trillion total supply. 30% Community, 20% Team, 20% Marketing, 10% Reserve, 10% Liquidity, 10% Governance.</p>
-
-  <h3 id="usecases">🧩 Use Cases</h3>
-  <p>Tip meme creators, fund investigations, stake for headlines. Meme journalism on-chain.</p>
-
-  <h3 id="howtobuy" style="margin-top: 40px;">🪙 How to Buy</h3>
-  <p>Connect MetaMask and swap BNB for $PNEWS via PancakeSwap. See tutorial video below.</p>
-
-  <h3 id="transparency">🔓 Transparency</h3>
-  <p>Team wallet locked, LP burnt, whitepaper public. Audits in progress. Multisig in place.</p>
-
-  <h3 id="partners">🤝 Partners</h3>
-  <p>Supported by meme networks, micro-creators, and future media DAOs.</p>
-
-  <h3 id="roadmap">🗓️ Roadmap</h3>
-  <ul style="list-style: none; padding: 0;">
-    <li><strong>Q2 2025:</strong> Fair Launch on BNB, Meme campaign, Website + Whitepaper live</li>
-    <li><strong>Q3 2025:</strong> Listings on CoinMarketCap & CoinGecko, NFT Press Pass drop, DAO voting portal</li>
-    <li><strong>Q4 2025:</strong> Meme Journalism dApp beta, Token burns, Global meme partnerships</li>
-  </ul>
-
-  <div class="market-cap-widget">
-    <h3 style="color: #FFD700;">📊 Live Stats</h3>
-    <p style="color: #FFD700; font-size: 1.1em;">$PNEWS Coming Soon...</p>
+<section class="cta" style="text-align: center;">
+  <h3>🚀 How to Get Started</h3>
+  <p>Connect your wallet and jump on the meme wave with $PNEWS!</p>
+  <a href="#" onclick="connectWallet()">Connect Wallet</a>
+  <a href="#" onclick="getBalance()">Check Balance</a>
+  <a href="#" onclick="transferTokens()">Transfer Tokens</a>
+  <br><br>
+  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Our Telegram</a>
+  <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
+  <div class="safety-guide">
+    <h3>Stay Safe in the Meme World</h3>
+    <a href="/safety-guide.pdf" download>Download Safety Guide (PDF)</a>
   </div>
-</section>
-
-<section class="cta" id="trust" style="text-align: center;">
-  <h3>🔐 Trust & Transparency</h3>
-  <ul style="list-style: none; padding: 0; color: #FFD700; font-size: 1.1em;">
-    <li>✅ Liquidity Locked until May 2026</li>
-    <li>🔥 70% of Supply Burned</li>
-    <li>🔓 Ownership Renounced</li>
-    <li>🚀 Fair Launch — No Presale</li>
-    <li>📊 0% Buy/Sell Tax</li>
-  </ul>
+  <div class="safety-guide">
+    <h3>Read the Whitepaper</h3>
+    <a href="https://raw.githubusercontent.com/PEPENEWS45/pepenews/main/Pepe%20News%20Token%20White%20Paper.pdf" download>Download Whitepaper (PDF)</a>
+  </div>
 </section>
 
 <footer>
   <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
 </footer>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    if (localStorage.getItem('enteredSite') === 'true') {
+      const overlay = document.getElementById("prelaunch-overlay");
+      if (overlay) overlay.style.display = "none";
+      return;
+    }
+    const overlay = document.getElementById("prelaunch-overlay");
+    const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = launchDate - now;
+      if (distance <= 0) {
+        overlay.style.display = "none";
+        return;
+      }
+      const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("launch-timer").textContent = `${d}d ${h}h ${m}m ${s}s`;
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>
 </body>
 </html>
