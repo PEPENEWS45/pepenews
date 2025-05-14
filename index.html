@@ -13,95 +13,32 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Fredoka', sans-serif;
-      background-color: #1b5e20;
-      color: white;
-    }
-    header, footer, section {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      text-align: center;
-    }
-    h1, h2, h3 {
-      color: #FFD700;
-    }
-    .cta a, footer a {
-      color: #1b5e20;
-      background: #FFD700;
-      padding: 12px 24px;
-      border-radius: 8px;
-      text-decoration: none;
-      margin: 10px;
-      display: inline-block;
-      font-weight: bold;
-    }
-    .cta a:hover {
-      background: #ffcc00;
-    }
+    body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
+    header, footer, section { max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
+    h1, h2, h3 { color: #FFD700; }
+    .cta a, footer a { color: #1b5e20; background: #FFD700; padding: 12px 24px; border-radius: 8px; text-decoration: none; margin: 10px; display: inline-block; font-weight: bold; }
+    .cta a:hover { background: #ffcc00; }
     .floating-pepe {
       animation: float 3s ease-in-out infinite;
       filter: drop-shadow(0 0 12px #FFD700);
       transition: filter 0.3s ease;
     }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
-    }
-    nav {
-      text-align: center;
-      padding: 10px 0;
-      background: #145a1b;
-    }
-    nav a {
-      color: #FFD700;
-      margin: 0 15px;
-      font-weight: bold;
-      text-decoration: none;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+    nav { text-align: center; padding: 10px 0; background: #145a1b; }
+    nav a { color: #FFD700; margin: 0 15px; font-weight: bold; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    html { scroll-behavior: smooth; }
     @media (max-width: 768px) {
-      header, footer, section {
-        padding: 10px;
-      }
-      header h1 {
-        font-size: 1.6em;
-        margin-top: 10px;
-      }
-      header h2 {
-        font-size: 1.2em;
-      }
-      .cta a {
-        display: block;
-        margin: 10px auto;
-        width: 90%;
-        font-size: 1em;
-      }
-      .floating-pepe {
-        max-width: 150px;
-      }
-      nav a {
-        display: inline-block;
-        margin: 8px 10px;
-        font-size: 0.95em;
-      }
+      header, footer, section { padding: 10px; }
+      header h1 { font-size: 1.6em; margin-top: 10px; }
+      header h2 { font-size: 1.2em; }
+      .cta a { display: block; margin: 10px auto; width: 90%; font-size: 1em; }
+      .floating-pepe { max-width: 150px; }
+      nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-      header .floating-pepe {
-        width: 50% !important;
-        height: auto;
-      }
-      body > img.floating-pepe {
-        width: 50% !important;
-        height: auto;
-      }
+      header .floating-pepe { width: 50% !important; height: auto; }
+      body > img.floating-pepe { width: 50% !important; height: auto; }
     }
     #prelaunch-overlay {
       position: fixed;
@@ -136,6 +73,79 @@
   </style>
 </head>
 <body>
-  <!-- Your full content (including overlays, headers, sections, etc.) goes here. Ensure images and text blocks are re-added here. -->
+<div id="prelaunch-overlay">
+  <h1>🚨 $PNEWS Launching In: <span id="launch-timer"></span></h1>
+  <p>Be part of the Meme Revolution. Get ready to ape in early!</p>
+  <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Telegram</a>
+  <button onclick="connectWallet()">Connect Wallet</button>
+  <button onclick="localStorage.setItem('enteredSite','true');document.getElementById('prelaunch-overlay').style.display='none'">🚀 Enter Site</button>
+</div>
+
+<nav>
+  <a href="#top">Home</a>
+  <a href="#about">About</a>
+  <a href="#tokenomics">Tokenomics</a>
+  <a href="#usecases">Use Cases</a>
+  <a href="#howtobuy">How to Buy</a>
+  <a href="#transparency">Transparency</a>
+  <a href="#partners">Partners</a>
+  <a href="#roadmap">Roadmap</a>
+</nav>
+
+<header>
+  <h2>Pepe News Token ($PNEWS)</h2>
+  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" style="filter: drop-shadow(0 0 15px #FFD700);" />
+  <h1>🚀 Meme Revolution</h1>
+  <p>The Future of Meme Journalism, powered by $PNEWS</p>
+</header>
+
+<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe">
+
+<section class="cta" style="text-align: left; padding: 20px;">
+  <h3 id="about">🧠 About $PNEWS</h3>
+  <p>Meme journalism meets cryptocurrency. A token that funds stories, memes, and decentralized media.</p>
+
+  <h3 id="tokenomics">📜 Tokenomics</h3>
+  <p>1 Trillion total supply. 30% Community, 20% Team, 20% Marketing, 10% Reserve, 10% Liquidity, 10% Governance.</p>
+
+  <h3 id="usecases">🧩 Use Cases</h3>
+  <p>Tip meme creators, fund investigations, stake for headlines. Meme journalism on-chain.</p>
+
+  <h3 id="howtobuy" style="margin-top: 40px;">🪙 How to Buy</h3>
+  <p>Connect MetaMask and swap BNB for $PNEWS via PancakeSwap. See tutorial video below.</p>
+
+  <h3 id="transparency">🔓 Transparency</h3>
+  <p>Team wallet locked, LP burnt, whitepaper public. Audits in progress. Multisig in place.</p>
+
+  <h3 id="partners">🤝 Partners</h3>
+  <p>Supported by meme networks, micro-creators, and future media DAOs.</p>
+
+  <h3 id="roadmap">🗓️ Roadmap</h3>
+  <ul style="list-style: none; padding: 0;">
+    <li><strong>Q2 2025:</strong> Fair Launch on BNB, Meme campaign, Website + Whitepaper live</li>
+    <li><strong>Q3 2025:</strong> Listings on CoinMarketCap & CoinGecko, NFT Press Pass drop, DAO voting portal</li>
+    <li><strong>Q4 2025:</strong> Meme Journalism dApp beta, Token burns, Global meme partnerships</li>
+  </ul>
+
+  <div class="market-cap-widget">
+    <h3 style="color: #FFD700;">📊 Live Stats</h3>
+    <p style="color: #FFD700; font-size: 1.1em;">$PNEWS Coming Soon...</p>
+  </div>
+</section>
+
+<section class="cta" id="trust" style="text-align: center;">
+  <h3>🔐 Trust & Transparency</h3>
+  <ul style="list-style: none; padding: 0; color: #FFD700; font-size: 1.1em;">
+    <li>✅ Liquidity Locked until May 2026</li>
+    <li>🔥 70% of Supply Burned</li>
+    <li>🔓 Ownership Renounced</li>
+    <li>🚀 Fair Launch — No Presale</li>
+    <li>📊 0% Buy/Sell Tax</li>
+  </ul>
+</section>
+
+<footer>
+  <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
+</footer>
 </body>
 </html>
