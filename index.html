@@ -52,7 +52,7 @@
     <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe floating-logo" />
     <h1>🚀 Meme Revolution</h1>
     <p>The Future of Meme Journalism, powered by PNEWS</p>
-    <p><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2027</strong></p>
+    <p><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
   </header>
 
   <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket" />
@@ -64,4 +64,137 @@
     <p><strong>🐦 Twitter:</strong> <a href="https://x.com/PepeNewsCoin" target="_blank" style="color:#FFD700;">@PepeNewsCoin</a></p>
   </section>
 
-  <!-- Tokenomics section remains unchanged below this point -->
+<section class="cta" id="tokenomics">
+    <h3>📜 Tokenomics</h3>
+    <div style="max-width: 700px; margin: auto; text-align: left;">
+      <p><strong>Token Name:</strong> Pepe News Token</p>
+      <p><strong>Symbol:</strong> PNEWS</p>
+      <p><strong>Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
+      <p><strong>Token Sale Address:</strong>
+        <code id="sale-address">0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code>
+        <button onclick="copySaleAddress()">📋</button>
+      </p>
+      <p><strong>Distribution:</strong></p>
+      <ul>
+        <li><strong>30% Community:</strong> Incentives, staking, airdrops (vested).</li>
+        <li><strong>20% Team:</strong> 1-year cliff, then monthly vesting.</li>
+        <li><strong>20% Marketing:</strong> For campaigns, partnerships.</li>
+        <li><strong>10% Reserve:</strong> Strategic, future development.</li>
+        <li><strong>10% Liquidity:</strong> For DEX/CEX trading stability.</li>
+        <li><strong>10% Charity & Governance:</strong> Community decision-making & causes.</li>
+      </ul>
+      <h4 style="margin-top:30px; color:#FFD700;">🔐 Trust & Transparency Measures</h4>
+      <ul>
+        <li>🔥 LP Locked</li>
+        <li>🔓 Ownership Renounced</li>
+        <li>💰 0% Buy/Sell Tax</li>
+        <li>🚫 No Presale</li>
+      </ul>
+    </div>
+    <div class="action-buttons">
+      <button onclick="connectWallet()">Connect Wallet</button>
+      <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">Buy PNEWS TOKEN</a>
+      <button onclick="getBalance()">Check Balance</button>
+      <button onclick="transferTokens()">Transfer Tokens</button>
+    </div>
+    <div class="action-buttons">
+      <a href="https://t.me/+jnLO5sjUhLphYjE0" target="_blank">📢 Join Our Telegram</a>
+      <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
+    </div>
+  </section>
+
+  <script>
+    const tokenAddress = "0xe7a6deF453a349b86d17E45f8decdAAfCEc95603";
+    const tokenABI = [
+      {
+        constant: true,
+        inputs: [{ name: "account", type: "address" }],
+        name: "balanceOf",
+        outputs: [{ name: "", type: "uint256" }],
+        type: "function"
+      },
+      {
+        constant: false,
+        inputs: [
+          { name: "to", type: "address" },
+          { name: "value", type: "uint256" }
+        ],
+        name: "transfer",
+        outputs: [{ name: "", type: "bool" }],
+        type: "function"
+      }
+    ];
+    let web3;
+    let contract;
+
+    function isMobileDevice() {
+      return /android|iphone|ipad|ipod/i.test(navigator.userAgent);
+    }
+
+    async function connectWallet() {
+      if (window.ethereum && !isMobileDevice()) {
+        try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          web3 = new Web3(window.ethereum);
+          contract = new web3.eth.Contract(tokenABI, tokenAddress);
+          alert("Wallet connected successfully.");
+        } catch (error) {
+          console.error(error);
+          alert("Connection failed.");
+        }
+      } else if (isMobileDevice()) {
+        const dappUrl = encodeURIComponent(window.location.href.replace(/^https?:\/\//, ''));
+        window.location.href = `https://metamask.app.link/dapp/${dappUrl}`;
+      } else {
+        alert("MetaMask not found. Please install MetaMask and try again.");
+      }
+    }
+
+    function copySaleAddress() {
+      const address = document.getElementById('sale-address').textContent;
+      navigator.clipboard.writeText(address).then(() => {
+        alert('Sale address copied to clipboard');
+      });
+    }
+
+    async function getBalance() {
+      if (!web3 || !contract) {
+        alert("Connect your wallet first.");
+        return;
+      }
+      try {
+        const accounts = await web3.eth.getAccounts();
+        const balance = await contract.methods.balanceOf(accounts[0]).call();
+        alert("Your PNEWS Balance: " + web3.utils.fromWei(balance));
+      } catch (error) {
+        console.error(error);
+        alert("Failed to retrieve balance.");
+      }
+    }
+
+    async function transferTokens() {
+      if (!web3 || !contract) {
+        alert("Connect your wallet first.");
+        return;
+      }
+      const to = prompt("Enter recipient address:");
+      const amount = prompt("Enter amount of PNEWS to transfer:");
+
+      if (!web3.utils.isAddress(to)) {
+        alert("Invalid recipient address.");
+        return;
+      }
+
+      try {
+        const accounts = await web3.eth.getAccounts();
+        const value = web3.utils.toWei(amount);
+        const tx = await contract.methods.transfer(to, value).send({ from: accounts[0] });
+        alert("Transfer successful! TX: " + tx.transactionHash);
+      } catch (err) {
+        console.error(err);
+        alert("Transfer failed.");
+      }
+    }
+  </script>
+</body>
+</html>
