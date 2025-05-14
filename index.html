@@ -38,8 +38,8 @@
     }
     @media (min-width: 769px) {
       .floating-logo, .floating-rocket {
-        width: 25% !important;
-        max-width: 250px;
+        width: 20% !important;
+        max-width: 200px;
         display: block;
         margin: 0 auto;
       }
@@ -62,7 +62,10 @@
       <p><strong>Token Name:</strong> Pepe News Token</p>
       <p><strong>Symbol:</strong> PNEWS</p>
       <p><strong>Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
-      <p><strong>Token Sale Address:</strong> <code>0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code></p>
+      <p><strong>Token Sale Address:</strong>
+        <code id="sale-address">0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code>
+        <button onclick="copySaleAddress()">📋</button>
+      </p>
       <p><strong>Distribution:</strong></p>
       <ul>
         <li><strong>30% Community:</strong> Incentives, staking, airdrops (vested).</li>
@@ -85,12 +88,41 @@
       <button onclick="buyToken()">Buy $PNEWS TOKEN</button>
       <button onclick="getBalance()">Check Balance</button>
       <button onclick="transferTokens()">Transfer Tokens</button>
-      <br><br>
+    </div>
+    <div class="action-buttons">
       <a href="https://t.me/boost?c=2611351630" target="_blank">📢 Join Our Telegram</a>
       <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
     </div>
   </section>
 
-  <!-- Rest of the HTML remains unchanged -->
+  <script>
+    function copySaleAddress() {
+      const address = document.getElementById('sale-address').textContent;
+      navigator.clipboard.writeText(address).then(() => {
+        alert('Sale address copied to clipboard');
+      });
+    }
+
+    async function connectWallet() {
+      if (typeof window.ethereum === 'undefined') {
+        alert("MetaMask not found. Please install MetaMask and try again.");
+        return;
+      }
+
+      const BSC_MAINNET = '0x38';
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+        if (chainId !== BSC_MAINNET) {
+          alert("Please switch to Binance Smart Chain Mainnet in MetaMask.");
+        } else {
+          alert("Wallet connected on BSC Mainnet!");
+        }
+      } catch (err) {
+        alert("Wallet connection rejected or failed.");
+        console.error(err);
+      }
+    }
+  </script>
 </body>
 </html>
