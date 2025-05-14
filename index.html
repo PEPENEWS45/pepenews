@@ -37,8 +37,8 @@
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-      header .floating-pepe { width: 50% !important; height: auto; }
-      body > img.floating-pepe { width: 50% !important; height: auto; }
+      header .floating-pepe { width: 35% !important; height: auto; }
+      body > img.floating-pepe { width: 35% !important; height: auto; }
     }
     #prelaunch-overlay {
       position: fixed;
@@ -125,20 +125,50 @@
 </footer>
 
 <script>
+  async function connectWallet() {
+    if (typeof window.ethereum === 'undefined') {
+      window.location.href = "https://metamask.app.link/dapp/pepenews.io";
+      return;
+    }
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      window.web3 = new Web3(window.ethereum);
+      alert("Wallet connected! You can now buy $PNEWS.");
+    } catch (error) {
+      alert("Connection rejected.");
+    }
+  }
+
+  async function getBalance() {
+    if (!window.web3) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+    const accounts = await web3.eth.getAccounts();
+    const contract = new web3.eth.Contract([], '');
+    // Replace above line with actual ABI and contract address if balanceOf is needed.
+    alert("Balance feature is under maintenance.");
+  }
+
+  async function transferTokens() {
+    if (!window.web3) {
+      alert("Please connect your wallet first.");
+      return;
+    }
+    alert("Transfer feature coming soon.");
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
     if (localStorage.getItem('enteredSite') === 'true') {
       const overlay = document.getElementById("prelaunch-overlay");
       if (overlay) overlay.style.display = "none";
-      return;
     }
-    const overlay = document.getElementById("prelaunch-overlay");
     const launchDate = new Date("2025-05-28T09:00:00-04:00").getTime();
-
     function updateCountdown() {
       const now = new Date().getTime();
       const distance = launchDate - now;
       if (distance <= 0) {
-        overlay.style.display = "none";
+        document.getElementById("prelaunch-overlay").style.display = "none";
         return;
       }
       const d = Math.floor(distance / (1000 * 60 * 60 * 24));
