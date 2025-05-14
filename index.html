@@ -40,11 +40,11 @@
 
     @media (min-width: 769px) {
       header .floating-pepe {
-        max-width: 12% !important;
+        max-width: 8% !important;
         height: auto;
       }
       body > img.floating-pepe {
-        max-width: 12% !important;
+        max-width: 8% !important;
         height: auto;
         display: block;
         margin: 0 auto;
@@ -116,9 +116,65 @@
       updateCountdown();
       setInterval(updateCountdown, 1000);
     });
+
+    async function connectWallet() {
+      if (typeof window.ethereum === 'undefined') {
+        alert("Please install MetaMask to connect your wallet.");
+        return;
+      }
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        alert("Wallet connected: " + accounts[0]);
+      } catch (error) {
+        console.error(error);
+        alert("Failed to connect wallet.");
+      }
+    }
   </script>
 
-  <!-- Insert the rest of your HTML content like header, nav, logo, sections, etc. below this point -->
-  <!-- If you want, I can now restore your entire full content here with all fixed styling -->
+  <nav>
+    <a href="#top">Home</a>
+    <a href="#about">About</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#howtobuy">How to Buy</a>
+    <a href="#roadmap">Roadmap</a>
+  </nav>
+
+  <header>
+    <h2>Pepe News Token ($PNEWS)</h2>
+    <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" class="floating-pepe" />
+    <h1>🚀 Meme Revolution</h1>
+    <p>The Future of Meme Journalism, powered by $PNEWS</p>
+  </header>
+
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe" />
+
+  <section class="cta" id="about">
+    <h3>🧠 About $PNEWS</h3>
+    <p>Meme journalism meets cryptocurrency. A token that funds stories, memes, and decentralized media.</p>
+  </section>
+
+  <section class="cta" id="tokenomics">
+    <h3>📜 Tokenomics</h3>
+    <p>1 Trillion total supply. 30% Community, 20% Team, 20% Marketing, 10% Reserve, 10% Liquidity, 10% Governance.</p>
+  </section>
+
+  <section class="cta" id="howtobuy">
+    <h3>🪙 How to Buy</h3>
+    <p>Connect MetaMask and swap BNB for $PNEWS via PancakeSwap.</p>
+  </section>
+
+  <section class="cta" id="roadmap">
+    <h3>🗓️ Roadmap</h3>
+    <ul style="list-style: none; padding: 0;">
+      <li><strong>Q2 2025:</strong> Fair Launch, Meme campaign</li>
+      <li><strong>Q3 2025:</strong> Listings, NFT drop, DAO voting</li>
+      <li><strong>Q4 2025:</strong> Meme Journalism dApp beta, partnerships</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 PepeNews.io - All rights reserved.</p>
+  </footer>
 </body>
 </html>
