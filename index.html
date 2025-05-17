@@ -43,12 +43,11 @@
     }
     @media (min-width: 769px) {
   .floating-logo {
-    width: 10% !important;
-    max-width: 300px !important;
+    width: 14.5% !important;
+    max-width: 435px !important;
     height: auto;
     display: block;
     margin: 0 auto;
-    border: 2px solid transparent; /* change to ensure update is applied */
   }
   .floating-rocket {
     width: 12% !important;
@@ -59,14 +58,14 @@
 }
   .floating-rocket {
     width: 12% !important;
-    max-width: 200px;
+    max-width: 300px;
     display: block;
     margin: 0 auto;
   }
 }
       .floating-rocket {
         width: 11.25% !important;
-        max-width: 180px;
+        max-width: 280px;
         display: block;
         margin: 0 auto;
       }
@@ -157,7 +156,7 @@ async function connectWallet() {
   if (typeof window.ethereum !== 'undefined') {
     try {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      web3 = new Web3(window.ethereum);
+      if (!window.web3) web3 = new Web3(window.ethereum);
       contract = new web3.eth.Contract(tokenABI, tokenAddress);
       if (accounts.length > 0) {
         alert("Wallet connected: " + accounts[0]);
@@ -212,9 +211,9 @@ async function connectWallet() {
 
   // Web3 + Token
   let web3;
-  let contract;
-  const tokenAddress = "0xe7a6deF453a349b86d17E45f8decdAAfCEc95603";
-  const tokenABI = [
+let contract;
+const tokenAddress = "0xe7a6deF453a349b86d17E45f8decdAAfCEc95603";
+const tokenABI = [
     {
       constant: true,
       inputs: [{ name: "account", type: "address" }],
