@@ -83,16 +83,10 @@
 
 <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket" />
 
-<section style="background:#145a1b; padding: 10px; color:#FFD700; font-size: 0.9em;">
-  <p><strong>🌐 Website:</strong> <a href="https://www.pepenews.io" target="_blank" style="color:#FFD700;">pepenews.io</a></p>
-  <p><strong>📧 Email:</strong> <a href="mailto:contact@pepenews.io" style="color:#FFD700;">contact@pepenews.io</a></p>
-  <p><strong>💬 Telegram:</strong> <a href="https://t.me/+jnLO5sjUhLphYjE0" target="_blank" style="color:#FFD700;">@PepeNewsToken</a></p>
-  <p><strong>🐦 Twitter:</strong> <a href="https://x.com/PepeNewsCoin" target="_blank" style="color:#FFD700;">@PepeNewsCoin</a></p>
-</section>
-
+
 <section class="cta" id="tokenomics">
   <h3>📜 Tokenomics</h3>
-  <div style="max-width: 700px; margin: auto; text-align: left;">
+  <div style="max-width: 700px; margin: auto; text-align: left; color: white;">
     <p><strong>Token Name:</strong> Pepe News Token</p>
     <p><strong>Symbol:</strong> PNEWS</p>
     <p><strong>Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
@@ -117,26 +111,17 @@
       <li>🚫 No Presale</li>
     </ul>
   </div>
-  <div class="action-buttons">
-    <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">Buy PNEWS TOKEN</a>
-    </div>
-  <div class="action-buttons">
-    <a href="https://t.me/+jnLO5sjUhLphYjE0" target="_blank">📢 Join Our Telegram</a>
-    <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
-  </div>
 </section>
+
+
+
 
 <section>
   <h3 style="color:#FFD700">🚀 Launch Countdown</h3>
   <div id="countdown" style="font-size: 1.5em; font-weight: bold;"></div>
 </section>
 
-<section>
-  <h3 style="color:#FFD700">📊 Tokenomics Distribution</h3>
-  <div style="max-width: 400px; margin: auto;">
-    <canvas id="tokenomicsChart" style="width: 100%; height: auto;"></canvas>
-  </div>
-</section>
+
 
 <section>
   <h3 style="color:#FFD700">📬 Stay Updated</h3>
@@ -226,25 +211,4 @@ const tokenABI = [
     });
   }
 
-  // Tokenomics Pie Chart
-  window.onload = function () {
-    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
-        datasets: [{
-          data: [30, 20, 20, 10, 10, 10],
-          backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { labels: { color: 'white' } }
-        }
-      }
-    });
-  };
-</script>
-</body>
-</html>
+  
