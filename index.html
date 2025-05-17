@@ -13,6 +13,9 @@
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
   <style>
     body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
     header, footer, section { max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
@@ -39,25 +42,22 @@
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-  .floating-logo {
-    width: 6.5% !important;
-    max-width: 104px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  .floating-rocket {
-    width: 11.25% !important;
-    max-width: 180px;
-    display: block;
-    margin: 0 auto;
-  }
+      .floating-logo {
+        width: 6.5% !important;
+        max-width: 130px !important;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+      }
+      .floating-rocket {
+        width: 11.25% !important;
+        max-width: 180px;
+        display: block;
+        margin: 0 auto;
+      }
     }
-  
-</style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
+  </style>
+</head>
 <body>
 <header>
   <h2>Pepe News Token (PNEWS)</h2>
@@ -114,13 +114,12 @@
     <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
   </div>
 </section>
-<!-- COUNTDOWN TIMER -->
-<section style="margin-top: 20px;">
+
+<section>
   <h3 style="color:#FFD700">🚀 Launch Countdown</h3>
   <div id="countdown" style="font-size: 1.5em; font-weight: bold;"></div>
 </section>
 
-<!-- TOKENOMICS PIE CHART -->
 <section>
   <h3 style="color:#FFD700">📊 Tokenomics Distribution</h3>
   <div style="max-width: 400px; margin: auto;">
@@ -128,7 +127,6 @@
   </div>
 </section>
 
-<!-- NEWSLETTER SIGNUP -->
 <section>
   <h3 style="color:#FFD700">📬 Stay Updated</h3>
   <form id="newsletterForm" action="https://formspree.io/f/moqgrqwn" method="POST">
@@ -139,122 +137,110 @@
 </section>
 
 <script>
-// Countdown
-const launchDate = new Date("May 27, 2025 00:00:00").getTime();
-const countdown = setInterval(() => {
-  const now = new Date().getTime();
-  const distance = launchDate - now;
-  if (distance < 0) {
-    clearInterval(countdown);
-    document.getElementById("countdown").innerHTML = "🚀 Launched!";
-    return;
-  }
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-  document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-}, 1000);
-
-// Tokenomics Pie Chart
-const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-new Chart(ctx, {
-  type: 'pie',
-  data: {
-    labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
-    datasets: [{
-      data: [30, 20, 20, 10, 10, 10],
-      backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
-    }]
-  },
-  options: {
-    plugins: {
-      legend: { labels: { color: 'white' } }
+  // Countdown
+  const launchDate = new Date("May 27, 2025 00:00:00").getTime();
+  const countdown = setInterval(() => {
+    const now = new Date().getTime();
+    const distance = launchDate - now;
+    if (distance < 0) {
+      clearInterval(countdown);
+      document.getElementById("countdown").innerHTML = "🚀 Launched!";
+      return;
     }
-  }
-});
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
 
-// Newsletter Success Feedback
-const form = document.getElementById('newsletterForm');
-form.addEventListener('submit', function(event) {
-  event.preventDefault();
-  fetch(form.action, {
-    method: form.method,
-    body: new FormData(form),
-    headers: { 'Accept': 'application/json' }
-  }).then(response => {
-    if (response.ok) {
-      document.getElementById('successMessage').style.display = 'block';
-      form.reset();
-    } else {
-      alert('Something went wrong. Please try again.');
-    }
-  }).catch(() => {
-    alert('Error sending form.');
+  // Newsletter
+  const form = document.getElementById('newsletterForm');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        document.getElementById('successMessage').style.display = 'block';
+        form.reset();
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    }).catch(() => {
+      alert('Error sending form.');
+    });
   });
-});
-// Web3 + Wallet Connect
-let web3;
-let contract;
-const tokenAddress = "0xe7a6deF453a349b86d17E45f8decdAAfCEc95603";
-const tokenABI = [
-  {
-    constant: true,
-    inputs: [{ name: "account", type: "address" }],
-    name: "balanceOf",
-    outputs: [{ name: "", type: "uint256" }],
-    type: "function"
-  },
-  {
-    constant: false,
-    inputs: [
-      { name: "to", type: "address" },
-      { name: "value", type: "uint256" }
-    ],
-    name: "transfer",
-    outputs: [{ name: "", type: "bool" }],
-    type: "function"
-  }
-];
 
-async function connectWallet() {
-  if (typeof window.ethereum !== 'undefined') {
-    try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
-      web3 = new Web3(window.ethereum);
-      contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      const accounts = await web3.eth.getAccounts();
-      alert("Wallet connected: " + accounts[0]);
-    } catch (error) {
-      console.error(error);
-      alert("Connection failed: " + error.message);
+  // Web3 + Token
+  let web3;
+  let contract;
+  const tokenAddress = "0xe7a6deF453a349b86d17E45f8decdAAfCEc95603";
+  const tokenABI = [
+    {
+      constant: true,
+      inputs: [{ name: "account", type: "address" }],
+      name: "balanceOf",
+      outputs: [{ name: "", type: "uint256" }],
+      type: "function"
+    },
+    {
+      constant: false,
+      inputs: [
+        { name: "to", type: "address" },
+        { name: "value", type: "uint256" }
+      ],
+      name: "transfer",
+      outputs: [{ name: "", type: "bool" }],
+      type: "function"
     }
-  } else {
-    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
-  }
-});
-      web3 = new Web3(window.ethereum);
-      contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      const accounts = await web3.eth.getAccounts();
-      alert("Wallet connected: " + accounts[0]);
-    } catch (error) {
-      console.error(error);
-      alert("Connection failed: " + error.message);
+  ];
+
+  async function connectWallet() {
+    if (window.ethereum && window.ethereum.isMetaMask) {
+      try {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        web3 = new Web3(window.ethereum);
+        contract = new web3.eth.Contract(tokenABI, tokenAddress);
+        const accounts = await web3.eth.getAccounts();
+        alert("Wallet connected: " + accounts[0]);
+      } catch (error) {
+        console.error(error);
+        alert("Connection failed: " + error.message);
+      }
+    } else {
+      alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
     }
-  } else {
-    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
   }
-});
-      web3 = new Web3(window.ethereum);
-      contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      alert("Wallet connected: " + accounts[0]);
-    } catch (error) {
-      alert("Connection failed: " + error.message);
-    }
-  } else {
-    alert("MetaMask not found. Please install it and try again.");
+
+  function copySaleAddress() {
+    const address = document.getElementById('sale-address').textContent;
+    navigator.clipboard.writeText(address).then(() => {
+      alert('Sale address copied to clipboard');
+    });
   }
-}
+
+  // Tokenomics Pie Chart
+  window.onload = function () {
+    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
+        datasets: [{
+          data: [30, 20, 20, 10, 10, 10],
+          backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { labels: { color: 'white' } }
+        }
+      }
+    });
+  };
 </script>
 </body>
 </html>
