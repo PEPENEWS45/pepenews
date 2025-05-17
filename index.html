@@ -70,7 +70,22 @@
         margin: 0 auto;
       }
     }
-  </style>
+    .desktop-two-column {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 20px;
+  }
+  .desktop-two-column > section {
+    flex: 1;
+    text-align: center;
+  }
+  @media (max-width: 768px) {
+    .desktop-two-column {
+      flex-direction: column;
+    }
+  }
+</style>
 </head>
 <body>
 <header>
@@ -83,8 +98,19 @@
 
 <img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket" />
 
-<div class="action-buttons" style="text-align:center; margin-top: 20px;">
-  <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">Buy PNEWS TOKEN</a>
+<div class="desktop-two-column">
+  <section style="text-align: center;">
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank" class="cta-button">Buy PNEWS TOKEN</a>
+  </section>
+  <section>
+    <h4 style="margin-top:0; color:#FFD700; text-align:center;">🔐 Trust & Transparency Measures</h4>
+    <ul style="display: table; margin: 0 auto; text-align: left;">
+      <li>🔥 LP Locked</li>
+      <li>🔓 Ownership Renounced</li>
+      <li>💰 0% Buy/Sell Tax</li>
+      <li>🚫 No Presale</li>
+    </ul>
+  </section>
 </div>
     <h4 style="margin-top:30px; color:#FFD700; text-align:center;">🔐 Trust & Transparency Measures</h4>
 <ul style="display: table; margin: 0 auto; text-align: left;">
@@ -99,13 +125,11 @@
 
 
 
+<div class="desktop-two-column">
 <section>
   <h3 style="color:#FFD700">🚀 Launch Countdown</h3>
   <div id="countdown" style="font-size: 1.5em; font-weight: bold;"></div>
 </section>
-
-
-
 <section>
   <h3 style="color:#FFD700">📬 Stay Updated</h3>
   <form id="newsletterForm" action="https://formspree.io/f/moqgrqwn" method="POST">
@@ -114,7 +138,7 @@
   </form>
   <div id="successMessage" class="success-message">✅ Thank you for subscribing!</div>
 </section>
-
+</div>
 <script>
 // Countdown
 window.addEventListener('DOMContentLoaded', () => {
