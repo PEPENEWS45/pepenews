@@ -155,21 +155,33 @@
 async function connectWallet() {
   if (window.ethereum) {
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const bnbChainId = '0x38'; // BSC Mainnet Chain ID
+      const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
+
+      if (currentChain !== bnbChainId) {
+        await window.ethereum.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: bnbChainId }]
+        });
+      }
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       web3 = new Web3(window.ethereum);
-      
-    
-    } catch (error) {
-      console.error("Connection error:", error);
-      alert("Connection failed: " + error.message);
-    
       contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      const accounts = await web3.eth.getAccounts();
+
       if (accounts.length > 0) {
         alert("Wallet connected: " + accounts[0]);
       } else {
         alert("No accounts found. Make sure your wallet is unlocked.");
       }
+    } catch (error) {
+      console.error("Connection error:", error);
+      alert("Connection failed: " + error.message);
+    }
+  } else {
+    alert("No Ethereum provider detected. Please install MetaMask from https://metamask.io/");
+  }
+}
     } catch (error) {
       console.error("Connection error:", error);
       alert("Connection failed: " + error.message);
