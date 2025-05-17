@@ -48,6 +48,7 @@
     height: auto;
     display: block;
     margin: 0 auto;
+    border: 2px solid transparent; /* change to ensure update is applied */
   }
   .floating-rocket {
     width: 12% !important;
@@ -151,20 +152,20 @@
 </section>
 
 <script>
+// Wallet Connect
 async function connectWallet() {
   if (typeof window.ethereum !== 'undefined') {
     try {
-      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       web3 = new Web3(window.ethereum);
       contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      const accounts = await web3.eth.getAccounts();
       if (accounts.length > 0) {
         alert("Wallet connected: " + accounts[0]);
       } else {
         alert("No accounts found. Make sure MetaMask is unlocked.");
       }
     } catch (error) {
-      console.error(error);
+      console.error("Connection error:", error);
       alert("Connection failed: " + error.message);
     }
   } else {
@@ -233,18 +234,7 @@ async function connectWallet() {
     }
   ];
 
-  async function 
-      web3 = new Web3(window.ethereum);
-      contract = new web3.eth.Contract(tokenABI, tokenAddress);
-      const accounts = await web3.eth.getAccounts();
-      if (accounts.length > 0) {
-        alert("Wallet connected: " + accounts[0]);
-      } else {
-        alert("No accounts found. Make sure MetaMask is unlocked.");
-      }
-    } catch (error) {
-      console.error(error);
-      alert("Connection failed: " + error.message);
+  
     }
   } else {
     alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
