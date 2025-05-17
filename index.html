@@ -58,6 +58,11 @@
     }
 
     @media (max-width: 600px) {
+  header img[src*="PepeNews"] {
+    width: 114.4%;
+    max-width: 1904px;
+    transform: rotate(90deg);
+  }
   .pepe-reporter-right {
     animation: float 3s ease-in-out infinite, blink 2s infinite;
     position: fixed;
@@ -65,6 +70,13 @@
     right: 10px;
     width: 80px;
     z-index: 1000;
+    filter: drop-shadow(0 0 6px #FFD700);
+  }
+
+  header img {
+    width: 80%;
+    max-width: 280px;
+    animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 0 6px #FFD700);
   }
 
@@ -153,8 +165,19 @@
 <body>
 <header>
   <h2>Pepe News Token (PNEWS)</h2>
-  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" style="width: 16.8%; max-width: 280px; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px #FFD700);" />
-  <h1>🚀 Meme Revolution</h1>
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 12px;">
+    <div style="text-align: left;">
+      <img src="https://github.com/PEPENEWS45/pepenews/blob/main/ROCKET.png?raw=true" alt="Rocket Icon" style="width: 120px; height: auto; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px #FFD700);" />
+    </div>
+    <div style="text-align: center;">
+      <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" style="width: 100%; max-width: 1200px; height: 300px; object-fit: cover; margin: 0 auto; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px #FFD700);" />
+      <h1 style="font-size: 1.2em; margin: 10px auto 5px; text-align: center;">🚀 Meme Revolution</h1>
+    </div>
+    <div></div>
+  </div>
+  <p style="text-align:center;">The Future of Meme Journalism, powered by PNEWS</p>
+  <p style="text-align:center;"><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
+  <div style="display:none">"font-size: 1.2em; margin: 10px auto 5px; text-align: center;">🚀 Meme Revolution</h1>
   <p>The Future of Meme Journalism, powered by PNEWS</p>
   <p><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
 </header>
