@@ -118,7 +118,6 @@
     </ul>
   </div>
   <div class="action-buttons">
-    <button onclick="connectWallet()">Connect Wallet</button>
     <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">Buy PNEWS TOKEN</a>
     <button onclick="getBalance()">Check Balance</button>
     <button onclick="transferTokens()">Transfer Tokens</button>
@@ -151,54 +150,6 @@
 </section>
 
 <script>
-// Wallet Connect
-async function connectWallet() {
-  if (window.ethereum) {
-    try {
-      const bnbChainId = '0x38'; // BSC Mainnet Chain ID
-      const currentChain = await window.ethereum.request({ method: 'eth_chainId' });
-
-      if (currentChain !== bnbChainId) {
-        await window.ethereum.request({
-          method: 'wallet_switchEthereumChain',
-          params: [{ chainId: bnbChainId }]
-        });
-      }
-
-      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      web3 = new Web3(window.ethereum);
-      contract = new web3.eth.Contract(tokenABI, tokenAddress);
-
-      if (accounts.length > 0) {
-        alert("Wallet connected: " + accounts[0]);
-      } else {
-        alert("No accounts found. Make sure your wallet is unlocked.");
-      }
-    } catch (error) {
-      console.error("Connection error:", error);
-      alert("Connection failed: " + error.message);
-    }
-  } else {
-    alert("No Ethereum provider detected. Please install MetaMask from https://metamask.io/");
-  }
-}
-    } catch (error) {
-      console.error("Connection error:", error);
-      alert("Connection failed: " + error.message);
-    }
-  } else {
-    alert("No Ethereum provider detected. Please install MetaMask from https://metamask.io/");
-  }
-}
-    } catch (error) {
-      console.error("Connection error:", error);
-      alert("Connection failed: " + error.message);
-    }
-  } else {
-    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
-  }
-}
-
 // Countdown
   const launchDate = new Date("May 27, 2025 00:00:00").getTime();
   const countdown = setInterval(() => {
@@ -259,13 +210,7 @@ const tokenABI = [
     type: "function"
   }
 ];
-
-  
-    }
-  } else {
-    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
-  }
-}
+   
 
   function copySaleAddress() {
     const address = document.getElementById('sale-address').textContent;
@@ -274,24 +219,7 @@ const tokenABI = [
     });
   }
 
-  // Tokenomics Pie Chart
-  window.onload = function () {
-    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
-        datasets: [{
-          data: [30, 20, 20, 10, 10, 10],
-          backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { labels: { color: 'white' } }
-        }
-      }
-    });
+
   };
 </script>
 </body>
