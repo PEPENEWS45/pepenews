@@ -119,9 +119,7 @@
   </div>
   <div class="action-buttons">
     <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">Buy PNEWS TOKEN</a>
-    <button onclick="getBalance()">Check Balance</button>
-    <button onclick="transferTokens()">Transfer Tokens</button>
-  </div>
+    </div>
   <div class="action-buttons">
     <a href="https://t.me/+jnLO5sjUhLphYjE0" target="_blank">📢 Join Our Telegram</a>
     <a href="https://x.com/PepeNewsCoin" target="_blank">🐦 Follow Us on X (Twitter)</a>
@@ -151,19 +149,26 @@
 
 <script>
 // Countdown
+window.addEventListener('DOMContentLoaded', () => {
   const launchDate = new Date("May 27, 2025 00:00:00").getTime();
   const countdown = setInterval(() => {
     const now = new Date().getTime();
     const distance = launchDate - now;
+    const countdownEl = document.getElementById("countdown");
+    if (!countdownEl) return;
+
     if (distance < 0) {
       clearInterval(countdown);
-      document.getElementById("countdown").innerHTML = "🚀 Launched!";
+      countdownEl.innerHTML = "🚀 Launched!";
       return;
     }
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
     const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    countdownEl.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  }, 1000);
+});
     document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
   }, 1000);
 
@@ -210,7 +215,9 @@ const tokenABI = [
     type: "function"
   }
 ];
-   
+
+  
+    
 
   function copySaleAddress() {
     const address = document.getElementById('sale-address').textContent;
@@ -219,7 +226,24 @@ const tokenABI = [
     });
   }
 
-
+  // Tokenomics Pie Chart
+  window.onload = function () {
+    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
+        datasets: [{
+          data: [30, 20, 20, 10, 10, 10],
+          backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
+        }]
+      },
+      options: {
+        plugins: {
+          legend: { labels: { color: 'white' } }
+        }
+      }
+    });
   };
 </script>
 </body>
