@@ -42,6 +42,7 @@
   .floating-logo {
     width: 6.5% !important;
     max-width: 104px;
+    height: auto;
     display: block;
     margin: 0 auto;
   }
@@ -217,9 +218,21 @@ const tokenABI = [
 ];
 
 async function connectWallet() {
-  if (window.ethereum && window.ethereum.isMetaMask) {
+  if (typeof window.ethereum !== 'undefined') {
     try {
       await window.ethereum.request({ method: 'eth_requestAccounts' });
+      web3 = new Web3(window.ethereum);
+      contract = new web3.eth.Contract(tokenABI, tokenAddress);
+      const accounts = await web3.eth.getAccounts();
+      alert("Wallet connected: " + accounts[0]);
+    } catch (error) {
+      console.error(error);
+      alert("Connection failed: " + error.message);
+    }
+  } else {
+    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
+  }
+});
       web3 = new Web3(window.ethereum);
       contract = new web3.eth.Contract(tokenABI, tokenAddress);
       const accounts = await web3.eth.getAccounts();
