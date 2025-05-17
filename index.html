@@ -114,6 +114,13 @@
     0%, 100% { transform: scale(1); opacity: 1; }
     50% { transform: scale(1.2); opacity: 0.7; }
   }
+  .animated-rocket {
+    animation: bounceRocket 2s infinite ease-in-out;
+  }
+  @keyframes bounceRocket {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
 </style>
 </head>
 <body>
@@ -125,7 +132,7 @@
   <p><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
 </header>
 
-<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket" />
+<img src="https://github.com/PEPENEWS45/pepenews/blob/main/Original%20Pepe%20Rocket.png?raw=true" alt="Pepe Rocket Floating" class="floating-pepe floating-rocket animated-rocket" />
 
 <div class="desktop-two-column">
   <section style="text-align: left;">
@@ -147,6 +154,10 @@
   <section style="text-align: right; display: flex; flex-direction: column; align-items: flex-end;">
     <h4 style="margin-top: 0; color:#FFD700; text-align: right;">🔐 Trust & Transparency Measures</h4>
     <ul style="list-style: none; padding: 0; text-align: right;">
+      <li title="Liquidity Pool is locked for added security">🔥 LP Locked</li>
+      <li title="Smart contract ownership renounced for transparency">🔓 Ownership Renounced</li>
+      <li title="No taxes on buy/sell transactions">💰 0% Buy/Sell Tax</li>
+      <li title="Tokens were not sold privately before launch">🚫 No Presale</li>
       <li>🔥 LP Locked</li>
       <li>🔓 Ownership Renounced</li>
       <li>💰 0% Buy/Sell Tax</li>
