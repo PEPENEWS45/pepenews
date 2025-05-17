@@ -42,13 +42,27 @@
       nav a { display: inline-block; margin: 8px 10px; font-size: 0.95em; }
     }
     @media (min-width: 769px) {
-      .floating-logo {
-        width: 6.5% !important;
-        max-width: 130px !important;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-      }
+  .floating-logo {
+    width: 10% !important;
+    max-width: 200px !important;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .floating-rocket {
+    width: 12% !important;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+  .floating-rocket {
+    width: 12% !important;
+    max-width: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+}
       .floating-rocket {
         width: 11.25% !important;
         max-width: 180px;
@@ -198,22 +212,23 @@
     }
   ];
 
-  async function connectWallet() {
-    if (window.ethereum && window.ethereum.isMetaMask) {
-      try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        web3 = new Web3(window.ethereum);
-        contract = new web3.eth.Contract(tokenABI, tokenAddress);
-        const accounts = await web3.eth.getAccounts();
+  async function 
+      web3 = new Web3(window.ethereum);
+      contract = new web3.eth.Contract(tokenABI, tokenAddress);
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length > 0) {
         alert("Wallet connected: " + accounts[0]);
-      } catch (error) {
-        console.error(error);
-        alert("Connection failed: " + error.message);
+      } else {
+        alert("No accounts found. Make sure MetaMask is unlocked.");
       }
-    } else {
-      alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
+    } catch (error) {
+      console.error(error);
+      alert("Connection failed: " + error.message);
     }
+  } else {
+    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
   }
+}
 
   function copySaleAddress() {
     const address = document.getElementById('sale-address').textContent;
