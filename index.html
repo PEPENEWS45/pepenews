@@ -44,7 +44,7 @@
     @media (min-width: 769px) {
   .floating-logo {
     width: 10% !important;
-    max-width: 200px !important;
+    max-width: 300px !important;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -151,7 +151,28 @@
 </section>
 
 <script>
-  // Countdown
+async function connectWallet() {
+  if (typeof window.ethereum !== 'undefined') {
+    try {
+      await window.ethereum.request({ method: 'eth_requestAccounts' });
+      web3 = new Web3(window.ethereum);
+      contract = new web3.eth.Contract(tokenABI, tokenAddress);
+      const accounts = await web3.eth.getAccounts();
+      if (accounts.length > 0) {
+        alert("Wallet connected: " + accounts[0]);
+      } else {
+        alert("No accounts found. Make sure MetaMask is unlocked.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Connection failed: " + error.message);
+    }
+  } else {
+    alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
+  }
+}
+
+// Countdown
   const launchDate = new Date("May 27, 2025 00:00:00").getTime();
   const countdown = setInterval(() => {
     const now = new Date().getTime();
