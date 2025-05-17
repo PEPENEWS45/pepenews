@@ -145,6 +145,16 @@
     0%, 100% { box-shadow: 0 0 16px #FFD700; }
     50% { box-shadow: 0 0 24px #ffcc00; }
   }
+  @media (max-width: 768px) {
+    .trust-mobile ul {
+      text-align: justify !important;
+      margin: 0 auto !important;
+      max-width: 90% !important;
+    }
+    .trust-mobile {
+      text-align: center;
+    }
+  }
 </style>
 </head>
 <body>
@@ -163,11 +173,11 @@
 <div class="desktop-two-column" style="gap: 20px; padding: 10px; align-items: flex-start;">
   <section style="text-align: left; font-size: 0.95em;">
     <h3 style="color:#FFD700; margin-bottom: 10px;">📜 Tokenomics</h3>
-    <p><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">Token Name:</strong> Pepe News Token</p>
-    <p><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">Symbol:</strong> PNEWS</p>
-    <p><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
-    <p><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">Token Sale Address:</strong> <code id="sale-address">0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code> <button onclick="copySaleAddress()">📋</button></p>
-    <p><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">Distribution:</strong></p>
+    <p title="The official name of the token used for meme journalism"><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">📰 Token Name:</strong> Pepe News Token</p>
+    <p title="The trading symbol for Pepe News Token"><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">💱 Symbol:</strong> PNEWS</p>
+    <p title="Maximum supply of PNEWS tokens in circulation"><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">📦 Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
+    <p title="Smart contract address for buying PNEWS on PancakeSwap"><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">🏷️ Token Sale Address:</strong> <code id="sale-address">0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code> <button onclick="copySaleAddress()">📋</button></p>
+    <p title="How the PNEWS token supply is allocated"><strong style="color: #FFD700; text-shadow: 0 0 6px #FFD700;">📊 Distribution:</strong></p>
     <ul style="text-align: left; margin-top: 10px;">
       <li><strong>30% Community:</strong> Incentives, staking, airdrops (vested).</li>
       <li><strong>20% Team:</strong> 1-year cliff, then monthly vesting.</li>
@@ -177,7 +187,7 @@
       <li><strong>10% Charity & Governance:</strong> Community decision-making & causes.</li>
     </ul>
   </section>
-  <section style="text-align: center; font-size: 0.95em;">
+  <section class="trust-mobile" style="text-align: center; font-size: 0.95em;">
     <h4 style="margin-top: 0; color:#FFD700; text-align: center;">🔐 Trust & Transparency Measures</h4>
     <ul style="list-style: none; padding: 0; text-align: justify; max-width: 350px; margin: 0 auto;">
   <li title="Liquidity Pool is locked for added security" style="background-image: url('https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png'); background-size: 16px 16px; background-repeat: no-repeat; background-position: 0 5px; padding-left: 24px; margin-bottom: 10px;">LP Locked</li>
@@ -284,6 +294,9 @@ const tokenABI = [
     type: "function"
   }
 ];
+
+  
+    
 
   function copySaleAddress() {
     const address = document.getElementById('sale-address').textContent;
