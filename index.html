@@ -44,14 +44,14 @@
     @media (min-width: 769px) {
   .floating-logo {
     width: 14.5% !important;
-    max-width: 535px !important;
+    max-width: 635px !important;
     height: auto;
     display: block;
     margin: 0 auto;
   }
   .floating-rocket {
     width: 12% !important;
-    max-width: 200px;
+    max-width: 300px;
     display: block;
     margin: 0 auto;
   }
@@ -65,7 +65,7 @@
 }
       .floating-rocket {
         width: 11.25% !important;
-        max-width: 280px;
+        max-width: 300px;
         display: block;
         margin: 0 auto;
       }
@@ -153,11 +153,17 @@
 <script>
 // Wallet Connect
 async function connectWallet() {
-  if (typeof window.ethereum !== 'undefined') {
+  if (window.ethereum) {
     try {
+      // Request account access
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-      if (!window.web3) web3 = new Web3(window.ethereum);
+
+      // Initialize web3 with MetaMask's provider
+      web3 = new Web3(window.ethereum);
+
+      // Initialize contract
       contract = new web3.eth.Contract(tokenABI, tokenAddress);
+
       if (accounts.length > 0) {
         alert("Wallet connected: " + accounts[0]);
       } else {
@@ -171,6 +177,7 @@ async function connectWallet() {
     alert("MetaMask not detected. Please install MetaMask from https://metamask.io/");
   }
 }
+
 
 // Countdown
   const launchDate = new Date("May 27, 2025 00:00:00").getTime();
@@ -247,23 +254,7 @@ const tokenABI = [
     });
   }
 
-  // Tokenomics Pie Chart
-  window.onload = function () {
-    const ctx = document.getElementById('tokenomicsChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'pie',
-      data: {
-        labels: ['Community (30%)', 'Team (20%)', 'Marketing (20%)', 'Reserve (10%)', 'Liquidity (10%)', 'Charity & Governance (10%)'],
-        datasets: [{
-          data: [30, 20, 20, 10, 10, 10],
-          backgroundColor: ['#FFD700', '#1b5e20', '#4caf50', '#ffeb3b', '#8bc34a', '#cddc39']
-        }]
-      },
-      options: {
-        plugins: {
-          legend: { labels: { color: 'white' } }
-        }
-      }
+ 
     });
   };
 </script>
