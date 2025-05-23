@@ -7,258 +7,88 @@
   <meta name="keywords" content="meme, Paps, news, cryptocurrency, $PNEWS, token, NFT, meme culture" />
   <meta property="og:title" content="PepeNews.io - The Future of Meme Journalism" />
   <meta property="og:description" content="Join the Meme Revolution. Powered by $PNEWS." />
-  <meta property="og:image" content="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" />
+  <meta property="og:image" content="https://github.com/PEPENEWS45/pepenews/blob/main/paps-news-token-logo-green-pnews%20(1).png?raw=true" />
   <meta name="twitter:card" content="summary_large_image" />
   <title>PepeNews.io - Meme Culture</title>
   <link rel="icon" href="/favicon.ico" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js" defer></script>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka&display=swap" rel="stylesheet">
-
   <style>
-    body { margin: 0; font-family: 'Fredoka', sans-serif; background-color: #1b5e20; color: white; }
-    header, footer, section { max-width: 1200px; margin: auto; padding: 20px; text-align: center; }
-    h1, h2, h3 { color: #FFD700; text-shadow: 0 0 6px #ffd700; }
-    .cta a, .action-buttons a, .action-buttons button { color: #1b5e20; background: #FFD700; padding: 10px 18px; border-radius: 8px; text-decoration: none; margin: 8px; display: inline-block; font-weight: bold; font-size: 0.95em; }
-    .cta a:hover, .action-buttons a:hover, .action-buttons button:hover { background: #ffcc00; }
-    html { scroll-behavior: smooth; }
-
-    .sticky-buy-button {
-      position: sticky;
-      top: 10px;
-      z-index: 1000;
-      text-align: center;
-      margin: 0 auto;
+    body {
+      margin: 0;
+      font-family: 'Fredoka', sans-serif;
+      background-color: #1b5e20;
+      color: white;
     }
-    .sticky-buy-button a {
+    .responsive-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    .responsive-buttons a {
+      background-color: #FFD700;
       color: #1b5e20;
-      background: #FFD700;
-      padding: 12px 24px;
+      padding: 10px 18px;
       border-radius: 8px;
       text-decoration: none;
-      display: inline-block;
       font-weight: bold;
-      font-size: 1em;
-      box-shadow: 0 0 16px #FFD700;
-      animation: pulse-glow 2s infinite ease-in-out;
+      display: inline-block;
     }
-    @keyframes pulse-glow {
-      0%, 100% { box-shadow: 0 0 16px #FFD700; }
-      50% { box-shadow: 0 0 24px #ffcc00; }
-    }
-
-    .desktop-two-column {
-      display: flex;
-      justify-content: space-between;
-      gap: 40px;
-      padding: 20px;
-    }
-    .desktop-two-column > section {
-      flex: 1;
-      text-align: center;
-    }
-
-    @media (max-width: 600px) {
-  body, html {
-    overflow-x: hidden;
-  }
-  .desktop-two-column {
-    flex-direction: column;
-    padding: 10px;
-  }
-  header, footer, section {
-    padding: 10px;
-    box-sizing: border-box;
-  }
-  .logo-container img {
-    max-width: 100% !important;
-    height: auto !important;
-    margin: 0 auto;
-  }
-  .sticky-buy-button a {
-    font-size: 0.95em;
-    padding: 10px 14px;
-  }
-  .logo-container img {
-    width: 120px !important;
-    height: auto !important;
-    max-width: 100% !important;
-  }
-  header img[src*="PepeNews"] {
-    width: 114.4%;
-    max-width: 1904px;
-    transform: rotate(90deg);
-  }
-  .pepe-reporter-right {
-    animation: float 3s ease-in-out infinite, blink 2s infinite;
-    position: fixed;
-    bottom: 100px;
-    right: 10px;
-    width: 80px;
-    z-index: 1000;
-    filter: drop-shadow(0 0 6px #FFD700);
-  }
-
-  header img {
-    width: 80%;
-    max-width: 280px;
-    animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 6px #FFD700);
-  }
-
-  header img {
-    width: 160%;
-    animation: float 3s ease-in-out infinite;
-    filter: drop-shadow(0 0 6px #FFD700);
-  }
-      .desktop-two-column {
-        flex-direction: column;
+    @media (max-width: 768px) {
+      .responsive-buttons a {
+        width: 100%;
+        text-align: center;
       }
     }
-
-    ul li {
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
-    ul li:hover {
-      transform: scale(1.05);
-      color: #FFD700;
-    }
-    ul li::before {
-      content: '⭐';
-      margin-right: 8px;
-      display: inline-block;
-      animation: pulse 2s infinite ease-in-out;
-    }
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.2); opacity: 0.7; }
-    }
-
-    .trust-mobile ul {
-      text-align: justify !important;
-      margin: 0 auto !important;
-      max-width: 90% !important;
-    }
-    .trust-mobile {
-      text-align: center;
-    }
-
-    @media (min-width: 600px) {
-  .pepe-reporter-right {
-    animation: float 2s ease-in-out infinite, blink 2s infinite;
-    position: fixed;
-    bottom: 120px;
-    right: 40px;
-    width: 120px;
-    height: auto;
-    z-index: 999;
-    pointer-events: auto;
-    transition: transform 0.3s ease;
-  }
-  .pepe-reporter-right:hover {
-    transform: scale(1.1);
-  }
-}
-    }
-    @keyframes bounceBlink {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.8;
-  }
-}
-    50% {
-      transform: translateY(-10px);
-      opacity: 0.8;
-    }
-  }
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-</style>
+  </style>
 </head>
-
 <body>
-<header>
-  <h2>Paps News Token (PNEWS)</h2>
-  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 12px;">
-    <div style="text-align: left;">
-      <img src="https://github.com/PEPENEWS45/pepenews/blob/main/ROCKET.png?raw=true" alt="Rocket Icon" style="width: 120px; height: auto; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 10px #FFD700);" />
+  <header style="text-align: center; padding: 40px 20px; background: linear-gradient(to bottom, #1b5e20 60%, #2e7d32 100%); border-bottom: 4px solid #FFD700;">
+    <h1 style="font-size: 2.5em; color: #FFD700; text-shadow: 0 0 6px #FFD700;">🚨 Paps News Token (PNEWS)</h1>
+    <img src="https://github.com/PEPENEWS45/pepenews/blob/main/paps-news-token-logo-green-pnews%20(1).png?raw=true" alt="Paps News Logo" style="width: 220px; max-width: 90%; height: auto; filter: drop-shadow(0 0 10px #FFD700);" />
+    <p style="margin-top: 10px; font-size: 1.2em; font-style: italic; color: #fff;">🚀 The Currency of Meme Journalism</p>
+    <p><strong style="color:#FFD700">📅 Launching May 27, 2025</strong></p>
+    <div class="responsive-buttons">
+      <a href="https://github.com/PEPENEWS45/pepenews/blob/main/pnews-whitepaper.pdf?raw=true" target="_blank">📄 Whitepaper</a>
+      <a href="#tokenomics">📊 Tokenomics</a>
+      <a href="https://github.com/PEPENEWS45/pepenews/blob/main/pnews-safety-overview.pdf?raw=true" target="_blank">🛡️ Safety</a>
     </div>
-    <div style="text-align: center;">
-      <div class="logo-container" style="border: 4px solid #FFD700; border-radius: 12px; padding: 6px; display: inline-block; animation: float 3s ease-in-out infinite; box-shadow: 0 0 20px #FFD700;">
-  <img src="https://github.com/PEPENEWS45/PepeNews/raw/main/Pepe%20the%20Frog%20News%20Reporter.png" alt="Pepe Logo" style="width: 100%; max-width: 1000px; height: 180px; object-fit: cover; margin: 0 auto; filter: drop-shadow(0 0 10px #FFD700);" />
-</div>
-      <h1 style="font-size: 1.2em; margin: 10px auto 5px; text-align: center;">🚀 Meme Revolution</h1>
-    </div>
-    <div></div>
-  </div>
-  <p style="text-align:center;">The Future of Meme Journalism, powered by PNEWS</p>
-  <p style="text-align:center;"><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
-  <div style="display:none">"font-size: 1.2em; margin: 10px auto 5px; text-align: center;">🚀 Meme Revolution</h1>
-  <p>The Future of Meme Journalism, powered by PNEWS</p>
-  <p><strong style="color:#FFD700">📅 Official Launch Date: May 27, 2025</strong></p>
-</header>
+  </header>
 
-<div class="sticky-buy-button">
-  <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">✨ Buy PNEWS TOKEN ✨</a>
-</div>
-
-<!-- Right-side Pepe image (desktop only) -->
-<a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank">
-  <img 
-    src="https://github.com/PEPENEWS45/pepenews/raw/main/Pepe%20the%20News%20Reporter.png" 
-    alt="Pepe the News Reporter" 
-    class="pepe-reporter-right" 
-  />
-</a>
-
-<div class="desktop-two-column">
-  <section style="text-align: left;">
-    <h3 style="color:#FFD700">📜 Tokenomics</h3>
-    <p><strong style="color:#FFD700">📰 Token Name:</strong> Paps News Token</p>
-    <p><strong style="color:#FFD700">💱 Symbol:</strong> PNEWS</p>
-    <p><strong style="color:#FFD700">📦 Total Supply:</strong> 1,000,000,000,000 PNEWS</p>
-    <p><strong style="color:#FFD700">🏷️ Token Sale Address:</strong> <code id="sale-address">0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code> <button onclick="copySaleAddress()">📋</button></p>
-    <p><strong style="color:#FFD700">📊 Distribution:</strong></p>
-    <ul style="text-align: left;">
-      <li><strong>30% Community:</strong> Incentives, staking, airdrops (vested).</li>
-      <li><strong>20% Team:</strong> 1-year cliff, then monthly vesting.</li>
-      <li><strong>20% Marketing:</strong> For campaigns, partnerships.</li>
-      <li><strong>10% Reserve:</strong> Strategic, future development.</li>
-      <li><strong>10% Liquidity:</strong> For DEX/CEX trading stability.</li>
-      <li><strong>10% Charity & Governance:</strong> Community decision-making & causes.</li>
+  <section id="tokenomics" style="max-width: 800px; margin: auto; background: rgba(255,255,255,0.05); border-radius: 16px; padding: 30px; text-align: center;">
+    <h2 style="color:#FFD700; text-align: center;">📜 Trust and Transparency Measures</h2>
+    
+      <li><strong>🧾 Sale Contract Address:</strong><br><code>0xe7a6deF453a349b86d17E45f8decdAAfCEc95603</code></li>
+      <li>⭐ LP Locked</li>
+      <li>⭐ Ownership Renounced</li>
+      <li>⭐ 0% Buy/Sell Tax</li>
+      <li>⭐ No Presale</li>
     </ul>
+    <div style="text-align: center; margin-top: 20px;">
+      <a href="https://x.com/PepeNewsCoin" target="_blank" style="background-color:#000; color:#fff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: inline-flex; align-items: center; gap: 6px;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023.svg" alt="X" style="height: 18px;"> Follow on X
+      </a>
+    </div>
+    <form id="newsletterForm" action="https://formspree.io/f/moqgrqwn" method="POST" onsubmit="return handleSubscription(event);" style="text-align: center; margin-top: 20px;">
+      <input type="email" name="email" required placeholder="Enter your email" style="padding:10px; width:250px; border-radius:6px; margin:10px;" />
+      <button type="submit" style="background:#FFD700; color:#1b5e20; padding:10px 20px; border:none; border-radius:8px; font-weight:bold;">Subscribe</button>
+    </form>
   </section>
 
-  <section class="trust-mobile" style="margin-top: -10px;">
-    <h4 style="color:#FFD700;">🔐 Trust & Transparency Measures</h4>
-    <ul style="list-style: none; padding: 0; text-align: justify; max-width: 350px; margin: 0 auto;">
-      <li title="Liquidity Pool is locked for added security">LP Locked</li>
-      <li title="Smart contract ownership renounced for transparency">Ownership Renounced</li>
-      <li title="No taxes on buy/sell transactions">0% Buy/Sell Tax</li>
-      <li title="Tokens were not sold privately before launch">No Presale</li>
-    </ul>
-      <div style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
-      <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
-        <a href="https://t.me/+jnLO5sjUhLphYjE0" target="_blank" style="background-color:#0088cc; color:white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram" style="height: 18px;"> Join Telegram</a>
-        <a href="https://x.com/PepeNewsCoin" target="_blank" style="background-color:#000000; color:white; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; display: flex; align-items: center; gap: 6px;"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/X_logo_2023.svg" alt="X" style="height: 18px;"> Follow on X</a>
-      </div>
-      <form id="newsletterForm" action="https://formspree.io/f/moqgrqwn" method="POST" onsubmit="return handleSubscription(event);">
-        <input type="email" name="email" required placeholder="Enter your email" style="padding:10px; width:250px; border-radius:6px; margin:10px;" />
-        <button type="submit" style="background:#FFD700; color:#1b5e20; padding:10px 20px; border:none; border-radius:8px; font-weight:bold;">Subscribe</button>
-      </form>
-    </div>
-    <script>
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0xe7a6deF453a349b86d17E45f8decdAAfCEc95603" target="_blank" class="floating-buy-btn" style="position: fixed; bottom: 30px; right: 20px; background: linear-gradient(to right, #FFD700, #FFA500); color: #1b5e20; padding: 16px 26px; border-radius: 40px; box-shadow: 0 0 24px #FFD700, 0 0 6px #ffcc00 inset; font-weight: bold; font-size: 1.1em; text-decoration: none; z-index: 10000; display: inline-block; transition: transform 0.3s ease;">
+    🛒 Buy PNEWS
+  </a>
+
+  <script>
+    // Show floating buy button only on mobile
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.innerWidth <= 768) {
+        document.querySelector('.floating-buy-btn').style.display = 'inline-block';
+      }
+    });
+
     function handleSubscription(event) {
       event.preventDefault();
       const form = document.getElementById('newsletterForm');
@@ -271,17 +101,18 @@
       })
       .then(response => {
         if (response.ok) {
-          alert(`✅ Thank you for subscribing to the PNEWS Newsletter — where memes meet the truth!
-
-Stay tuned for the latest updates, viral scoops, and breaking news straight to your inbox.`);
+          alert(`✅ Thank you for subscribing to the PNEWS Newsletter — where memes meet the truth!\n\nStay tuned for viral scoops straight to your inbox.`);
           form.reset();
         } else {
           alert('Something went wrong. Please try again.');
         }
       })
       .catch(() => alert('Error sending form.'));
+
       return false;
     }
-    </script>
-  </section>
-</div>
+  </script>
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/ChatGPT%20Image%20May%2023,%202025,%2007_12_41%20PM.png?raw=true" alt="Female Reporter" style="position: fixed; bottom: 80px; left: 20px; width: 120px; height: auto; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 8px #FFD700); z-index: 999;">
+  <img src="https://github.com/PEPENEWS45/pepenews/blob/main/female-paps-reporter-final.png?raw=true" alt="Female Reporter Mic" style="position: fixed; bottom: 80px; right: 20px; width: 120px; height: auto; animation: float 3s ease-in-out infinite; filter: drop-shadow(0 0 8px #FFD700); z-index: 999;">
+</body>
+</html>
